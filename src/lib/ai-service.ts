@@ -223,7 +223,6 @@ Remember: Return ONLY a JSON object with the "creatures" array.`;
 
       for (const modelName of modelOptions) {
         try {
-          console.log(`Trying Gemini model: ${modelName}`);
           const model = this.gemini.getGenerativeModel({
             model: modelName,
             generationConfig: {
@@ -234,7 +233,6 @@ Remember: Return ONLY a JSON object with the "creatures" array.`;
 
           // Test the model by actually trying to generate content
           result = await model.generateContent(fullPrompt);
-          console.log(`Successfully used Gemini model: ${modelName}`);
           break;
         } catch (error) {
           console.warn(`Model ${modelName} failed:`, error);
@@ -292,7 +290,6 @@ Last error: ${lastError}`;
   }
 
   private parseAndValidateResponse(content: string): AIInitiativeResponse {
-    console.log("Raw AI Response:", content);
 
     // Clean up the response - sometimes AI adds markdown formatting
     let cleanContent = content.trim();
@@ -306,10 +303,8 @@ Last error: ${lastError}`;
     }
 
     const jsonResponse = JSON.parse(cleanContent);
-    console.log("Parsed JSON:", jsonResponse);
 
     const validatedResponse = AIInitiativeResponseSchema.parse(jsonResponse);
-    console.log("Validated Response:", validatedResponse);
 
     return validatedResponse;
   }
@@ -503,7 +498,6 @@ Return ONLY the JSON object.`;
 
       for (const modelName of modelOptions) {
         try {
-          console.log(`Trying Gemini model for encounter: ${modelName}`);
           const model = this.gemini.getGenerativeModel({
             model: modelName,
             generationConfig: {
@@ -513,9 +507,6 @@ Return ONLY the JSON object.`;
           });
 
           result = await model.generateContent(fullPrompt);
-          console.log(
-            `Successfully used Gemini model for encounter: ${modelName}`,
-          );
           break;
         } catch (error) {
           console.warn(`Encounter model ${modelName} failed:`, error);
@@ -547,7 +538,6 @@ Return ONLY the JSON object.`;
   private parseAndValidateEncounterResponse(
     content: string,
   ): AIEncounterResponse {
-    console.log("Raw AI Encounter Response:", content);
 
     // Clean up the response - sometimes AI adds markdown formatting
     let cleanContent = content.trim();
@@ -561,10 +551,8 @@ Return ONLY the JSON object.`;
     }
 
     const jsonResponse = JSON.parse(cleanContent);
-    console.log("Parsed Encounter JSON:", jsonResponse);
 
     const validatedResponse = AIEncounterResponseSchema.parse(jsonResponse);
-    console.log("Validated Encounter Response:", validatedResponse);
 
     return validatedResponse;
   }

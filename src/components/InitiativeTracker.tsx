@@ -755,11 +755,9 @@ const InitiativeTracker = () => {
 
   // Encounter management handlers
   const handleLoadEncounter = (encounter: any) => {
-    console.log("Loading encounter:", encounter.id, encounter.name);
     setInitiativeTracker(encounter.creatures);
     setEncounterName(encounter.name);
     setCurrentEncounterId(encounter.id); // Track the loaded encounter ID
-    console.log("Set currentEncounterId to:", encounter.id);
 
     // Load AI-generated encounter data
     setAiDescription(encounter.aiDescription || "");
@@ -807,9 +805,7 @@ const InitiativeTracker = () => {
 
   const handleSaveEncounter = (encounterId: string) => {
     // When an encounter is saved, track its ID
-    console.log("handleSaveEncounter called with ID:", encounterId);
     setCurrentEncounterId(encounterId);
-    console.log("Updated currentEncounterId to:", encounterId);
   };
 
   const handleGenerateEncounter = async () => {
@@ -902,10 +898,8 @@ const InitiativeTracker = () => {
     if (currentEncounterId && getEncounter) {
       const encounter = getEncounter(currentEncounterId);
       if (encounter) {
-        console.log("Auto-loading encounter:", encounter.name);
         handleLoadEncounter(encounter);
       } else {
-        console.log("Encounter not found, clearing currentEncounterId");
         setCurrentEncounterId(null);
       }
     }

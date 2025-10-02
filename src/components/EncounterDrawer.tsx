@@ -78,12 +78,8 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
   const handleSaveCurrent = () => {
     const name = currentEncounterName.trim() || "Untitled Encounter";
 
-    console.log("Save Current - currentEncounterId:", currentEncounterId);
-    console.log("Save Current - name:", name);
-
     if (currentEncounterId) {
       // Update existing encounter
-      console.log("Updating existing encounter:", currentEncounterId);
       updateExistingEncounter(currentEncounterId, {
         name,
         creatures,
@@ -95,7 +91,6 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
       });
     } else {
       // Create new encounter
-      console.log("Creating new encounter");
       const newEncounter = saveEncounter(
         name,
         creatures,
@@ -106,7 +101,6 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
         combatMechanics,
         tactics,
       );
-      console.log("New encounter created with ID:", newEncounter.id);
       onSaveEncounter(newEncounter.id);
     }
 
