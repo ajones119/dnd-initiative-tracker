@@ -1,11 +1,31 @@
+---
+import '../styles/global.css';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		
+		<!-- SEO Meta Tags -->
+		<title>Fantasy Initiative Tracker - D&D 5e Combat Management Tool</title>
+		<meta name="description" content="The ultimate D&D 5e initiative tracker with AI-powered encounter generation, drag-and-drop combat management, and mystical fantasy theming. Perfect for Dungeon Masters." />
+		<meta name="keywords" content="D&D, Dungeons and Dragons, initiative tracker, combat management, D&D 5e, Dungeon Master tools, fantasy RPG, encounter generator, AI D&D" />
+		<meta name="author" content="Fantasy Initiative Tracker" />
+		
+		<!-- Open Graph Meta Tags -->
+		<meta property="og:title" content="Fantasy Initiative Tracker - D&D 5e Combat Management Tool" />
+		<meta property="og:description" content="Streamline your D&D combat with AI-powered encounter generation, drag-and-drop initiative tracking, and mystical fantasy theming." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://initiative-tracker.com" />
+		
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Fantasy Initiative Tracker - D&D 5e Combat Management Tool" />
+		<meta name="twitter:description" content="The ultimate D&D 5e initiative tracker with AI-powered encounter generation and mystical fantasy theming." />
 	</head>
 	<body>
 		<slot />
@@ -13,10 +33,18 @@
 </html>
 
 <style>
-	html,
+	html {
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	
 	body {
 		margin: 0;
+		padding: 0;
 		width: 100%;
-		height: 100%;
+		min-height: 100vh;
+		/* Remove the gray background - let global.css handle it */
 	}
 </style>

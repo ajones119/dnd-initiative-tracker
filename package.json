@@ -4,11 +4,51 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run fetch-monsters && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "fetch-monsters": "node scripts/fetch-monsters.js"
   },
   "dependencies": {
-    "astro": "^5.14.1"
+    "@astrojs/react": "^4.4.0",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@google/generative-ai": "^0.24.1",
+    "@mastra/client-js": "^0.14.1",
+    "@mastra/core": "^0.19.1",
+    "@mastra/libsql": "^0.15.0",
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-checkbox": "^1.3.3",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-radio-group": "^1.3.8",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/react-table": "^8.21.3",
+    "@types/crypto-js": "^4.2.2",
+    "@types/react": "^19.1.15",
+    "@types/react-dom": "^19.1.9",
+    "astro": "^5.14.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "crypto-js": "^4.2.0",
+    "lucide-react": "^0.544.0",
+    "mastra": "^0.13.4",
+    "openai": "^6.0.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.13",
+    "usehooks-ts": "^3.1.1",
+    "vaul": "^1.1.2",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "tw-animate-css": "^1.4.0"
   }
 }
