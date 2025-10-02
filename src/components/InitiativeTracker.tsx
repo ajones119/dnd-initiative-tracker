@@ -499,24 +499,12 @@ const DeleteRowCell = ({ row }: any) => {
     <Button
       variant="ghost"
       size="sm"
-      className="h-8 w-8 p-0 hover:bg-red-50 hover:text-red-600"
+      className="h-8 w-8 p-0 hover:text-red-600"
       onClick={handleDelete}
       title="Delete this row"
     >
       <Trash2 className="h-4 w-4" />
     </Button>
-  );
-};
-
-const DragHandleCell = ({ row }: any) => {
-  // This component will receive the drag props from SortableRow
-  return (
-    <div
-      className="flex items-center justify-center h-8 w-8 cursor-grab rounded"
-      title="Drag to reorder"
-    >
-      <GripVertical className="size-4 text-foreground" />
-    </div>
   );
 };
 
@@ -574,10 +562,10 @@ const SortableRow = ({
             ref={setNodeRef}
             {...attributes}
             {...listeners}
-            className="flex items-center justify-center h-8 w-8 cursor-grab hover:bg-gray-50 rounded active:cursor-grabbing"
+            className="flex items-center justify-center h-8 w-8 cursor-grab hover:scale-102 transition-all duration-200 rounded active:cursor-grabbing"
             title="Drag to reorder"
           >
-            <GripVertical className="h-4 w-4 text-gray-400" />
+            <GripVertical className="h-4 w-4 " />
           </div>
         </TableCell>
       );
@@ -608,7 +596,6 @@ const TableColumns: ColumnDef<InitiativeRow>[] = [
   {
     header: "",
     id: "dragHandle",
-    //cell: DragHandleCell,
     size: 10,
     meta: { className: "" }, // Always visible
   },
@@ -636,13 +623,6 @@ const TableColumns: ColumnDef<InitiativeRow>[] = [
     cell: StatusConditionsCell,
     size: 115,
     meta: { className: "hidden lg:table-cell" }, // lg+
-  },
-  {
-    header: "Conc.",
-    accessorKey: "concentration",
-    cell: ConcentrationCell,
-    size: 15,
-    meta: { className: "hidden xl:table-cell" }, // xl+
   },
   {
     header: "",
@@ -688,6 +668,13 @@ const TableColumns: ColumnDef<InitiativeRow>[] = [
     cell: EditableNumberCell,
     size: 25,
     meta: { className: "hidden lg:table-cell" }, // lg+
+  },
+  {
+    header: "Conc.",
+    accessorKey: "concentration",
+    cell: ConcentrationCell,
+    size: 15,
+    meta: { className: "hidden xl:table-cell" }, // xl+
   },
   {
     header: "Death Saves",

@@ -8,14 +8,12 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<div class="w-full h-full p-4">
-		<div class="mb-8 text-center">
+		<div class="mb-8 text-left">
 			<h1 class="text-4xl font-bold text-gradient-mystical mb-4">
 				Fantasy Initiative Tracker
 			</h1>
-			<p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-				The ultimate D&D 5e initiative tracker with AI-powered encounter generation, 
-				drag-and-drop combat management, and mystical fantasy theming. Perfect for 
-				Dungeon Masters who want to streamline combat while maintaining immersive gameplay.
+			<p class="text-lg text-muted-foreground max-w-full">
+				A D&D 5e initiative tracker with AI encounter generation and drag-and-drop combat management.
 			</p>
 		</div>
 		<InitiativeTracker client:only="react" />
