@@ -27,6 +27,94 @@ class AIService {
     this.gemini = new GoogleGenerativeAI(apiKey);
   }
 
+  // Helper method to check available Gemini models
+  async checkAvailableGeminiModels(apiKey: string): Promise<string[]> {
+    try {
+      this.initializeGemini(apiKey);
+      if (!this.gemini) throw new Error("Failed to initialize Gemini");
+
+      // Try to list available models
+      const models = await this.gemini.listModels();
+      return models.map(model => model.name);
+    } catch (error) {
+      console.error("Error checking Gemini models:", error);
+      return [];
+    }
+  }
+
+  // Helper method to test a specific Gemini model
+  async testGeminiModel(apiKey: string, modelName: string): Promise<boolean> {
+    try {
+      this.initializeGemini(apiKey);
+      if (!this.gemini) return false;
+
+      const model = this.gemini.getGenerativeModel({ model: modelName });
+      const result = await model.generateContent("Test");
+      await result.response;
+      return true;
+    } catch (error) {
+      console.error(`Error testing model ${modelName}:`, error);
+      return false;
+    }
+  }
+
+  // Diagnostic method to help troubleshoot Gemini API issues
+  async diagnoseGeminiAPI(apiKey: string): Promise<{
+    isValid: boolean;
+    availableModels: string[];
+    workingModels: string[];
+    errors: string[];
+  }> {
+    const result = {
+      isValid: false,
+      availableModels: [] as string[],
+      workingModels: [] as string[],
+      errors: [] as string[]
+    };
+
+    try {
+      // Test API key validity
+      this.initializeGemini(apiKey);
+      if (!this.gemini) {
+        result.errors.push("Failed to initialize Gemini client");
+        return result;
+      }
+
+      // Try to list available models
+      try {
+        const models = await this.gemini.listModels();
+        result.availableModels = models.map(model => model.name);
+        result.isValid = true;
+      } catch (error) {
+        result.errors.push(`Failed to list models: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+
+      // Test common models (updated for current API)
+      const modelsToTest = [
+        "gemini-2.0-flash-exp",
+        "gemini-2.0-flash-thinking-exp",
+        "gemini-1.0-pro",
+        "gemini-pro"
+      ];
+
+      for (const modelName of modelsToTest) {
+        try {
+          const isWorking = await this.testGeminiModel(apiKey, modelName);
+          if (isWorking) {
+            result.workingModels.push(modelName);
+          }
+        } catch (error) {
+          result.errors.push(`${modelName}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        }
+      }
+
+    } catch (error) {
+      result.errors.push(`API initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+
+    return result;
+  }
+
   async generateInitiativeData(
     prompt: string,
     model: AIModel,
@@ -210,12 +298,13 @@ User request: ${prompt}
 Remember: Return ONLY a JSON object with the "creatures" array.`;
 
       // Try different Gemini models in order of preference
+      // Updated for current API - these are the free tier models
       const modelOptions = [
-        "gemini-1.5-flash-latest",
-        "gemini-1.5-flash",
-        "gemini-1.5-pro-latest",
-        "gemini-1.5-pro",
-        // Note: gemini-pro is deprecated and removed from fallback list
+        "gemini-2.0-flash-exp", // Fast, free tier model
+        "gemini-2.0-flash-thinking-exp", // Enhanced reasoning, free tier
+        "gemini-1.0-pro", // Stable fallback
+        "gemini-pro", // Legacy fallback
+        // Note: Gemini 1.5 models require paid tier
       ];
 
       let result;
@@ -269,17 +358,27 @@ Last error: ${lastError}`;
       if (error instanceof Error) {
         if (error.message.includes("API_KEY_INVALID")) {
           throw new Error(
-            "Invalid Gemini API key. Please check your API key in settings.",
+            "Invalid Gemini API key. Please check your API key in settings. Make sure it starts with 'AIza' and is 39 characters long.",
           );
         }
         if (error.message.includes("PERMISSION_DENIED")) {
           throw new Error(
-            "Permission denied. Please check your Gemini API key permissions.",
+            "Permission denied. Your API key may not have access to Gemini 1.5 models. Try enabling billing in Google AI Studio or use an older model.",
           );
         }
         if (error.message.includes("QUOTA_EXCEEDED")) {
           throw new Error(
-            "Gemini API quota exceeded. Please check your usage limits.",
+            "Gemini API quota exceeded. Please check your usage limits or enable billing.",
+          );
+        }
+        if (error.message.includes("INVALID_ARGUMENT")) {
+          throw new Error(
+            "Invalid model or region restriction. Try using 'gemini-2.0-flash-exp' or 'gemini-pro' instead.",
+          );
+        }
+        if (error.message.includes("NOT_FOUND")) {
+          throw new Error(
+            "Model not found. The requested Gemini model may not be available. Try using 'gemini-2.0-flash-exp' or 'gemini-pro' as a fallback.",
           );
         }
         throw new Error(`Gemini failed: ${error.message}`);
@@ -486,11 +585,13 @@ User request: Create a D&D encounter: ${prompt}
 Return ONLY the JSON object.`;
 
       // Try different Gemini models in order of preference
+      // Updated for current API - these are the free tier models
       const modelOptions = [
-        "gemini-1.5-flash-latest",
-        "gemini-1.5-flash",
-        "gemini-1.5-pro-latest",
-        "gemini-1.5-pro",
+        "gemini-2.0-flash-exp", // Fast, free tier model
+        "gemini-2.0-flash-thinking-exp", // Enhanced reasoning, free tier
+        "gemini-1.0-pro", // Stable fallback
+        "gemini-pro", // Legacy fallback
+        // Note: Gemini 1.5 models require paid tier
       ];
 
       let result;

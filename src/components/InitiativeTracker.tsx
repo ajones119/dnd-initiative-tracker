@@ -149,7 +149,7 @@ const EditableNumberCell = ({ getValue, row, column }: any) => {
       onChange={handleChange}
       onBlur={onBlur}
       type="number"
-      className="h-8 w-full text-center [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+      className="h-8 min-w-10 w-full text-center [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
     />
   );
 };
@@ -1092,7 +1092,7 @@ const InitiativeTracker = () => {
                 className="flex items-center gap-1"
               >
                 <ChevronLeft className="h-4 w-4" />
-                Previous
+                <span className="hidden sm:inline">Previous</span>
               </Button>
               <Button
                 variant="outline"
@@ -1100,7 +1100,7 @@ const InitiativeTracker = () => {
                 onClick={nextTurn}
                 className="flex items-center gap-1"
               >
-                Next
+                <span className="hidden sm:inline">Next</span>
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -1113,7 +1113,7 @@ const InitiativeTracker = () => {
               className="flex items-center gap-2"
             >
               <RotateCcw className="h-4 w-4" />
-              Reset Combat
+              <span className="hidden sm:inline">Reset Combat</span>
             </Button>
             <Button
               variant="outline"
@@ -1123,13 +1123,13 @@ const InitiativeTracker = () => {
               title="Help & Instructions"
             >
               <HelpCircle className="h-4 w-4" />
-              Help
+              <span className="hidden sm:inline">Help</span>
             </Button>
           </div>
         </div>
 
         {/* Row Management */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 items-center">
           <Button
             variant="outline"
             onClick={() => {

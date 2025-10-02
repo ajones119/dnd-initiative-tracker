@@ -10,9 +10,10 @@ import {
   DrawerTitle,
   DrawerClose,
 } from "./ui/drawer";
-import { Settings, X, Key, Brain, Sparkles, AlertTriangle } from "lucide-react";
+import { Settings, X, Key, Brain, Sparkles, AlertTriangle, TestTube } from "lucide-react";
 import { useSettings } from "../hooks/useSettings";
 import { type AIModel } from "../lib/settings";
+import { aiService } from "../lib/ai-service";
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -26,6 +27,8 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
   const { settings, updateSettings, resetSettings, isEncrypted } =
     useSettings();
   const [tempSettings, setTempSettings] = useState(() => settings);
+  const [isDiagnosing, setIsDiagnosing] = useState(false);
+  const [diagnosticResult, setDiagnosticResult] = useState<string | null>(null);
 
   // Update temp settings when drawer opens (only when open changes to true)
   React.useEffect(() => {
@@ -48,10 +51,56 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
     setTempSettings({ ...tempSettings, aiModel: model });
   };
 
+  const handleDiagnoseGemini = async () => {
+    if (!tempSettings.geminiApiKey) {
+      setDiagnosticResult("No Gemini API key provided");
+      return;
+    }
+
+    setIsDiagnosing(true);
+    setDiagnosticResult(null);
+
+    try {
+      const result = await aiService.diagnoseGeminiAPI(tempSettings.geminiApiKey);
+      
+      let message = `🔍 Gemini API Diagnostic Results:\n\n`;
+      message += `✅ API Key Valid: ${result.isValid ? 'Yes' : 'No'}\n\n`;
+      
+      if (result.availableModels.length > 0) {
+        message += `📋 Available Models:\n${result.availableModels.map(m => `  • ${m}`).join('\n')}\n\n`;
+      }
+      
+      if (result.workingModels.length > 0) {
+        message += `✅ Working Models:\n${result.workingModels.map(m => `  • ${m}`).join('\n')}\n\n`;
+      } else {
+        message += `❌ No working models found\n\n`;
+      }
+      
+      if (result.errors.length > 0) {
+        message += `⚠️ Errors:\n${result.errors.map(e => `  • ${e}`).join('\n')}\n\n`;
+      }
+
+      if (result.workingModels.length === 0) {
+        message += `💡 Troubleshooting Tips:\n`;
+        message += `  • Check if your API key starts with 'AIza' and is 39 characters\n`;
+        message += `  • Try using 'gemini-2.0-flash-exp' (free tier model)\n`;
+        message += `  • Try using 'gemini-pro' as a fallback\n`;
+        message += `  • Check if Gemini is available in your region\n`;
+        message += `  • Note: Gemini 1.5 models require paid tier\n`;
+      }
+
+      setDiagnosticResult(message);
+    } catch (error) {
+      setDiagnosticResult(`Diagnostic failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setIsDiagnosing(false);
+    }
+  };
+
   return (
     <Drawer open={open} onOpenChange={onOpenChange} direction="right">
-      <DrawerContent className="w-96">
-        <DrawerHeader className="flex items-center justify-between">
+      <DrawerContent className="w-96 h-full flex flex-col">
+        <DrawerHeader className="flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-2">
             <Settings className="h-5 w-5 text-gray-600" />
             <DrawerTitle>Settings</DrawerTitle>
@@ -64,7 +113,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
         </DrawerHeader>
 
         {/* Content */}
-        <div className="flex-1 p-6 space-y-6 overflow-y-auto">
+        <div className="flex-1 p-6 space-y-6 overflow-y-auto min-h-0">
           {/* AI Model Selection */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
@@ -184,6 +233,18 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                   yet
                 </span>
               </p>
+              
+              {/* Diagnostic Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDiagnoseGemini}
+                disabled={isDiagnosing || !tempSettings.geminiApiKey}
+                className="mt-2 w-full"
+              >
+                <TestTube className="h-4 w-4 mr-2" />
+                {isDiagnosing ? "Testing..." : "Test Gemini API"}
+              </Button>
             </div>
           </div>
 
@@ -209,6 +270,19 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                 "✅ Gemini ready for assistance"}
             </p>
           </div>
+
+          {/* Diagnostic Results */}
+          {diagnosticResult && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <TestTube className="h-4 w-4 text-blue-500" />
+                <span className="font-medium text-sm text-blue-900">Diagnostic Results</span>
+              </div>
+              <pre className="text-xs text-blue-800 whitespace-pre-wrap overflow-x-auto">
+                {diagnosticResult}
+              </pre>
+            </div>
+          )}
           {/* Security Warning */}
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <div className="flex items-start gap-3">
@@ -240,20 +314,27 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
               </div>
             </div>
           </div>
-        </div>
 
-        <DrawerFooter className="border-t">
-          <div className="flex justify-between">
-            <Button variant="destructive" onClick={resetSettings}>
+          {/* Reset Button - moved inside scrollable area */}
+          <div className="pt-4 border-t">
+            <Button 
+              variant="destructive" 
+              onClick={resetSettings}
+              className="w-full"
+            >
               Reset to Defaults
             </Button>
+          </div>
+        </div>
 
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={handleCancel}>
-                Cancel
-              </Button>
-              <Button onClick={handleSave}>Save Settings</Button>
-            </div>
+        <DrawerFooter className="border-t bg-background flex-shrink-0 p-4">
+          <div className="flex gap-2 w-full">
+            <Button variant="outline" onClick={handleCancel} className="flex-1">
+              Cancel
+            </Button>
+            <Button onClick={handleSave} className="flex-1">
+              Save Settings
+            </Button>
           </div>
         </DrawerFooter>
       </DrawerContent>
