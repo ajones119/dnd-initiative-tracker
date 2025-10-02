@@ -347,7 +347,7 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
           </div>
         </div>
 
-        <DrawerFooter className="border-t ">
+        <DrawerFooter className="border-t pb-safe">
           <Button
             variant="outline"
             onClick={() => onOpenChange(false)}

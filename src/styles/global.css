@@ -77,18 +77,18 @@ html {
   height: 100%;
   background: radial-gradient(
     circle at 20% 80%,
-    rgb(var(--background)) 0%,
+    rgb(4 8 20) 0%,
     rgb(2 4 10) 50%,
-    rgb(var(--background)) 100%
+    rgb(4 8 20) 100%
   );
 }
 
 body {
   background: radial-gradient(
     circle at 20% 80%,
-    rgb(var(--background)) 0%,
+    rgb(4 8 20) 0%,
     rgb(2 4 10) 50%,
-    rgb(var(--background)) 100%
+    rgb(4 8 20) 100%
   );
   color: rgb(var(--foreground));
   font-family:
@@ -382,6 +382,11 @@ body::before {
       rgb(var(--background)),
       rgb(15 8 35)
     );
+  }
+
+  /* Safe area utilities for mobile */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   /* Additional cyberpunk utilities */

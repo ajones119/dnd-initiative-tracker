@@ -1092,7 +1092,7 @@ const InitiativeTracker = () => {
                 className="flex items-center gap-1"
               >
                 <ChevronLeft className="h-4 w-4" />
-                Previous
+                <span className="hidden sm:inline">Previous</span>
               </Button>
               <Button
                 variant="outline"
@@ -1100,7 +1100,7 @@ const InitiativeTracker = () => {
                 onClick={nextTurn}
                 className="flex items-center gap-1"
               >
-                Next
+                <span className="hidden sm:inline">Next</span>
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -1129,7 +1129,7 @@ const InitiativeTracker = () => {
         </div>
 
         {/* Row Management */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 items-center">
           <Button
             variant="outline"
             onClick={() => {

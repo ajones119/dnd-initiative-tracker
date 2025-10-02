@@ -211,10 +211,9 @@ Remember: Return ONLY a JSON object with the "creatures" array.`;
 
       // Try different Gemini models in order of preference
       const modelOptions = [
-        "gemini-1.5-flash-latest",
         "gemini-1.5-flash",
-        "gemini-1.5-pro-latest",
         "gemini-1.5-pro",
+        "gemini-1.0-pro",
         // Note: gemini-pro is deprecated and removed from fallback list
       ];
 
@@ -487,10 +486,9 @@ Return ONLY the JSON object.`;
 
       // Try different Gemini models in order of preference
       const modelOptions = [
-        "gemini-1.5-flash-latest",
         "gemini-1.5-flash",
-        "gemini-1.5-pro-latest",
         "gemini-1.5-pro",
+        "gemini-1.0-pro",
       ];
 
       let result;
