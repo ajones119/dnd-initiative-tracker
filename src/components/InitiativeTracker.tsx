@@ -149,7 +149,7 @@ const EditableNumberCell = ({ getValue, row, column }: any) => {
       onChange={handleChange}
       onBlur={onBlur}
       type="number"
-      className="h-8 w-full text-center [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+      className="h-8 min-w-10 w-full text-center [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
     />
   );
 };
@@ -1113,7 +1113,7 @@ const InitiativeTracker = () => {
               className="flex items-center gap-2"
             >
               <RotateCcw className="h-4 w-4" />
-              Reset Combat
+              <span className="hidden sm:inline">Reset Combat</span>
             </Button>
             <Button
               variant="outline"
@@ -1123,7 +1123,7 @@ const InitiativeTracker = () => {
               title="Help & Instructions"
             >
               <HelpCircle className="h-4 w-4" />
-              Help
+              <span className="hidden sm:inline">Help</span>
             </Button>
           </div>
         </div>
