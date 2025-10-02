@@ -57,7 +57,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
             <DrawerTitle>Settings</DrawerTitle>
           </div>
           <DrawerClose asChild>
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 absolute right-0 top-0">
               <X className="h-4 w-4" />
             </Button>
           </DrawerClose>

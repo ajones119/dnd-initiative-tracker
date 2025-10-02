@@ -516,6 +516,41 @@ body::before {
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Enhanced focus styles for accessibility */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgb(var(--ring) / 0.2);
+  }
+  
+  /* Checkbox focus styles */
+  input[type="checkbox"]:focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgb(var(--ring) / 0.2);
+  }
+  
+  /* Button focus styles with mystical theme */
+  button:focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 
+      0 0 0 4px rgb(var(--primary) / 0.2),
+      0 0 8px rgb(var(--primary) / 0.4);
+  }
+  
+  /* Table cell focus for keyboard navigation */
+  td:focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 1px;
+    box-shadow: 0 0 0 2px rgb(var(--accent) / 0.3);
+  }
 }
 
 /* Custom Scrollbars - Mystical Blue Style */

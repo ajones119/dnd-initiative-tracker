@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   InitiativeTrackerProvider,
   useInitiativeTracker,
@@ -45,6 +45,7 @@ import { HelpModal } from "./HelpModal";
 import { aiService } from "../lib/ai-service";
 import { useSettings } from "../hooks/useSettings";
 import { useEncounters } from "../hooks/useEncounters";
+import { useKeyPress } from "../hooks/useKeyPress";
 import { useLocalStorage } from "usehooks-ts";
 import { isAIAvailable, getCurrentApiKey } from "../lib/settings";
 import {
@@ -745,6 +746,9 @@ const InitiativeTracker = () => {
   >([]);
   const [tactics, setTactics] = useState("");
 
+  // Table ref for keyboard navigation
+  const tableRef = useRef<HTMLTableElement>(null);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -961,6 +965,108 @@ const InitiativeTracker = () => {
     getRowId: (row) => row.id,
   });
 
+  // Navigation logic for arrow keys
+  const navigateToCell = (direction: 'left' | 'right' | 'up' | 'down', event?: KeyboardEvent) => {
+    if (!tableRef.current) return;
+
+    // Prevent default behavior to stop numeric input increment/decrement
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    const activeElement = document.activeElement as HTMLElement;
+    if (!activeElement || !tableRef.current.contains(activeElement)) return;
+
+    // Find the current cell
+    const currentCell = activeElement.closest('td');
+    if (!currentCell) return;
+
+    const currentRow = currentCell.closest('tr');
+    if (!currentRow) return;
+
+    const allRows = Array.from(tableRef.current.querySelectorAll('tbody tr'));
+    const currentRowIndex = allRows.indexOf(currentRow);
+    const currentCellIndex = Array.from(currentRow.children).indexOf(currentCell);
+
+    let targetRowIndex = currentRowIndex;
+    let targetCellIndex = currentCellIndex;
+
+    switch (direction) {
+      case 'left':
+        targetCellIndex = Math.max(0, currentCellIndex - 1);
+        break;
+      case 'right':
+        targetCellIndex = Math.min(currentRow.children.length - 1, currentCellIndex + 1);
+        break;
+      case 'up':
+        targetRowIndex = Math.max(0, currentRowIndex - 1);
+        break;
+      case 'down':
+        targetRowIndex = Math.min(allRows.length - 1, currentRowIndex + 1);
+        break;
+    }
+
+    // Get the target cell
+    const targetRow = allRows[targetRowIndex];
+    if (!targetRow) return;
+
+    const targetCell = targetRow.children[targetCellIndex] as HTMLElement;
+    if (!targetCell) return;
+
+    // Find the first focusable element in the target cell
+    const focusableElement = targetCell.querySelector('input, button, textarea, [tabindex]:not([tabindex="-1"])') as HTMLElement;
+    if (focusableElement) {
+      focusableElement.focus();
+    } else {
+      targetCell.focus();
+    }
+  };
+
+  // Set up cell navigation with Ctrl+Arrow keys
+  useKeyPress({
+    ref: tableRef,
+    key: 'ArrowLeft',
+    callback: (event) => navigateToCell('left', event),
+    ctrlKey: true
+  });
+
+  useKeyPress({
+    ref: tableRef,
+    key: 'ArrowRight',
+    callback: (event) => navigateToCell('right', event),
+    ctrlKey: true
+  });
+
+  useKeyPress({
+    ref: tableRef,
+    key: 'ArrowUp',
+    callback: (event) => navigateToCell('up', event),
+    ctrlKey: true
+  });
+
+  useKeyPress({
+    ref: tableRef,
+    key: 'ArrowDown',
+    callback: (event) => navigateToCell('down', event),
+    ctrlKey: true
+  });
+
+  // Set up turn navigation with Shift+Arrow Left/Right
+  useKeyPress({
+    ref: tableRef,
+    key: 'ArrowLeft',
+    callback: () => previousTurn(),
+    shiftKey: true
+  });
+
+  useKeyPress({
+    ref: tableRef,
+    key: 'ArrowRight',
+    callback: () => nextTurn(),
+    shiftKey: true
+  });
+
   return (
     <div>
       {/* Encounter Name Input */}
@@ -1049,7 +1155,6 @@ const InitiativeTracker = () => {
 
           <Button
             variant="outline"
-            size="sm"
             onClick={() => setEncounterOpen(true)}
             className="flex items-center gap-2"
           >
@@ -1059,7 +1164,6 @@ const InitiativeTracker = () => {
 
           <Button
             variant="outline"
-            size="sm"
             onClick={() => setSettingsOpen(true)}
             className="flex items-center gap-2"
           >
@@ -1087,7 +1191,7 @@ const InitiativeTracker = () => {
             onDragEnd={handleDragEnd}
             modifiers={[restrictToVerticalAxis]}
           >
-            <Table>
+            <Table ref={tableRef}>
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
@@ -1159,7 +1263,7 @@ const InitiativeTracker = () => {
             </Table>
           </DndContext>
         ) : (
-          <Table>
+          <Table ref={tableRef}>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>

@@ -16,7 +16,12 @@ import {
   Zap,
   Info,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Keyboard,
+  ArrowUp,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight as ArrowRightIcon
 } from 'lucide-react';
 
 interface HelpModalProps {
@@ -60,6 +65,72 @@ export const HelpModal: React.FC<HelpModalProps> = ({ open, onOpenChange }) => {
                 <div>
                   <strong>Manage Combat:</strong> Use Previous/Next Turn buttons to track rounds
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Keyboard Shortcuts */}
+          <section>
+            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+              <Keyboard className="h-5 w-5 text-accent" />
+              Keyboard Shortcuts
+            </h3>
+            <div className="space-y-4 text-sm">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="border border-accent/20 rounded-lg p-4">
+                  <h4 className="font-medium mb-3 flex items-center gap-2">
+                    <ArrowUp className="h-4 w-4" />
+                    Table Navigation
+                  </h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span>Navigate between cells:</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Ctrl + Arrow Keys</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Previous turn:</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Shift + ←</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Next turn:</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Shift + →</kbd>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border border-primary/20 rounded-lg p-4">
+                  <h4 className="font-medium mb-3 flex items-center gap-2">
+                    <Zap className="h-4 w-4" />
+                    General Navigation
+                  </h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span>Tab through elements:</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Tab</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Navigate backwards:</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Shift + Tab</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Activate focused element:</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Enter / Space</kbd>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
+                <h4 className="font-medium mb-2 flex items-center gap-2">
+                  <Info className="h-4 w-4 text-accent" />
+                  Navigation Tips
+                </h4>
+                <ul className="space-y-1 text-xs">
+                  <li>• <strong>Ctrl + Arrow</strong> moves between table cells without changing input values</li>
+                  <li>• <strong>Shift + Arrow</strong> (left/right) advances combat turns</li>
+                  <li>• All buttons and checkboxes have visible focus indicators</li>
+                  <li>• Regular arrow keys work normally in text inputs (no modifier needed)</li>
+                </ul>
               </div>
             </div>
           </section>

@@ -75,7 +75,7 @@ export const AIAssistant: React.FC = () => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          size="sm"
+
           className="flex items-center gap-2 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-300 hover:from-purple-500/20 hover:to-blue-500/20"
         >
           <Sparkles className="h-4 w-4 text-purple-500" />
