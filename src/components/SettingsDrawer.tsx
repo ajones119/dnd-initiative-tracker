@@ -14,6 +14,7 @@ import { Settings, X, Key, Brain, Sparkles, AlertTriangle, TestTube } from "luci
 import { useSettings } from "../hooks/useSettings";
 import { type AIModel } from "../lib/settings";
 import { aiService } from "../lib/ai-service";
+import { RateLimitStatus } from "./RateLimitStatus";
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -292,6 +293,15 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
               </p>
             </div>
           )}
+
+          {/* Rate Limit Status */}
+          <RateLimitStatus 
+            model={tempSettings.aiModel}
+            onStatusChange={(status) => {
+              // Optional: Handle status changes if needed
+              console.log('Rate limit status:', status);
+            }}
+          />
 
           {/* Diagnostic Results */}
           {diagnosticResult && (

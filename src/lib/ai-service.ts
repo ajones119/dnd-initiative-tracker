@@ -7,6 +7,7 @@ import {
   type AIEncounterResponse,
 } from "./ai-schemas";
 import { type AIModel } from "./settings";
+import { validateRequest, recordRequest } from "./rate-limiter";
 
 class AIService {
   private openai: OpenAI | null = null;
@@ -124,6 +125,15 @@ class AIService {
       throw new Error("AI model is disabled");
     }
 
+    // Validate request (rate limiting and prompt validation)
+    const validation = validateRequest(prompt, model);
+    if (!validation.canProceed) {
+      throw new Error(validation.error);
+    }
+
+    // Record the request for rate limiting
+    recordRequest();
+
     if (model === "openai") {
       return this.generateWithOpenAI(prompt, apiKey);
     } else if (model === "gemini") {
@@ -143,6 +153,15 @@ class AIService {
     if (model === "none") {
       throw new Error("AI model is disabled");
     }
+
+    // Validate request (rate limiting and prompt validation)
+    const validation = validateRequest(prompt, model);
+    if (!validation.canProceed) {
+      throw new Error(validation.error);
+    }
+
+    // Record the request for rate limiting
+    recordRequest();
 
     if (model === "openai") {
       return this.generateEncounterWithOpenAI(prompt, apiKey);
