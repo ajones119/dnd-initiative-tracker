@@ -8,6 +8,7 @@ import {
 } from "./ai-schemas";
 import { type AIModel } from "./settings";
 import { validateRequest, recordRequest } from "./rate-limiter";
+import { supabaseProxyService } from "./supabase-proxy-service";
 
 class AIService {
   private openai: OpenAI | null = null;
@@ -125,7 +126,17 @@ class AIService {
       throw new Error("AI model is disabled");
     }
 
-    // Validate request (rate limiting and prompt validation)
+    // Try Supabase proxy first for Groq (if available)
+    if (model === "groq" && supabaseProxyService.isAvailable()) {
+      try {
+        return await supabaseProxyService.generateInitiativeData(prompt, model);
+      } catch (error) {
+        console.warn("Supabase proxy failed, falling back to client-side:", error);
+        // Fall through to client-side implementation
+      }
+    }
+
+    // Fallback to client-side rate limiting
     const validation = validateRequest(prompt, model);
     if (!validation.canProceed) {
       throw new Error(validation.error);
@@ -154,7 +165,17 @@ class AIService {
       throw new Error("AI model is disabled");
     }
 
-    // Validate request (rate limiting and prompt validation)
+    // Try Supabase proxy first for Groq (if available)
+    if (model === "groq" && supabaseProxyService.isAvailable()) {
+      try {
+        return await supabaseProxyService.generateEncounterData(prompt, model);
+      } catch (error) {
+        console.warn("Supabase proxy failed, falling back to client-side:", error);
+        // Fall through to client-side implementation
+      }
+    }
+
+    // Fallback to client-side rate limiting
     const validation = validateRequest(prompt, model);
     if (!validation.canProceed) {
       throw new Error(validation.error);
