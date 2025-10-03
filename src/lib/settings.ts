@@ -7,6 +7,7 @@ export type AIModel = "openai" | "gemini" | "groq" | "none";
 export type StorageMethod = 
   | 'environment'
   | 'proxy'
+  | 'supabase'
   | 'indexeddb'
   | 'cookies'
   | 'session'
@@ -20,7 +21,8 @@ export const SettingsSchema = z.object({
   geminiApiKey: z.string().default(""),
   storageMethod: z.enum([
     "environment",
-    "proxy", 
+    "proxy",
+    "supabase", 
     "indexeddb",
     "cookies",
     "session",

@@ -6,8 +6,7 @@
 import { type AIModel } from "./settings";
 import { encryptForStorage, decryptFromStorage } from "./encryption";
 
-// Supabase client setup (you'll need to install @supabase/supabase-js)
-// import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
 export interface SupabaseApiKeys {
   openaiApiKey?: string;
@@ -15,10 +14,12 @@ export interface SupabaseApiKeys {
 }
 
 // Initialize Supabase client
-// const supabase = createClient(
-//   import.meta.env.VITE_SUPABASE_URL,
-//   import.meta.env.VITE_SUPABASE_ANON_KEY
-// )
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabase = supabaseUrl && supabaseAnonKey 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 class SupabaseStorage {
   private userId: string;
@@ -51,31 +52,51 @@ class SupabaseStorage {
   }
 
   /**
+   * Get current user's IP address
+   */
+  private async getCurrentIP(): Promise<string> {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error("Failed to get IP address:", error);
+      return '127.0.0.1'; // Fallback for localhost
+    }
+  }
+
+  /**
    * Store API keys in Supabase with encryption
    */
   async storeApiKeys(keys: SupabaseApiKeys): Promise<void> {
+    if (!supabase) {
+      throw new Error("Supabase not configured");
+    }
+
     try {
       // Encrypt keys with CryptoJS before sending to Supabase
       const encryptedKeys = encryptForStorage(keys);
       
-      // In a real implementation, you'd use Supabase client:
-      // const { data, error } = await supabase
-      //   .from('user_api_keys')
-      //   .upsert({
-      //     user_id: this.userId,
-      //     encrypted_keys: encryptedKeys,
-      //     updated_at: new Date().toISOString()
-      //   });
+      // Get current IP address
+      const userIp = await this.getCurrentIP();
+      
+      const { data, error } = await supabase
+        .from('user_api_keys')
+        .upsert({
+          user_id: this.userId,
+          encrypted_keys: encryptedKeys,
+          user_ip: userIp,
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'user_id'
+        });
 
-      // For demo purposes, simulate the API call
-      console.log('Storing encrypted keys to Supabase:', {
-        user_id: this.userId,
-        encrypted_keys: encryptedKeys,
-        updated_at: new Date().toISOString()
-      });
+      if (error) {
+        console.error("Supabase storage error:", error);
+        throw error;
+      }
 
-      // Simulate success
-      return Promise.resolve();
+      console.log('Stored encrypted keys to Supabase for user:', this.userId);
     } catch (error) {
       console.error("Failed to store API keys in Supabase:", error);
       throw new Error("Failed to store API keys in Supabase");
@@ -86,18 +107,35 @@ class SupabaseStorage {
    * Get API keys from Supabase
    */
   async getApiKeys(): Promise<SupabaseApiKeys> {
+    if (!supabase) {
+      console.warn("Supabase not configured, returning empty keys");
+      return {};
+    }
+
     try {
-      // In a real implementation, you'd use Supabase client:
-      // const { data, error } = await supabase
-      //   .from('user_api_keys')
-      //   .select('encrypted_keys')
-      //   .eq('user_id', this.userId)
-      //   .single();
+      const { data, error } = await supabase
+        .from('user_api_keys')
+        .select('encrypted_keys')
+        .eq('user_id', this.userId)
+        .single();
 
-      // For demo purposes, simulate the API call
-      console.log('Retrieving encrypted keys from Supabase for user:', this.userId);
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // No rows found - user hasn't stored keys yet
+          console.log('No API keys found for user:', this.userId);
+          return {};
+        }
+        console.error("Supabase retrieval error:", error);
+        return {};
+      }
 
-      // Simulate no data found
+      if (data?.encrypted_keys) {
+        // Decrypt the keys
+        const decryptedKeys = decryptFromStorage(data.encrypted_keys);
+        console.log('Retrieved encrypted keys from Supabase for user:', this.userId);
+        return decryptedKeys;
+      }
+
       return {};
     } catch (error) {
       console.error("Failed to retrieve API keys from Supabase:", error);
@@ -109,15 +147,23 @@ class SupabaseStorage {
    * Clear API keys from Supabase
    */
   async clearApiKeys(): Promise<void> {
-    try {
-      // In a real implementation, you'd use Supabase client:
-      // const { error } = await supabase
-      //   .from('user_api_keys')
-      //   .delete()
-      //   .eq('user_id', this.userId);
+    if (!supabase) {
+      console.warn("Supabase not configured, cannot clear keys");
+      return;
+    }
 
-      console.log('Clearing API keys from Supabase for user:', this.userId);
-      return Promise.resolve();
+    try {
+      const { error } = await supabase
+        .from('user_api_keys')
+        .delete()
+        .eq('user_id', this.userId);
+
+      if (error) {
+        console.error("Supabase clear error:", error);
+        throw error;
+      }
+
+      console.log('Cleared API keys from Supabase for user:', this.userId);
     } catch (error) {
       console.error("Failed to clear API keys from Supabase:", error);
       throw new Error("Failed to clear API keys from Supabase");
@@ -128,6 +174,10 @@ class SupabaseStorage {
    * Check if Supabase storage is configured
    */
   async isConfigured(): Promise<boolean> {
+    if (!supabase) {
+      return false;
+    }
+
     try {
       const keys = await this.getApiKeys();
       return !!(keys.openaiApiKey || keys.geminiApiKey);
@@ -161,6 +211,7 @@ class SupabaseStorage {
     geminiConfigured: boolean;
     userId: string;
     warning: string;
+    supabaseAvailable: boolean;
   }> {
     const keys = await this.getApiKeys();
     const openaiConfigured = !!keys.openaiApiKey;
@@ -171,7 +222,10 @@ class SupabaseStorage {
       openaiConfigured,
       geminiConfigured,
       userId: this.userId,
-      warning: "API keys are encrypted with CryptoJS before being sent to Supabase. IP-based security rules protect access."
+      supabaseAvailable: !!supabase,
+      warning: supabase 
+        ? "API keys are encrypted with CryptoJS before being sent to Supabase. IP-based security rules protect access."
+        : "Supabase not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables."
     };
   }
 }
@@ -223,6 +277,7 @@ export async function getSupabaseStorageStatus(): Promise<{
   geminiConfigured: boolean;
   userId: string;
   warning: string;
+  supabaseAvailable: boolean;
 }> {
   return supabaseStorage.getStatus();
 }

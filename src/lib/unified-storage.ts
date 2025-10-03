@@ -50,14 +50,22 @@ import {
 } from "./memory-storage";
 
 import { 
-  proxyService,
-  getIndexedDBApiKey as getProxyApiKey,
-  isIndexedDBStorageConfigured as isProxyStorageConfigured 
+  proxyService
 } from "./proxy-service";
+
+import { 
+  getApiKeysFromSupabase, 
+  getSupabaseApiKey, 
+  isSupabaseStorageConfigured,
+  storeApiKeysInSupabase,
+  clearApiKeysFromSupabase,
+  getSupabaseStorageStatus 
+} from "./supabase-storage";
 
 export type StorageMethod = 
   | 'environment'
   | 'proxy'
+  | 'supabase'
   | 'indexeddb'
   | 'cookies'
   | 'session'
@@ -80,11 +88,12 @@ export interface ApiKeys {
 }
 
 class UnifiedStorageManager {
-  private preferredMethod: StorageMethod = 'indexeddb';
+  private preferredMethod: StorageMethod = 'supabase';
   private fallbackChain: StorageMethod[] = [
     'environment',
     'proxy',
-    'indexeddb',      // Primary: Persistent + Secure
+    'supabase',       // Primary: Server-side with IP security
+    'indexeddb',      // Secondary: Persistent + Secure
     'localstorage',   // Fallback: Current method (persistent)
     'cookies',        // Fallback: Persistent
     'session',        // Fallback: Session-only
@@ -145,6 +154,9 @@ class UnifiedStorageManager {
         // Proxy service doesn't expose API keys directly
         return '';
       
+      case 'supabase':
+        return await getSupabaseApiKey(model);
+      
       case 'indexeddb':
         return await getIndexedDBApiKey(model);
       
@@ -183,6 +195,10 @@ class UnifiedStorageManager {
           const result = await proxyService.saveApiKeys(keys);
           return result.success;
         
+        case 'supabase':
+          await storeApiKeysInSupabase(keys);
+          return true;
+        
         case 'indexeddb':
           await storeApiKeysInIndexedDB(keys);
           return true;
@@ -218,6 +234,7 @@ class UnifiedStorageManager {
   async clearApiKeys(): Promise<void> {
     const clearPromises = [
       proxyService.clearApiKeys(),
+      clearApiKeysFromSupabase(),
       clearApiKeysFromIndexedDB(),
       clearApiKeyCookies(),
       clearApiKeysFromSession(),
@@ -257,6 +274,18 @@ class UnifiedStorageManager {
           priority,
           available: proxyStatus.available,
           warning: proxyStatus.warning
+        };
+      
+      case 'supabase':
+        const supabaseStatus = await getSupabaseStorageStatus();
+        return {
+          method,
+          configured: supabaseStatus.configured,
+          openaiConfigured: supabaseStatus.openaiConfigured,
+          geminiConfigured: supabaseStatus.geminiConfigured,
+          priority,
+          available: supabaseStatus.supabaseAvailable,
+          warning: supabaseStatus.warning
         };
       
       case 'indexeddb':
@@ -365,6 +394,10 @@ class UnifiedStorageManager {
           case 'proxy':
             securityScore += 9;
             recommendations.push("✅ Proxy service: Excellent security, keys never leave server");
+            break;
+          case 'supabase':
+            securityScore += 8;
+            recommendations.push("✅ Supabase: Server-side storage with IP-based security and encryption");
             break;
           case 'indexeddb':
             securityScore += 7;

@@ -15,6 +15,8 @@ import { useSettings } from "../hooks/useSettings";
 import { type AIModel } from "../lib/settings";
 import { aiService } from "../lib/ai-service";
 import { RateLimitStatus } from "./RateLimitStatus";
+import { SupabaseStatus } from "./SupabaseStatus";
+import { SupabaseTest } from "./SupabaseTest";
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -293,6 +295,12 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
               </p>
             </div>
           )}
+
+          {/* Supabase Status */}
+          <SupabaseStatus />
+
+          {/* Supabase Test */}
+          <SupabaseTest />
 
           {/* Rate Limit Status */}
           <RateLimitStatus 
