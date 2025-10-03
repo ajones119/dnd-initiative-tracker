@@ -119,10 +119,10 @@ export function getMigrationRecommendation(currentSettings: Settings): {
       'localStorage is vulnerable to XSS attacks' : 
       'Current storage method is already secure',
     benefits: [
-      '🔒 Better encryption and security',
+      '🔒 Better encryption to protect your personal API keys',
       '💾 Same persistence as localStorage (no re-entry needed)',
-      '📦 Larger storage capacity',
-      '🛡️ Protection against XSS attacks',
+      '🛡️ Protection against theft of your API keys',
+      '💰 Helps protect your API credits from unauthorized use',
       '🔄 Automatic fallback to localStorage if needed'
     ]
   };

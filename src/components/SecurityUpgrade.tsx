@@ -69,8 +69,8 @@ export const SecurityUpgrade: React.FC<SecurityUpgradeProps> = ({
           </h3>
           
           <p className="text-blue-700 mb-4">
-            Your API keys are currently stored in localStorage, which is vulnerable to security attacks. 
-            Upgrade to secure storage while keeping your existing keys - no need to re-enter them!
+            Your personal API keys are currently stored in localStorage, which is vulnerable to security attacks. 
+            Upgrade to encrypted storage to better protect your API keys and credits - no need to re-enter them!
           </p>
           
           <div className="mb-4">
