@@ -8,18 +8,28 @@ import { aiService } from "../lib/ai-service";
 import { AI_PROMPT_EXAMPLES } from "../lib/ai-schemas";
 import { useInitiativeTracker } from "./InitiativeTrackerContext";
 import { useSettings } from "../hooks/useSettings";
-import { isAIAvailable, getCurrentApiKey } from "../lib/settings";
+import { isAIAvailable } from "../lib/settings";
+import { getUsageStats } from "../lib/rate-limiter";
 import type { AIInitiativeResponse } from "../lib/ai-schemas";
 
 export const AIAssistant: React.FC = () => {
   const { addInitiativeRow } = useInitiativeTracker();
-  const { settings } = useSettings();
+  const { settings, getCurrentApiKey } = useSettings();
   const [open, setOpen] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [lastResponse, setLastResponse] = useState<AIInitiativeResponse | null>(
     null,
   );
+  const [usageStats, setUsageStats] = useState<any>(null);
+
+  // Update usage stats when component mounts or settings change
+  React.useEffect(() => {
+    if (settings.aiModel === 'groq') {
+      const stats = getUsageStats();
+      setUsageStats(stats);
+    }
+  }, [settings.aiModel]);
 
   // Don't render if AI is not available
   if (!isAIAvailable(settings)) {
@@ -31,7 +41,7 @@ export const AIAssistant: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const apiKey = getCurrentApiKey(settings);
+      const apiKey = await getCurrentApiKey(settings.aiModel);
       const response = await aiService.generateInitiativeData(
         prompt,
         settings.aiModel,
@@ -54,6 +64,12 @@ export const AIAssistant: React.FC = () => {
         });
       });
 
+      // Update usage stats for Groq
+      if (settings.aiModel === 'groq') {
+        const stats = getUsageStats();
+        setUsageStats(stats);
+      }
+
       setPrompt("");
       setOpen(false);
     } catch (error) {
@@ -75,11 +91,15 @@ export const AIAssistant: React.FC = () => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-
           className="flex items-center gap-2 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-300 hover:from-purple-500/20 hover:to-blue-500/20"
         >
           <Sparkles className="h-4 w-4 text-purple-500" />
           AI Assistant
+          {usageStats && settings.aiModel === 'groq' && (
+            <Badge variant="secondary" className="ml-1 text-xs">
+              {usageStats.requestsUsed}/{usageStats.requestsUsed + usageStats.requestsRemaining}
+            </Badge>
+          )}
         </Button>
       </PopoverTrigger>
 
