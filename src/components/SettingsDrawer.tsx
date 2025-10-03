@@ -122,7 +122,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
             </div>
 
             <div className="space-y-2">
-              {(["none", "openai", "gemini"] as const).map((model) => (
+              {(["none", "groq", "openai", "gemini"] as const).map((model) => (
                 <label
                   key={model}
                   className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-muted transition-colors"
@@ -140,20 +140,25 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                       <span className="font-medium capitalize">
                         {model === "none"
                           ? "Disabled"
-                          : model === "openai"
-                            ? "OpenAI"
-                            : "Google Gemini"}
+                          : model === "groq"
+                            ? "Groq (Free)"
+                            : model === "openai"
+                              ? "OpenAI"
+                              : "Google Gemini"}
                       </span>
                       {model !== "none" && (
                         <Badge variant="secondary" className="text-xs">
-                          {model === "openai"
-                            ? "GPT-4o-mini"
-                            : "Gemini 1.5 Flash"}
+                          {model === "groq"
+                            ? "Llama 3.2"
+                            : model === "openai"
+                              ? "GPT-4o-mini"
+                              : "Gemini 1.5 Flash"}
                         </Badge>
                       )}
                     </div>
                     <p className="text-sm text-gray-500">
                       {model === "none" && "No AI assistance"}
+                      {model === "groq" && "Free AI assistance - no API key needed!"}
                       {model === "openai" && "Fast and reliable AI assistance"}
                       {model === "gemini" && "Google's powerful AI model"}
                     </p>
@@ -163,12 +168,13 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
             </div>
           </div>
 
-          {/* API Keys */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Key className="h-4 w-4 text-blue-500" />
-              <h3 className="font-medium">API Keys</h3>
-            </div>
+          {/* API Keys - Only show if not using Groq */}
+          {tempSettings.aiModel !== "groq" && (
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Key className="h-4 w-4 text-blue-500" />
+                <h3 className="font-medium">API Keys</h3>
+              </div>
 
             {/* OpenAI API Key */}
             <div className="space-y-2">
@@ -247,6 +253,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
               </Button>
             </div>
           </div>
+          )}
 
           {/* Status */}
           <div className="p-4 rounded-lg">
@@ -256,6 +263,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
             </div>
             <p className="text-sm text-gray-600">
               {tempSettings.aiModel === "none" && "AI assistance is disabled"}
+              {tempSettings.aiModel === "groq" && "✅ Groq ready for free AI assistance"}
               {tempSettings.aiModel === "openai" &&
                 !tempSettings.openaiApiKey &&
                 "OpenAI selected but no API key provided"}
@@ -270,6 +278,20 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                 "✅ Gemini ready for assistance"}
             </p>
           </div>
+
+          {/* Groq Free Tier Notice */}
+          {tempSettings.aiModel === "groq" && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="h-4 w-4 text-green-500" />
+                <span className="font-medium text-sm text-green-800">Free AI Available!</span>
+              </div>
+              <p className="text-sm text-green-700">
+                🎉 You're using Groq's free tier with 14,400 requests per day. 
+                No API key needed - start generating D&D creatures and encounters right away!
+              </p>
+            </div>
+          )}
 
           {/* Diagnostic Results */}
           {diagnosticResult && (
