@@ -80,15 +80,15 @@ export interface ApiKeys {
 }
 
 class UnifiedStorageManager {
-  private preferredMethod: StorageMethod = 'environment';
+  private preferredMethod: StorageMethod = 'indexeddb';
   private fallbackChain: StorageMethod[] = [
     'environment',
     'proxy',
-    'indexeddb',
-    'cookies',
-    'session',
-    'memory',
-    'localstorage'
+    'indexeddb',      // Primary: Persistent + Secure
+    'localstorage',   // Fallback: Current method (persistent)
+    'cookies',        // Fallback: Persistent
+    'session',        // Fallback: Session-only
+    'memory'          // Last resort: Session-only
   ];
 
   /**
