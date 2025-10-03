@@ -42,12 +42,13 @@ import { AIAssistant } from "./AIAssistant";
 import { SettingsDrawer } from "./SettingsDrawer";
 import { EncounterDrawer } from "./EncounterDrawer";
 import { HelpModal } from "./HelpModal";
+import { IndexedDBMigration } from "./IndexedDBMigration";
 import { aiService } from "../lib/ai-service";
 import { useSettings } from "../hooks/useSettings";
 import { useEncounters } from "../hooks/useEncounters";
 import { useKeyPress } from "../hooks/useKeyPress";
 import { useLocalStorage } from "usehooks-ts";
-import { isAIAvailable, getCurrentApiKey } from "../lib/settings";
+import { isAIAvailable } from "../lib/settings";
 import {
   type ColumnDef,
   flexRender,
@@ -721,7 +722,7 @@ const InitiativeTracker = () => {
     previousTurn,
     reset,
   } = useInitiativeTracker();
-  const { settings } = useSettings();
+  const { settings, getCurrentApiKey } = useSettings();
   const { getEncounter } = useEncounters();
   const [isClient, setIsClient] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -825,7 +826,7 @@ const InitiativeTracker = () => {
 
     setIsGeneratingEncounter(true);
     try {
-      const apiKey = getCurrentApiKey(settings);
+      const apiKey = await getCurrentApiKey(settings.aiModel);
       const encounterResponse = await aiService.generateFullEncounter(
         combatDescription,
         settings.aiModel,

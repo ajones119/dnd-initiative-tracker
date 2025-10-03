@@ -8,12 +8,12 @@ import { aiService } from "../lib/ai-service";
 import { AI_PROMPT_EXAMPLES } from "../lib/ai-schemas";
 import { useInitiativeTracker } from "./InitiativeTrackerContext";
 import { useSettings } from "../hooks/useSettings";
-import { isAIAvailable, getCurrentApiKey } from "../lib/settings";
+import { isAIAvailable } from "../lib/settings";
 import type { AIInitiativeResponse } from "../lib/ai-schemas";
 
 export const AIAssistant: React.FC = () => {
   const { addInitiativeRow } = useInitiativeTracker();
-  const { settings } = useSettings();
+  const { settings, getCurrentApiKey } = useSettings();
   const [open, setOpen] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ export const AIAssistant: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const apiKey = getCurrentApiKey(settings);
+      const apiKey = await getCurrentApiKey(settings.aiModel);
       const response = await aiService.generateInitiativeData(
         prompt,
         settings.aiModel,

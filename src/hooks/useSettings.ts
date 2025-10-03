@@ -7,6 +7,12 @@ import {
   type StorageMethod,
 } from "../lib/settings";
 import { unifiedStorage } from "../lib/unified-storage";
+import { 
+  storeApiKeysInIndexedDB, 
+  getApiKeysFromIndexedDB, 
+  clearApiKeysFromIndexedDB,
+  isIndexedDBStorageConfigured 
+} from "../lib/indexeddb-storage";
 
 const SETTINGS_KEY = "initiative-tracker-settings";
 
@@ -19,14 +25,46 @@ export const useSettings = () => {
 
   const [storageAnalysis, setStorageAnalysis] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [indexedDBKeys, setIndexedDBKeys] = useState<{openaiApiKey?: string; geminiApiKey?: string}>({});
+  const [indexedDBLoaded, setIndexedDBLoaded] = useState(false);
+
+  // Load IndexedDB keys on mount
+  useEffect(() => {
+    const loadIndexedDBKeys = async () => {
+      try {
+        const keys = await getApiKeysFromIndexedDB();
+        setIndexedDBKeys(keys);
+        setIndexedDBLoaded(true);
+      } catch (error) {
+        console.error("Failed to load IndexedDB keys:", error);
+        setIndexedDBLoaded(true);
+      }
+    };
+    
+    loadIndexedDBKeys();
+  }, []);
 
   // Validate and sanitize settings from localStorage (memoized to prevent infinite loops)
   const settings = useMemo(() => {
-    return SettingsSchema.parse({
+    const baseSettings = SettingsSchema.parse({
       ...DEFAULT_SETTINGS,
       ...storedSettings,
     });
-  }, [storedSettings]);
+
+    // If IndexedDB is configured and we have keys, use those instead of localStorage
+    if (indexedDBLoaded && (indexedDBKeys.openaiApiKey || indexedDBKeys.geminiApiKey)) {
+      return {
+        ...baseSettings,
+        // Use IndexedDB keys if available, otherwise fallback to localStorage
+        openaiApiKey: indexedDBKeys.openaiApiKey || baseSettings.openaiApiKey,
+        geminiApiKey: indexedDBKeys.geminiApiKey || baseSettings.geminiApiKey,
+        storageMethod: 'indexeddb' as const,
+        useUnifiedStorage: true,
+      };
+    }
+
+    return baseSettings;
+  }, [storedSettings, indexedDBKeys, indexedDBLoaded]);
 
   // Load storage analysis when component mounts or settings change
   useEffect(() => {
@@ -50,35 +88,70 @@ export const useSettings = () => {
       const updatedSettings = { ...settings, ...newSettings };
       const validatedSettings = SettingsSchema.parse(updatedSettings);
       
-      // If using unified storage and API keys are being updated
-      if (validatedSettings.useUnifiedStorage && 
-          (newSettings.openaiApiKey !== undefined || newSettings.geminiApiKey !== undefined)) {
-        
+      // Check if API keys are being updated
+      if (newSettings.openaiApiKey !== undefined || newSettings.geminiApiKey !== undefined) {
         const keysToStore = {
           openaiApiKey: newSettings.openaiApiKey,
           geminiApiKey: newSettings.geminiApiKey,
         };
         
-        // Store in unified storage
-        const success = await unifiedStorage.storeApiKeys(keysToStore);
-        if (success) {
-          // Clear keys from localStorage when using unified storage
-          validatedSettings.openaiApiKey = "";
-          validatedSettings.geminiApiKey = "";
+        // Try to store in IndexedDB first
+        try {
+          await storeApiKeysInIndexedDB(keysToStore);
+          
+          // Update local state
+          setIndexedDBKeys(keysToStore);
+          
+          // Clear keys from localStorage since we're using IndexedDB
+          const settingsForStorage = {
+            ...validatedSettings,
+            openaiApiKey: "",
+            geminiApiKey: "",
+            storageMethod: 'indexeddb' as const,
+            useUnifiedStorage: true,
+          };
+          
+          setStoredSettings(settingsForStorage);
+          return;
+        } catch (error) {
+          console.error("Failed to store in IndexedDB, falling back to localStorage:", error);
+          
+          // Fallback to localStorage if IndexedDB fails
+          const settingsForStorage = {
+            ...validatedSettings,
+            storageMethod: 'localstorage' as const,
+            useUnifiedStorage: false,
+          };
+          
+          setStoredSettings(settingsForStorage);
+          return;
         }
       }
       
+      // For non-API key updates, just update localStorage
       setStoredSettings(validatedSettings);
     },
     [settings, setStoredSettings],
   );
 
   const resetSettings = useCallback(async () => {
-    // Clear from unified storage if enabled
-    if (settings.useUnifiedStorage) {
-      await unifiedStorage.clearApiKeys();
+    try {
+      // Clear from IndexedDB
+      await clearApiKeysFromIndexedDB();
+      setIndexedDBKeys({});
+      
+      // Clear from unified storage if enabled
+      if (settings.useUnifiedStorage) {
+        await unifiedStorage.clearApiKeys();
+      }
+      
+      // Reset to default settings
+      setStoredSettings(DEFAULT_SETTINGS);
+    } catch (error) {
+      console.error("Failed to reset settings:", error);
+      // Still reset localStorage even if IndexedDB fails
+      setStoredSettings(DEFAULT_SETTINGS);
     }
-    setStoredSettings(DEFAULT_SETTINGS);
   }, [setStoredSettings, settings.useUnifiedStorage]);
 
   const switchStorageMethod = useCallback(async (method: StorageMethod) => {
@@ -108,15 +181,22 @@ export const useSettings = () => {
   }, [settings, updateSettings]);
 
   const getCurrentApiKey = useCallback(async (model: string) => {
+    // Try IndexedDB first
+    if (indexedDBKeys.openaiApiKey || indexedDBKeys.geminiApiKey) {
+      if (model === "openai") return indexedDBKeys.openaiApiKey || "";
+      if (model === "gemini") return indexedDBKeys.geminiApiKey || "";
+    }
+    
+    // Fallback to unified storage
     if (settings.useUnifiedStorage) {
       return await unifiedStorage.getApiKey(model as any);
     }
     
-    // Fallback to localStorage
+    // Final fallback to localStorage
     if (model === "openai") return settings.openaiApiKey;
     if (model === "gemini") return settings.geminiApiKey;
     return "";
-  }, [settings]);
+  }, [settings, indexedDBKeys]);
 
   return {
     settings,
@@ -126,6 +206,7 @@ export const useSettings = () => {
     getCurrentApiKey,
     storageAnalysis,
     loading,
-    isEncrypted: false,
+    indexedDBLoaded,
+    isEncrypted: indexedDBKeys.openaiApiKey || indexedDBKeys.geminiApiKey ? true : false,
   };
 };
