@@ -7,13 +7,10 @@ import { Sparkles, Send, Loader2, Wand2 } from "lucide-react";
 import { aiService } from "../lib/ai-service";
 import { AI_PROMPT_EXAMPLES } from "../lib/ai-schemas";
 import { useInitiativeTracker } from "./InitiativeTrackerContext";
-import { useSettings } from "../hooks/useSettings";
-import { isAIAvailable, getCurrentApiKey } from "../lib/settings";
 import type { AIInitiativeResponse } from "../lib/ai-schemas";
 
 export const AIAssistant: React.FC = () => {
   const { addInitiativeRow } = useInitiativeTracker();
-  const { settings } = useSettings();
   const [open, setOpen] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -21,22 +18,12 @@ export const AIAssistant: React.FC = () => {
     null,
   );
 
-  // Don't render if AI is not available
-  if (!isAIAvailable(settings)) {
-    return null;
-  }
-
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
 
     setIsLoading(true);
     try {
-      const apiKey = getCurrentApiKey(settings);
-      const response = await aiService.generateInitiativeData(
-        prompt,
-        settings.aiModel,
-        apiKey,
-      );
+      const response = await aiService.generateInitiativeData(prompt);
       setLastResponse(response);
 
       // Add each creature to the initiative tracker

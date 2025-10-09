@@ -30,7 +30,6 @@ import {
   ChevronLeft,
   ChevronRight,
   RotateCcw,
-  Settings,
   BookOpen,
   Plus,
   Wand2,
@@ -39,15 +38,12 @@ import {
 } from "lucide-react";
 import { MonsterAutocomplete } from "./MonsterAutocomplete";
 import { AIAssistant } from "./AIAssistant";
-import { SettingsDrawer } from "./SettingsDrawer";
 import { EncounterDrawer } from "./EncounterDrawer";
 import { HelpModal } from "./HelpModal";
 import { aiService } from "../lib/ai-service";
-import { useSettings } from "../hooks/useSettings";
 import { useEncounters } from "../hooks/useEncounters";
 import { useKeyPress } from "../hooks/useKeyPress";
 import { useLocalStorage } from "usehooks-ts";
-import { isAIAvailable, getCurrentApiKey } from "../lib/settings";
 import {
   type ColumnDef,
   flexRender,
@@ -721,10 +717,8 @@ const InitiativeTracker = () => {
     previousTurn,
     reset,
   } = useInitiativeTracker();
-  const { settings } = useSettings();
   const { getEncounter } = useEncounters();
   const [isClient, setIsClient] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const [encounterOpen, setEncounterOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [encounterName, setEncounterName] = useState("Untitled Encounter");
@@ -816,20 +810,10 @@ const InitiativeTracker = () => {
       return;
     }
 
-    if (!isAIAvailable(settings)) {
-      alert(
-        "Please configure an AI model in Settings to use encounter generation.",
-      );
-      return;
-    }
-
     setIsGeneratingEncounter(true);
     try {
-      const apiKey = getCurrentApiKey(settings);
       const encounterResponse = await aiService.generateFullEncounter(
         combatDescription,
-        settings.aiModel,
-        apiKey,
       );
 
       // Clear existing creatures and add new ones
@@ -1158,16 +1142,6 @@ const InitiativeTracker = () => {
 
           <Button
             variant="outline"
-            onClick={() => setSettingsOpen(true)}
-            className="flex items-center gap-2"
-          >
-            <Settings className="h-4 w-4" />
-            Settings
-          </Button>
-
-
-          <Button
-            variant="outline"
             onClick={sortByInitiative}
             className="flex items-center gap-2"
           >
@@ -1356,30 +1330,19 @@ const InitiativeTracker = () => {
             rows={5}
           />
           
-          {isAIAvailable(settings) && (
-            <Button
-              variant="outline"
-              onClick={handleGenerateEncounter}
-              disabled={isGeneratingEncounter || !combatDescription.trim()}
-              className="flex items-center gap-2"
-            >
-              <Wand2
-                className={`h-4 w-4 ${isGeneratingEncounter ? "animate-spin" : ""}`}
-              />
-              {isGeneratingEncounter ? "Generating..." : "Generate Encounter"}
-            </Button>
-          )}
-
-          {!isAIAvailable(settings) && (
-            <div className="text-sm text-gray-500 italic">
-              💡 Configure an AI model in Settings to use the encounter generator
-            </div>
-          )}
+          <Button
+            variant="outline"
+            onClick={handleGenerateEncounter}
+            disabled={isGeneratingEncounter || !combatDescription.trim()}
+            className="flex items-center gap-2"
+          >
+            <Wand2
+              className={`h-4 w-4 ${isGeneratingEncounter ? "animate-spin" : ""}`}
+            />
+            {isGeneratingEncounter ? "Generating..." : "Generate Encounter"}
+          </Button>
         </div>
       </div>
-
-      {/* Settings Drawer */}
-      <SettingsDrawer open={settingsOpen} onOpenChange={setSettingsOpen} />
 
       {/* Encounter Drawer */}
       <EncounterDrawer

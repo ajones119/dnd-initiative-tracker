@@ -5,12 +5,12 @@ A modern, AI-powered D&D initiative tracker built with Astro, React, and Tailwin
 ## ✨ Features
 
 - **📊 Initiative Tracking** - Drag-and-drop row reordering, turn management
-- **🤖 AI Integration** - Generate encounters with OpenAI GPT-4 or Google Gemini
+- **🤖 AI Integration** - Generate encounters with OpenAI GPT-4o-mini (always available!)
 - **👹 Monster Database** - 500+ D&D monsters with autocomplete search
 - **💾 Encounter Management** - Save and load encounters locally
-- **🔐 Encrypted Storage** - Secure API key storage
 - **📱 Responsive Design** - Works on desktop and mobile
 - **🎨 Cyberpunk Theme** - Beautiful dark UI with neon accents
+- **🚀 No Setup Required** - AI features work out of the box with rate limiting
 
 ## 🚀 Quick Start
 
@@ -22,56 +22,20 @@ A modern, AI-powered D&D initiative tracker built with Astro, React, and Tailwin
    npm install
    ```
 
-2. **Set up environment variables:**
-
-   ```bash
-   cp .env.example .env.local
-   ```
-
-   Edit `.env.local` and add your encryption key:
-
-   ```bash
-   VITE_ENCRYPTION_KEY=your-super-secret-encryption-key-change-this-in-production
-   ```
-
-3. **Generate monster data:**
+2. **Generate monster data:**
 
    ```bash
    npm run fetch-monsters
    ```
 
-4. **Start development server:**
+3. **Start development server:**
    ```bash
    npm run dev
    ```
 
-## 🔐 Security Setup
+## 🤖 AI Features
 
-### AES-256 Encryption (Required)
-
-The app encrypts user API keys in localStorage using military-grade AES-256 encryption:
-
-```bash
-# Generate a secure random key (32+ characters recommended)
-VITE_ENCRYPTION_KEY=your-super-secret-encryption-key-change-this-in-production
-```
-
-**Security Features:**
-
-- 🔐 **AES-256-CBC encryption** - Military-grade encryption standard
-- 🛡️ **PBKDF2 key derivation** - 10,000 iterations for key security
-- 🔒 **Random IV per encryption** - Prevents pattern analysis
-- ✅ **API keys encrypted before storage**
-- ✅ **Encryption key not accessible to users**
-- ✅ **XSS protection** - encrypted data useless without key
-- ✅ **Browser extension safe** - can't read encrypted data
-
-### API Keys (Optional)
-
-Users can add their own API keys in Settings:
-
-- **OpenAI API Key** - For GPT-4o-mini
-- **Google Gemini API Key** - For Gemini 1.5 Flash
+AI encounter generation is **always available** with no setup required! The app uses a Supabase edge function to provide OpenAI GPT-4o-mini integration with built-in rate limiting for fair usage.
 
 ## 🎮 Usage
 
@@ -84,10 +48,10 @@ Users can add their own API keys in Settings:
 
 ### AI Encounter Generation
 
-1. Configure AI model in Settings
-2. Describe your encounter in the textarea
-3. Click "Generate Encounter"
-4. Review generated creatures and combat mechanics
+1. Describe your encounter in the textarea (no setup required!)
+2. Click "Generate Encounter"
+3. Review generated creatures and combat mechanics
+4. AI Assistant button for quick creature additions
 
 ### Monster Search
 
@@ -120,7 +84,7 @@ npm run fetch-monsters # Update monster database
 - **TanStack Table** - Data table
 - **@dnd-kit** - Drag and drop
 - **Zod** - Schema validation
-- **OpenAI/Gemini** - AI integration
+- **Supabase Functions** - AI integration via OpenAI
 
 ## 📁 Project Structure
 
@@ -143,17 +107,6 @@ src/
 
 ## 🔧 Configuration
 
-### Environment Variables
-
-```bash
-# Required
-VITE_ENCRYPTION_KEY=your-encryption-key
-
-# Optional (for demo mode)
-VITE_DEMO_OPENAI_KEY=your-demo-openai-key
-VITE_DEMO_GEMINI_KEY=your-demo-gemini-key
-```
-
 ### Monster Data
 
 Monster data is fetched from the D&D 5e API and cached locally. Run `npm run fetch-monsters` to update.
@@ -168,9 +121,9 @@ Deploy to any static hosting service:
 - **Netlify** - `netlify deploy --prod`
 - **GitHub Pages** - Configure in repository settings
 
-### Environment Variables in Production
+### Supabase Edge Functions
 
-Set `VITE_ENCRYPTION_KEY` in your hosting platform's environment variables.
+The app uses Supabase edge functions for AI integration. Make sure to deploy the `openai-chat-proxy` function to your Supabase project.
 
 ## 🤝 Contributing
 
@@ -188,5 +141,5 @@ MIT License - see LICENSE file for details.
 
 - **D&D 5e API** - Monster data source
 - **ShadCN UI** - Beautiful component library
-- **OpenAI & Google** - AI capabilities
+- **OpenAI** - AI capabilities via Supabase edge functions
 - **Astro Team** - Amazing framework

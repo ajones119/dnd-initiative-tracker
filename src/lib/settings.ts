@@ -1,35 +1,31 @@
 import { z } from "zod";
 
-// AI Model types
-export type AIModel = "openai" | "gemini" | "none";
+// AI Model type - OpenAI only via Supabase edge function
+export type AIModel = "openai";
 
-// Settings schema for validation
+// Settings schema - simplified for OpenAI only
 export const SettingsSchema = z.object({
-  aiModel: z.enum(["openai", "gemini", "none"]).default("none"),
+  aiModel: z.enum(["openai"]).default("openai"),
+  // Keeping these fields for backwards compatibility but they're not used
   openaiApiKey: z.string().default(""),
   geminiApiKey: z.string().default(""),
 });
 
 export type Settings = z.infer<typeof SettingsSchema>;
 
-// Default settings
+// Default settings - AI is always enabled via Supabase edge function
 export const DEFAULT_SETTINGS: Settings = {
-  aiModel: "none",
+  aiModel: "openai",
   openaiApiKey: "",
   geminiApiKey: "",
 };
 
-// Helper to check if AI is available
-export const isAIAvailable = (settings: Settings): boolean => {
-  if (settings.aiModel === "none") return false;
-  if (settings.aiModel === "openai") return settings.openaiApiKey.trim() !== "";
-  if (settings.aiModel === "gemini") return settings.geminiApiKey.trim() !== "";
-  return false;
+// AI is always available - using Supabase edge function
+export const isAIAvailable = (settings?: Settings): boolean => {
+  return true; // Always available via Supabase edge function
 };
 
-// Helper to get current API key
+// Not needed - keeping for backwards compatibility
 export const getCurrentApiKey = (settings: Settings): string => {
-  if (settings.aiModel === "openai") return settings.openaiApiKey;
-  if (settings.aiModel === "gemini") return settings.geminiApiKey;
-  return "";
+  return ""; // Not needed - using Supabase edge function
 };

@@ -162,49 +162,18 @@ export const HelpModal: React.FC<HelpModalProps> = ({ open, onOpenChange }) => {
             </div>
           </section>
 
-          {/* AI Setup */}
+          {/* AI Features */}
           <section>
             <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-              <Settings className="h-5 w-5 text-secondary" />
-              AI Setup & Configuration
+              <Wand2 className="h-5 w-5 text-secondary" />
+              AI Features
             </h3>
             <div className="space-y-4 text-sm">
               <div className="bg-muted p-4 rounded-lg">
-                <h4 className="font-medium mb-2">Getting Started with AI:</h4>
-                <ol className="space-y-2 ml-4 list-decimal">
-                  <li>Click the <strong>Settings</strong> button (gear icon)</li>
-                  <li>Choose your AI model: <strong>OpenAI</strong> or <strong>Gemini</strong></li>
-                  <li>Enter your API key (see instructions below)</li>
-                  <li>Save settings and start generating encounters!</li>
-                </ol>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="border border-primary/20 rounded-lg p-4">
-                  <h4 className="font-medium mb-2 flex items-center gap-2">
-                    <Wand2 className="h-4 w-4" />
-                    OpenAI Setup
-                  </h4>
-                  <ol className="space-y-1 text-xs">
-                    <li>1. Visit <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">platform.openai.com</a></li>
-                    <li>2. Create account or sign in</li>
-                    <li>3. Generate new API key</li>
-                    <li>4. Copy and paste into Settings</li>
-                  </ol>
-                </div>
-
-                <div className="border border-secondary/20 rounded-lg p-4">
-                  <h4 className="font-medium mb-2 flex items-center gap-2">
-                    <Zap className="h-4 w-4" />
-                    Gemini Setup
-                  </h4>
-                  <ol className="space-y-1 text-xs">
-                    <li>1. Visit <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">aistudio.google.com</a></li>
-                    <li>2. Sign in with Google account</li>
-                    <li>3. Create new API key</li>
-                    <li>4. Copy and paste into Settings</li>
-                  </ol>
-                </div>
+                <h4 className="font-medium mb-2">AI is Always Available:</h4>
+                <p className="text-sm">
+                  No setup required! The AI Assistant is always ready to help you generate creatures and encounters using OpenAI's GPT-4o-mini model.
+                </p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -239,14 +208,14 @@ export const HelpModal: React.FC<HelpModalProps> = ({ open, onOpenChange }) => {
                 </div>
               </div>
 
-              <div className="bg-warning/10 border border-warning/20 rounded-lg p-4">
+              <div className="bg-info/10 border border-info/20 rounded-lg p-4">
                 <h4 className="font-medium mb-2 flex items-center gap-2">
-                  <Info className="h-4 w-4 text-warning" />
-                  Security Note
+                  <Info className="h-4 w-4 text-info" />
+                  Rate Limits
                 </h4>
                 <p className="text-xs">
-                  Your API keys are stored locally in your browser and never sent to our servers. 
-                  Use dedicated API keys with usage limits for security.
+                  AI generation is rate-limited to ensure fair usage for all users. 
+                  If you hit the limit, please wait a bit before trying again.
                 </p>
               </div>
             </div>
