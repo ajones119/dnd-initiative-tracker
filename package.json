@@ -1,7 +1,7 @@
 {
-  "name": "steadfast-shell",
+  "name": "initiative-tracker",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "npm run fetch-monsters && astro build",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.0",
+    "@astrojs/sitemap": "^3.6.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",

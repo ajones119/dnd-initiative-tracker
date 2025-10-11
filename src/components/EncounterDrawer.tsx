@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
@@ -21,6 +21,8 @@ import {
   Users,
   Play,
   RotateCcw,
+  Download,
+  Upload,
 } from "lucide-react";
 import { useEncounters } from "../hooks/useEncounters";
 import { getEncounterSummary, type Encounter } from "../lib/encounters";
@@ -70,10 +72,14 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
     deleteEncounter,
     duplicateEncounter,
     clearAllEncounters,
+    exportEncounters,
+    exportSingleEncounter,
+    importEncounters,
   } = useEncounters();
 
   const [saveAsName, setSaveAsName] = useState("");
   const [saveAsDescription, setSaveAsDescription] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSaveCurrent = () => {
     const name = currentEncounterName.trim() || "Untitled Encounter";
@@ -146,6 +152,49 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
   const handleNewEncounter = () => {
     onNewEncounter();
     onOpenChange(false);
+  };
+
+  const handleExportAll = () => {
+    if (encounters.length === 0) {
+      alert("No encounters to export");
+      return;
+    }
+    exportEncounters();
+  };
+
+  const handleExportSingle = (id: string) => {
+    exportSingleEncounter(id);
+  };
+
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const result = await importEncounters(file);
+      if (result.success > 0) {
+        alert(
+          `Successfully imported ${result.success} encounter(s)${result.failed > 0 ? `. ${result.failed} failed.` : ""}`,
+        );
+      } else {
+        alert("No valid encounters found in the file");
+      }
+    } catch (error) {
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Failed to import encounters",
+      );
+    }
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -241,6 +290,41 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
             </div>
           </div>
 
+          {/* Import/Export Section */}
+          <div className="space-y-3 border-t pt-4">
+            <h3 className="font-medium text-sm text-gray-700">
+              Import / Export
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                onClick={handleImportClick}
+                variant="outline"
+                size="sm"
+                className="w-full"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                Import
+              </Button>
+              <Button
+                onClick={handleExportAll}
+                variant="outline"
+                size="sm"
+                className="w-full"
+                disabled={encounters.length === 0}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export All
+              </Button>
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+          </div>
+
           {/* Saved Encounters */}
           <div className="space-y-3 border-t pt-4">
             <div className="flex items-center justify-between">
@@ -273,7 +357,7 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                 {encounters.map((encounter) => (
                   <div
                     key={encounter.id}
-                    className={`p-3 border rounded-lg hover:bg-gray-50 transition-colors ${
+                    className={`p-3 border rounded-lg ${
                       encounter.id === currentEncounterId
                         ? "border-blue-500 bg-blue-50"
                         : ""
@@ -312,6 +396,15 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                           title="Load encounter"
                         >
                           <Play className="h-3 w-3" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleExportSingle(encounter.id)}
+                          className="h-6 w-6 p-0"
+                          title="Export encounter"
+                        >
+                          <Download className="h-3 w-3" />
                         </Button>
                         <Button
                           variant="ghost"

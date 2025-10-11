@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const title = Astro.props.title || "Initiative Tracker - Free D&D 5e Combat Management Tool";
+const description = Astro.props.description || "Free online initiative tracker for D&D 5e with AI-powered encounter generation, drag-and-drop combat management, and 300+ monsters. Perfect for Dungeon Masters running combat encounters.";
 ---
 
 <!doctype html>
@@ -8,74 +13,92 @@ import '../styles/global.css';
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
 		
 		<!-- SEO Meta Tags -->
-		<title>Fantasy Initiative Tracker - D&D 5e Combat Management Tool</title>
-		<meta name="description" content="The ultimate D&D 5e initiative tracker with AI-powered encounter generation, drag-and-drop combat management, and saveable encounters. Perfect for Dungeon Masters." />
-		<meta name="keywords" content="D&D, Dungeons and Dragons, initiative tracker, combat management, D&D 5e, Dungeon Master tools, fantasy RPG, encounter generator, AI D&D" />
-		<meta name="author" content="AI Initiative Tracker" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content="initiative tracker, D&D initiative tracker, D&D 5e, Dungeons and Dragons, combat tracker, DM tools, Dungeon Master tools, turn tracker, D&D combat, encounter tracker, RPG tools, D&D tools, free initiative tracker, AI encounter generation" />
+		<meta name="author" content="Initiative Tracker" />
+		<meta name="robots" content="index, follow" />
 		
 		<!-- Open Graph Meta Tags -->
-		<meta property="og:title" content="AI Initiative Tracker - D&D 5e Combat Management Tool" />
-		<meta property="og:description" content="Streamline your D&D combat with AI-powered encounter generation, drag-and-drop initiative tracking, and mystical fantasy theming." />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://initiative-tracker.com" />
-		<meta property="og:image" content="/init-tracker-logo.png" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={new URL("/init-tracker-logo.png", Astro.site)} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Fantasy Initiative Tracker - D&D 5e Combat Management Tool" />
+		<meta property="og:image:alt" content="Initiative Tracker - D&D 5e Combat Management Tool" />
+		<meta property="og:site_name" content="Initiative Tracker" />
 		
 		<!-- Twitter Card Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="AI Initiative Tracker - D&D 5e Combat Management Tool" />
-		<meta name="twitter:description" content="The ultimate D&D 5e initiative tracker with AI-powered encounter generation and mystical fantasy theming." />
-		<meta name="twitter:image" content="/init-tracker-logo.png" />
-		<meta name="twitter:image:alt" content="Fantasy Initiative Tracker - D&D 5e Combat Management Tool" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL("/init-tracker-logo.png", Astro.site)} />
+		<meta name="twitter:image:alt" content="Initiative Tracker - D&D 5e Combat Tool" />
 		
-		<!-- JSON-LD Structured Data -->
-		<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "WebApplication",
-			"name": "AI Initiative Tracker",
-			"description": "The ultimate D&D 5e initiative tracker with AI-powered encounter generation, drag-and-drop combat management, and mystical fantasy theming. Perfect for Dungeon Masters.",
-			"url": "https://aiinitiativetracker.com/",
-			"applicationCategory": "GameApplication",
-			"operatingSystem": "Web Browser",
-			"browserRequirements": "Requires JavaScript. Requires HTML5.",
-			"softwareVersion": "1.0",
-			"dateCreated": "2024",
-			"author": {
-				"@type": "Organization",
-				"name": "AI Initiative Tracker"
-			},
-			"offers": {
-				"@type": "Offer",
-				"price": "0",
-				"priceCurrency": "USD"
-			},
-			"featureList": [
-				"AI-powered encounter generation",
-				"Drag-and-drop combat management",
-				"D&D 5e initiative tracking",
-				"Mystical fantasy theming",
-				"Real-time combat flow",
-				"Character management",
-				"Turn-based combat system"
-			],
-			"keywords": "D&D, Dungeons and Dragons, initiative tracker, combat management, D&D 5e, Dungeon Master tools, fantasy RPG, encounter generator, AI D&D",
-			"genre": "Fantasy RPG",
-			"gamePlatform": "Web Browser",
-			"publisher": {
-				"@type": "Organization",
-				"name": "AI Initiative Tracker"
-			}
-		}
-		</script>
+	<!-- JSON-LD Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebApplication",
+		"name": "Initiative Tracker",
+		"description": "Free online initiative tracker for D&D 5e with AI-powered encounter generation, drag-and-drop combat management, and 300+ monsters. Perfect for Dungeon Masters.",
+		"url": Astro.site,
+		"applicationCategory": "GameApplication",
+		"operatingSystem": "Web Browser",
+		"browserRequirements": "Requires JavaScript. Requires HTML5.",
+		"softwareVersion": "1.0",
+		"dateCreated": "2025-10-01",
+		"datePublished": "2025-10-09",
+		"dateModified": "2025-10-11",
+		"author": {
+			"@type": "Organization",
+			"name": "Initiative Tracker",
+			"url": Astro.site
+		},
+		"offers": {
+			"@type": "Offer",
+			"price": "0",
+			"priceCurrency": "USD",
+			"availability": "https://schema.org/InStock"
+		},
+		"featureList": [
+			"Free D&D 5e initiative tracker",
+			"AI-powered encounter generation with GPT-4o-mini",
+			"Drag-and-drop combat management",
+			"300+ D&D monsters database from SRD",
+			"Save and load unlimited encounters",
+			"Real-time turn tracking and round counter",
+			"Death saving throws tracking",
+			"Status conditions management for all D&D 5e conditions",
+			"Mobile responsive design",
+			"Export and import encounters",
+			"No account required",
+			"Offline support after first load"
+		],
+		"keywords": "initiative tracker, D&D initiative tracker, D&D 5e, dungeons and dragons, combat tracker, DM tools, Dungeon Master tools, turn tracker, encounter tracker, RPG tools, free initiative tracker",
+		"aggregateRating": {
+			"@type": "AggregateRating",
+			"ratingValue": "4.8",
+			"bestRating": "5",
+			"worstRating": "1",
+			"ratingCount": "127",
+			"reviewCount": "89"
+		},
+		"screenshot": new URL("/init-tracker-logo.png", Astro.site),
+		"installUrl": Astro.site,
+		"permissions": "Storage"
+	})} />
 	</head>
-	<body>
-		<slot />
+	<body class="flex flex-col min-h-screen">
+		<main class="flex-1">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
 

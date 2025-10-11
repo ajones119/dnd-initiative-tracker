@@ -40,6 +40,7 @@ import { MonsterAutocomplete } from "./MonsterAutocomplete";
 import { AIAssistant } from "./AIAssistant";
 import { EncounterDrawer } from "./EncounterDrawer";
 import { HelpModal } from "./HelpModal";
+import { IncrementableNumberInput } from "./IncrementableNumberInput";
 import { aiService } from "../lib/ai-service";
 import { useEncounters } from "../hooks/useEncounters";
 import { useKeyPress } from "../hooks/useKeyPress";
@@ -116,7 +117,7 @@ const EditableTextCell = ({ getValue, row, column, placeholder }: any) => {
 const EditableNumberCell = ({ getValue, row, column }: any) => {
   const { updateInitiativeRow } = useInitiativeTracker();
   const initialValue = getValue() as number | undefined;
-  const [value, setValue] = useState(initialValue ?? "");
+  const [value, setValue] = useState<number | "">(initialValue ?? "");
 
   const onBlur = () => {
     const numericValue = value === "" ? undefined : Number(value);
@@ -127,25 +128,15 @@ const EditableNumberCell = ({ getValue, row, column }: any) => {
     setValue(initialValue ?? "");
   }, [initialValue]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    if (inputValue === "") {
-      setValue("");
-    } else {
-      const numericValue = Number(inputValue);
-      if (!isNaN(numericValue)) {
-        setValue(numericValue);
-      }
-    }
+  const handleChange = (newValue: number | "") => {
+    setValue(newValue);
   };
 
   return (
-    <Input
+    <IncrementableNumberInput
       value={value}
       onChange={handleChange}
       onBlur={onBlur}
-      type="number"
-      className="h-8 min-w-10 w-full text-center [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
     />
   );
 };

@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Article Schema for SEO
+const articleSchema = {
+	"@context": "https://schema.org",
+	"@type": "Article",
+	"headline": "Initiative Tracker Features for D&D 5e",
+	"description": "Explore all the features of our free D&D 5e initiative tracker: AI encounter generation, 300+ monsters, drag-and-drop management, and more.",
+	"image": new URL("/init-tracker-logo.png", Astro.site),
+	"datePublished": "2025-10-09",
+	"dateModified": "2025-10-11",
+	"author": {
+		"@type": "Organization",
+		"name": "Initiative Tracker"
+	},
+	"publisher": {
+		"@type": "Organization",
+		"name": "Initiative Tracker",
+		"logo": {
+			"@type": "ImageObject",
+			"url": new URL("/init-tracker-logo.png", Astro.site)
+		}
+	},
+	"articleSection": "Features"
+};
+---
+
+<Layout 
+	title="Features - Initiative Tracker for D&D 5e"
+	description="Explore all the features of our free D&D 5e initiative tracker: AI encounter generation, 300+ monsters, drag-and-drop management, and more."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+	<div class="w-full min-h-screen p-4">
+		<div class="max-w-4xl mx-auto">
+			<nav class="mb-6 text-sm">
+				<a href="/" class="text-primary hover:underline">← Back to Tracker</a>
+			</nav>
+
+			<article class="max-w-none">
+				<h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">Initiative Tracker Features</h1>
+				
+				<p class="text-lg text-muted-foreground mb-8">
+					Our initiative tracker is packed with features designed to make running D&D 5e combat encounters seamless and enjoyable for Dungeon Masters.
+				</p>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">🎯 Initiative Tracking & Combat Management</h2>
+					<p class="text-muted-foreground mb-4">
+						The core of any good initiative tracker is reliable turn order management. Our tracker automatically sorts combatants by initiative roll, highlights the active turn, and lets you advance through combat with a single click.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Automatic Sorting:</strong> Enter initiative values and watch the tracker automatically organize turn order from highest to lowest</li>
+						<li><strong>Turn Highlighting:</strong> The current turn is clearly highlighted so everyone knows whose turn it is</li>
+						<li><strong>Next/Previous Turn:</strong> Navigate through combat rounds with intuitive controls</li>
+						<li><strong>Round Counter:</strong> Automatically tracks what round of combat you're in for duration-based effects</li>
+						<li><strong>Initiative Rolls:</strong> Quick dice roller for generating initiative values</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">🤖 AI Encounter Generation</h2>
+					<p class="text-muted-foreground mb-4">
+						Generate balanced combat encounters on the fly using AI assistance. Describe what you want, and our AI will suggest appropriate monsters, tactics, and encounter composition.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Natural Language Input:</strong> Describe your encounter in plain English (e.g., "forest ambush with goblins for 4 level-3 players")</li>
+						<li><strong>Smart Suggestions:</strong> AI recommends appropriate monsters based on party level and encounter difficulty</li>
+						<li><strong>Tactical Insights:</strong> Get combat tactics and strategy tips for each encounter</li>
+						<li><strong>Instant Setup:</strong> Generated encounters are automatically added to your tracker</li>
+						<li><strong>Fair Usage:</strong> 20 AI generations per day with no API keys or setup required</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">👹 300+ Monster Database</h2>
+					<p class="text-muted-foreground mb-4">
+						Access over 300 D&D 5e monsters from the SRD with intelligent autocomplete search. All monster stats are pre-loaded for instant access.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Autocomplete Search:</strong> Type any monster name and get instant suggestions</li>
+						<li><strong>Auto-Fill Stats:</strong> Select a monster and automatically populate HP, AC, and initiative bonus</li>
+						<li><strong>Monster Actions:</strong> View special abilities, actions, and legendary actions in a convenient popup</li>
+						<li><strong>Challenge Ratings:</strong> Quick reference for monster difficulty</li>
+						<li><strong>Offline Access:</strong> All monster data stored locally - no internet required after first load</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">🎨 Drag & Drop Interface</h2>
+					<p class="text-muted-foreground mb-4">
+						Intuitive drag-and-drop functionality makes reordering initiative as easy as clicking and dragging. Perfect for when players use features that change initiative order.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Visual Reordering:</strong> Drag rows up and down to change initiative order</li>
+						<li><strong>Mobile Support:</strong> Touch-friendly drag controls work on tablets and phones</li>
+						<li><strong>Instant Updates:</strong> Changes take effect immediately with no save button needed</li>
+						<li><strong>Undo Protection:</strong> Easy to drag back if you make a mistake</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">💾 Save & Load Encounters</h2>
+					<p class="text-muted-foreground mb-4">
+						Never set up the same encounter twice. Save your favorite encounters, boss fights, or random encounter tables for instant recall.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Local Storage:</strong> Encounters saved securely in your browser - no account needed</li>
+						<li><strong>Named Encounters:</strong> Give your encounters descriptive names for easy organization</li>
+						<li><strong>Instant Load:</strong> Recall any saved encounter with one click</li>
+						<li><strong>Unlimited Saves:</strong> Save as many encounters as you need</li>
+						<li><strong>Export/Import:</strong> Backup your encounters or share them with other DMs</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">💀 Death Saving Throws</h2>
+					<p class="text-muted-foreground mb-4">
+						Track death saving throws for dying characters with a visual interface that makes it impossible to lose count.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Success/Failure Tracking:</strong> Easy checkboxes for marking saves</li>
+						<li><strong>Automatic Stabilization:</strong> Visual indicators when a character stabilizes or dies</li>
+						<li><strong>Reset on Heal:</strong> Death saves automatically reset when HP is restored</li>
+						<li><strong>Critical Tracking:</strong> Mark critical successes and failures</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">🎭 Status Conditions & Effects</h2>
+					<p class="text-muted-foreground mb-4">
+						Apply and track all D&D 5e status conditions with visual indicators. Never forget who's stunned or paralyzed.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>All Conditions:</strong> Blinded, Charmed, Deafened, Frightened, Grappled, Incapacitated, Invisible, Paralyzed, Petrified, Poisoned, Prone, Restrained, Stunned, Unconscious</li>
+						<li><strong>Visual Badges:</strong> Conditions displayed as colored badges on each creature</li>
+						<li><strong>Quick Toggle:</strong> Add or remove conditions with a single click</li>
+						<li><strong>Concentration Tracking:</strong> Mark creatures maintaining concentration on spells</li>
+						<li><strong>Custom Notes:</strong> Add custom status effects or reminders</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">📱 Mobile Responsive Design</h2>
+					<p class="text-muted-foreground mb-4">
+						Use the initiative tracker on any device - desktop, laptop, tablet, or phone. The interface adapts to your screen size.
+					</p>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>Touch Optimized:</strong> Large buttons and touch-friendly controls</li>
+						<li><strong>Responsive Layout:</strong> Columns hide/show based on screen size</li>
+						<li><strong>No Horizontal Scrolling:</strong> Everything fits on mobile screens</li>
+						<li><strong>Quick Actions:</strong> Swipe gestures for common actions on mobile</li>
+						<li><strong>Readable Text:</strong> Font sizes optimized for all screen sizes</li>
+					</ul>
+				</section>
+
+				<section class="mb-12">
+					<h2 class="text-3xl font-bold mb-4">⚡ Additional Features</h2>
+					<ul class="list-disc list-inside text-muted-foreground space-y-2 mb-4">
+						<li><strong>HP Tracking:</strong> Update hit points with quick +/- buttons or direct input</li>
+						<li><strong>Armor Class Display:</strong> Keep AC visible for quick attack rolls</li>
+						<li><strong>Initiative Bonus:</strong> Store initiative modifiers for quick rerolls</li>
+						<li><strong>Duplicate Creatures:</strong> Clone existing creatures for multiple enemies</li>
+						<li><strong>Bulk Actions:</strong> Delete or modify multiple creatures at once</li>
+						<li><strong>Notes & Actions:</strong> Store monster actions, player abilities, or combat notes</li>
+						<li><strong>Dark Theme:</strong> Beautiful fantasy-themed dark mode easy on the eyes</li>
+						<li><strong>Keyboard Shortcuts:</strong> Navigate combat faster with hotkeys</li>
+						<li><strong>No Installation:</strong> Works instantly in any modern browser</li>
+						<li><strong>Privacy First:</strong> All data stays on your device - nothing sent to servers</li>
+					</ul>
+				</section>
+
+			<div class="bg-secondary/20 p-6 rounded-lg mt-12">
+					<h3 class="text-2xl font-bold mb-4">Ready to streamline your D&D combat?</h3>
+					<p class="text-muted-foreground mb-4">
+						Try our free initiative tracker today - no sign-up required, no downloads, just start tracking.
+					</p>
+					<a href="/" class="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+						Start Using Initiative Tracker
+					</a>
+				</div>
+			</article>
+		</div>
+	</div>
+</Layout>
+
+

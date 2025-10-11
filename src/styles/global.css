@@ -4,103 +4,69 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Mystical Blue Theme */
+  /* Dark Blue Fantasy Theme */
   --background: 4 8 20; /* Deep ocean blue-black */
-  --foreground: 191 219 254; /* Ethereal sky blue */
-  --muted: 15 25 45; /* Dark mystical blue */
-  --accent: 59 130 246; /* Mystical blue */
-  --border: 96 165 250; /* Ocean blue border */
+  --foreground: 226 232 240; /* Light slate text */
+  --muted: 15 25 45; /* Dark blue */
+  --accent: 96 165 250; /* Bright blue */
+  --border: 71 85 105; /* Slate border */
 
-  /* Mystical blue colors */
-  --primary: 59 130 246; /* Mystical blue - main accent */
-  --secondary: 168 85 247; /* Enchanted purple - secondary accent */
-  --success: 34 197 94; /* Nature green - success/health */
-  --warning: 251 191 36; /* Golden amber - warning */
-  --destructive: 239 68 68; /* Mystical red - danger */
+  /* Color palette */
+  --primary: 96 165 250; /* Sky blue */
+  --primary-foreground: 4 8 20; /* Dark text on bright */
+  --secondary: 71 85 105; /* Slate gray */
+  --secondary-foreground: 226 232 240; /* Light text */
+  --success: 34 197 94; /* Green */
+  --warning: 234 179 8; /* Yellow */
+  --destructive: 239 68 68; /* Red */
 
-  /* Mystical blue gradients */
-  --gradient-primary: linear-gradient(
-    135deg,
-    rgb(4 8 20),
-    rgb(59 130 246),
-    rgb(96 165 250)
-  );
-  --gradient-accent: linear-gradient(135deg, rgb(59 130 246), rgb(168 85 247));
-  --gradient-danger: linear-gradient(135deg, rgb(239 68 68), rgb(168 85 247));
-  --radius: 0.625rem;
-  --card: 8 15 35; /* Mystical blue card background */
-  --card-foreground: 191 219 254; /* Ethereal sky blue text */
-  --popover: 12 20 40; /* Mystical blue popover background */
-  --popover-foreground: 191 219 254; /* Ethereal sky blue text */
-  --primary-foreground: 4 8 20; /* Dark mystical text on bright backgrounds */
-  --secondary-foreground: 4 8 20; /* Dark mystical text on bright backgrounds */
-  --muted-foreground: 147 197 253; /* Lighter sky blue for muted text */
-  --accent-foreground: 4 8 20; /* Dark mystical text on bright backgrounds */
-  --input: 15 25 45; /* Mystical blue input background */
-  --ring: 59 130 246; /* Mystical blue focus ring */
-  --chart-1: 59 130 246; /* Mystical blue */
-  --chart-2: 168 85 247; /* Enchanted purple */
-  --chart-3: 34 197 94; /* Nature green */
-  --chart-4: 251 191 36; /* Golden amber */
-  --chart-5: 96 165 250; /* Ocean blue */
-  --sidebar: 6 12 25; /* Dark mystical blue sidebar */
-  --sidebar-foreground: 191 219 254; /* Ethereal sky blue text */
-  --sidebar-primary: 59 130 246; /* Mystical blue */
-  --sidebar-primary-foreground: 4 8 20; /* Dark mystical text */
-  --sidebar-accent: 168 85 247; /* Enchanted purple */
-  --sidebar-accent-foreground: 4 8 20; /* Dark mystical text */
-  --sidebar-border: 96 165 250; /* Ocean blue border */
-  --sidebar-ring: 59 130 246; /* Mystical blue ring */
+  --radius: 0.5rem;
+  --card: 15 23 42; /* Dark slate card */
+  --card-foreground: 226 232 240; /* Light text */
+  --popover: 15 23 42; /* Dark popover */
+  --popover-foreground: 226 232 240; /* Light text */
+  --muted-foreground: 148 163 184; /* Muted slate text */
+  --accent-foreground: 4 8 20; /* Dark text on accent */
+  --input: 15 23 42; /* Dark input background */
+  --ring: 96 165 250; /* Blue focus ring */
 }
 
 /* Base styles */
 * {
-  border-color: rgb(var(--border));
-}
-
-/* Text selection styling */
-::selection {
-  background-color: rgb(
-    147 197 253 / 0.6
-  ); /* Icy blue selection for contrast */
-  color: rgb(4 8 20); /* Dark text on bright selection */
-}
-
-::-moz-selection {
-  background-color: rgb(
-    147 197 253 / 0.6
-  ); /* Icy blue selection for contrast */
-  color: rgb(4 8 20); /* Dark text on bright selection */
+  border-color: rgb(var(--border) / 0.3);
 }
 
 html {
-  height: 100%;
+  min-height: 100%;
   background: radial-gradient(
-    circle at 20% 80%,
-    rgb(4 8 20) 0%,
-    rgb(2 4 10) 50%,
-    rgb(4 8 20) 100%
+    ellipse at top,
+    rgb(15 23 42) 0%,
+    rgb(4 8 20) 50%,
+    rgb(2 6 16) 100%
   );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body {
-  background: radial-gradient(
-    circle at 20% 80%,
-    rgb(4 8 20) 0%,
-    rgb(2 4 10) 50%,
-    rgb(4 8 20) 100%
-  );
+  background: transparent;
   color: rgb(var(--foreground));
   font-family:
-    "Inter",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
+    "Roboto",
+    "Helvetica Neue",
+    Arial,
     sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
 
+/* Subtle background glow */
 body::before {
   content: "";
   position: fixed;
@@ -110,19 +76,14 @@ body::before {
   height: 100%;
   background:
     radial-gradient(
-      circle at 25% 25%,
-      rgb(59 130 246 / 0.05) 0%,
+      circle at 20% 30%,
+      rgb(59 130 246 / 0.08) 0%,
       transparent 50%
     ),
     radial-gradient(
-      circle at 75% 75%,
-      rgb(168 85 247 / 0.05) 0%,
+      circle at 80% 70%,
+      rgb(96 165 250 / 0.06) 0%,
       transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgb(96 165 250 / 0.03) 0%,
-      transparent 70%
     );
   pointer-events: none;
   z-index: -1;
@@ -154,6 +115,10 @@ body::before {
     background-color: rgb(var(--secondary));
   }
 
+  .bg-card {
+    background-color: rgb(var(--card));
+  }
+
   .bg-success {
     background-color: rgb(var(--success));
   }
@@ -180,6 +145,10 @@ body::before {
 
   .text-muted {
     color: rgb(var(--muted));
+  }
+
+  .text-muted-foreground {
+    color: rgb(var(--muted-foreground));
   }
 
   .text-accent {
@@ -246,198 +215,9 @@ body::before {
     border-color: rgb(var(--destructive));
   }
 
-  /* Epic gradient backgrounds */
-  .bg-gradient-primary {
-    background: var(--gradient-primary);
-  }
-
-  .bg-gradient-accent {
-    background: var(--gradient-accent);
-  }
-
-  .bg-gradient-danger {
-    background: var(--gradient-danger);
-  }
-
-  /* Fantasy mystical glow effects */
-  .glow-accent {
-    box-shadow:
-      0 0 8px rgb(var(--accent) / 0.6),
-      0 0 16px rgb(var(--accent) / 0.4),
-      0 0 24px rgb(var(--accent) / 0.3),
-      0 0 32px rgb(var(--accent) / 0.2);
-  }
-
-  .glow-primary {
-    box-shadow:
-      0 0 8px rgb(var(--primary) / 0.6),
-      0 0 16px rgb(var(--primary) / 0.4),
-      0 0 24px rgb(var(--primary) / 0.3),
-      0 0 32px rgb(var(--primary) / 0.2);
-  }
-
-  .glow-secondary {
-    box-shadow:
-      0 0 8px rgb(var(--secondary) / 0.6),
-      0 0 16px rgb(var(--secondary) / 0.4),
-      0 0 24px rgb(var(--secondary) / 0.3),
-      0 0 32px rgb(var(--secondary) / 0.2);
-  }
-
-  .glow-success {
-    box-shadow:
-      0 0 8px rgb(var(--success) / 0.6),
-      0 0 16px rgb(var(--success) / 0.4),
-      0 0 24px rgb(var(--success) / 0.3),
-      0 0 32px rgb(var(--success) / 0.2);
-  }
-
-  .glow-warning {
-    box-shadow:
-      0 0 8px rgb(var(--warning) / 0.6),
-      0 0 16px rgb(var(--warning) / 0.4),
-      0 0 24px rgb(var(--warning) / 0.3),
-      0 0 32px rgb(var(--warning) / 0.2);
-  }
-
-  .glow-destructive {
-    box-shadow:
-      0 0 8px rgb(var(--destructive) / 0.6),
-      0 0 16px rgb(var(--destructive) / 0.4),
-      0 0 24px rgb(var(--destructive) / 0.3),
-      0 0 32px rgb(var(--destructive) / 0.2);
-  }
-
-  /* Fantasy mystical text gradients */
-  .text-gradient-primary {
-    background: linear-gradient(
-      135deg,
-      rgb(var(--primary)),
-      rgb(var(--accent))
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-danger {
-    background: linear-gradient(
-      135deg,
-      rgb(var(--secondary)),
-      rgb(var(--destructive))
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-mystical {
-    background: linear-gradient(
-      45deg,
-      rgb(var(--primary)),
-      rgb(var(--secondary)),
-      rgb(var(--warning))
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Fantasy mystical specific effects */
-  .mystical-border {
-    border: 1px solid rgb(var(--primary));
-    box-shadow:
-      inset 0 0 10px rgb(var(--primary) / 0.2),
-      0 0 10px rgb(var(--primary) / 0.4);
-  }
-
-  .mystical-button {
-    background: linear-gradient(
-      135deg,
-      rgb(var(--background)),
-      rgb(var(--muted))
-    );
-    border: 1px solid rgb(var(--primary));
-    color: rgb(var(--primary));
-    transition: all 0.3s ease;
-  }
-
-  .mystical-button:hover {
-    background: rgb(var(--primary) / 0.1);
-    box-shadow:
-      0 0 8px rgb(var(--primary) / 0.6),
-      0 0 16px rgb(var(--primary) / 0.4),
-      0 0 24px rgb(var(--primary) / 0.3);
-    color: rgb(var(--primary));
-  }
-
-  .mystical-text {
-    color: rgb(var(--primary));
-    text-shadow: 0 0 10px rgb(var(--primary) / 0.8);
-  }
-
-  .mystical-bg {
-    background: radial-gradient(
-      circle at center,
-      rgb(var(--background)),
-      rgb(15 8 35)
-    );
-  }
-
   /* Safe area utilities for mobile */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* Additional cyberpunk utilities */
-  .cyber-grid {
-    background-image:
-      linear-gradient(rgb(var(--primary) / 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--primary) / 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-
-  .cyber-scan-line {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cyber-scan-line::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgb(var(--primary) / 0.3),
-      transparent
-    );
-    animation: scan 2s infinite;
-  }
-
-  @keyframes scan {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
-
-  .cyber-flicker {
-    animation: flicker 0.15s infinite linear alternate;
-  }
-
-  @keyframes flicker {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.95;
-    }
   }
 }
 
@@ -464,54 +244,6 @@ body::before {
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-.dark {
-  /* Enhanced Mystical Blue Dark Mode */
-  --background: 2 4 8; /* Even darker ocean background */
-  --foreground: 147 197 253; /* Lighter sky blue text */
-  --card: 6 12 18; /* Dark blue card background */
-  --card-foreground: 147 197 253; /* Lighter sky blue text */
-  --popover: 8 16 28; /* Slightly lighter mystical blue */
-  --popover-foreground: 147 197 253; /* Lighter sky blue text */
-  --primary: 59 130 246; /* Mystical blue */
-  --primary-foreground: 2 4 8; /* Dark text on bright backgrounds */
-  --secondary: 168 85 247; /* Enchanted purple */
-  --secondary-foreground: 2 4 8; /* Dark text on bright backgrounds */
-  --muted: 15 25 50; /* Dark mystical blue */
-  --muted-foreground: 96 165 250; /* Lighter ocean blue for muted text */
-  --accent: 59 130 246; /* Mystical blue */
-  --accent-foreground: 2 4 8; /* Dark text on bright backgrounds */
-  --destructive: 239 68 68; /* Mystical red */
-  --border: 59 130 246 / 30%; /* Semi-transparent mystical blue border */
-  --input: 10 20 35; /* Dark mystical blue input background */
-  --ring: 59 130 246; /* Mystical blue focus ring */
-  --chart-1: 59 130 246; /* Mystical blue */
-  --chart-2: 168 85 247; /* Enchanted purple */
-  --chart-3: 34 197 94; /* Nature green */
-  --chart-4: 251 191 36; /* Golden amber */
-  --chart-5: 96 165 250; /* Ocean blue */
-  --sidebar: 4 8 15; /* Very dark mystical blue sidebar */
-  --sidebar-foreground: 147 197 253; /* Lighter sky blue text */
-  --sidebar-primary: 59 130 246; /* Mystical blue */
-  --sidebar-primary-foreground: 2 4 8; /* Dark text */
-  --sidebar-accent: 168 85 247; /* Enchanted purple */
-  --sidebar-accent-foreground: 2 4 8; /* Dark text */
-  --sidebar-border: 59 130 246 / 30%; /* Semi-transparent mystical blue border */
-  --sidebar-ring: 59 130 246; /* Mystical blue ring */
 }
 
 @layer base {
@@ -520,6 +252,19 @@ body::before {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Button scale states */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    transform: scale(1);
+    transition: transform 0.15s ease;
+  }
+  
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    transform: scale(0.98);
+    transition: transform 0.15s ease;
   }
   
   /* Enhanced focus styles for accessibility */
@@ -531,57 +276,33 @@ body::before {
   [tabindex]:focus-visible {
     outline: 2px solid rgb(var(--ring));
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgb(var(--ring) / 0.2);
   }
   
   /* Checkbox focus styles */
   input[type="checkbox"]:focus-visible {
     outline: 2px solid rgb(var(--ring));
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgb(var(--ring) / 0.2);
-  }
-  
-  /* Button focus styles with mystical theme */
-  button:focus-visible {
-    outline: 2px solid rgb(var(--primary));
-    outline-offset: 2px;
-    box-shadow: 
-      0 0 0 4px rgb(var(--primary) / 0.2),
-      0 0 8px rgb(var(--primary) / 0.4);
-  }
-  
-  /* Table cell focus for keyboard navigation */
-  td:focus-visible {
-    outline: 2px solid rgb(var(--accent));
-    outline-offset: 1px;
-    box-shadow: 0 0 0 2px rgb(var(--accent) / 0.3);
   }
 }
 
-/* Custom Scrollbars - Mystical Blue Style */
+/* Custom Scrollbars - Blue theme */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgb(var(--muted));
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--accent)));
-  border-radius: 4px;
-  border: 1px solid rgb(var(--border));
+  background: rgb(var(--primary));
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    135deg,
-    rgb(var(--accent)),
-    rgb(var(--secondary))
-  );
-  box-shadow: 0 0 8px rgb(var(--primary) / 0.5);
+  background: rgb(96 165 250);
 }
 
 ::-webkit-scrollbar-corner {
@@ -594,31 +315,13 @@ body::before {
   scrollbar-color: rgb(var(--primary)) rgb(var(--muted));
 }
 
-/* Input text selection styling */
-input::selection,
-textarea::selection,
-[data-slot="input"]::selection {
-  background-color: rgb(
-    147 197 253 / 0.7
-  ) !important; /* Icy blue for better contrast */
-  color: rgb(4 8 20) !important; /* Dark text on bright selection */
+/* Text selection */
+::selection {
+  background-color: rgb(96 165 250 / 0.3);
+  color: rgb(226 232 240);
 }
 
-input::-moz-selection,
-textarea::-moz-selection,
-[data-slot="input"]::-moz-selection {
-  background-color: rgb(
-    147 197 253 / 0.7
-  ) !important; /* Icy blue for better contrast */
-  color: rgb(4 8 20) !important; /* Dark text on bright selection */
-}
-
-/* Ensure all input elements have visible text selection */
-input,
-textarea,
-[data-slot="input"] {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
+::-moz-selection {
+  background-color: rgb(96 165 250 / 0.3);
+  color: rgb(226 232 240);
 }
