@@ -1821,6 +1821,40 @@ export const MONSTERS: Monster[] = [
     ]
   },
   {
+    "index": "black-bear",
+    "name": "Black Bear",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 19,
+    "hit_dice": "3d8",
+    "speed": "40 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 10,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The bear makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) slashing damage."
+      }
+    ]
+  },
+  {
     "index": "black-dragon-wyrmling",
     "name": "Black Dragon Wyrmling",
     "size": "Medium",
@@ -1890,6 +1924,36 @@ export const MONSTERS: Monster[] = [
     ]
   },
   {
+    "index": "blink-dog",
+    "name": "Blink Dog",
+    "size": "Medium",
+    "type": "fey",
+    "alignment": "lawful good",
+    "armor_class": 13,
+    "hit_points": 22,
+    "hit_dice": "4d8",
+    "speed": "40 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 17,
+    "passive_perception": 10,
+    "languages": "Blink Dog, understands Sylvan but can't speak it",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage."
+      },
+      {
+        "name": "Teleport",
+        "description": "The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 ft. to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack."
+      }
+    ]
+  },
+  {
     "index": "blood-hawk",
     "name": "Blood Hawk",
     "size": "Small",
@@ -1944,6 +2008,322 @@ export const MONSTERS: Monster[] = [
       {
         "name": "Lightning Breath",
         "description": "The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 12 Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  {
+    "index": "boar",
+    "name": "Boar",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 11,
+    "hit_dice": "2d8",
+    "speed": "40 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 11,
+    "passive_perception": 9,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Tusk",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "bone-devil",
+    "name": "Bone Devil",
+    "size": "Large",
+    "type": "fiend",
+    "alignment": "lawful evil",
+    "armor_class": 19,
+    "hit_points": 142,
+    "hit_dice": "15d10",
+    "speed": "40 ft.",
+    "challenge_rating": 9,
+    "proficiency_bonus": 4,
+    "xp": 5000,
+    "dexterity": 16,
+    "passive_perception": 12,
+    "languages": "Infernal, telepathy 120 ft.",
+    "damage_resistances": [
+      "cold",
+      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered"
+    ],
+    "damage_immunities": [
+      "fire",
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The devil makes three attacks: two with its claws and one with its sting."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 8 (1d8 + 4) slashing damage."
+      },
+      {
+        "name": "Sting",
+        "description": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 13 (2d8 + 4) piercing damage plus 17 (5d6) poison damage, and the target must succeed on a DC 14 Constitution saving throw or become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ]
+  },
+  {
+    "index": "brass-dragon-wyrmling",
+    "name": "Brass Dragon Wyrmling",
+    "size": "Medium",
+    "type": "dragon",
+    "alignment": "chaotic good",
+    "armor_class": 16,
+    "hit_points": 16,
+    "hit_dice": "3d8",
+    "speed": "30 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 10,
+    "passive_perception": 14,
+    "languages": "Draconic",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "fire"
+    ],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage."
+      },
+      {
+        "name": "Breath Weapons",
+        "description": "The dragon uses one of the following breath weapons.\nFire Breath. The dragon exhales fire in an 20-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one.\nSleep Breath. The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC 11 Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+      }
+    ]
+  },
+  {
+    "index": "bronze-dragon-wyrmling",
+    "name": "Bronze Dragon Wyrmling",
+    "size": "Medium",
+    "type": "dragon",
+    "alignment": "lawful good",
+    "armor_class": 17,
+    "hit_points": 32,
+    "hit_dice": "5d8",
+    "speed": "30 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 10,
+    "passive_perception": 14,
+    "languages": "Draconic",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "lightning"
+    ],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage."
+      },
+      {
+        "name": "Breath Weapons",
+        "description": "The dragon uses one of the following breath weapons.\nLightning Breath. The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC 12 Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one.\nRepulsion Breath. The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC 12 Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
+      }
+    ]
+  },
+  {
+    "index": "brown-bear",
+    "name": "Brown Bear",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 34,
+    "hit_dice": "4d10",
+    "speed": "40 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 10,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The bear makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "bugbear",
+    "name": "Bugbear",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "chaotic evil",
+    "armor_class": 16,
+    "hit_points": 27,
+    "hit_dice": "5d8",
+    "speed": "30 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 14,
+    "passive_perception": 10,
+    "languages": "Common, Goblin",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Morningstar",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 11 (2d8 + 2) piercing damage."
+      },
+      {
+        "name": "Javelin",
+        "description": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 9 (2d6 + 2) piercing damage in melee or 5 (1d6 + 2) piercing damage at range."
+      }
+    ]
+  },
+  {
+    "index": "bulette",
+    "name": "Bulette",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "unaligned",
+    "armor_class": 17,
+    "hit_points": 94,
+    "hit_dice": "9d10",
+    "speed": "40 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 11,
+    "passive_perception": 16,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 30 (4d12 + 4) piercing damage."
+      },
+      {
+        "name": "Deadly Leap",
+        "description": "If the bulette jumps at least 15 ft. as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 Strength or Dexterity saving throw (target's choice) or be knocked prone and take 14 (3d6 + 4) bludgeoning damage plus 14 (3d6 + 4) slashing damage. On a successful save, the creature takes only half the damage, isn't knocked prone, and is pushed 5 ft. out of the bulette's space into an unoccupied space of the creature's choice. If no unoccupied space is within range, the creature instead falls prone in the bulette's space."
+      }
+    ]
+  },
+  {
+    "index": "camel",
+    "name": "Camel",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 9,
+    "hit_points": 15,
+    "hit_dice": "2d10",
+    "speed": "50 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 8,
+    "passive_perception": 9,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "cat",
+    "name": "Cat",
+    "size": "Tiny",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 2,
+    "hit_dice": "1d4",
+    "speed": "40 ft.",
+    "challenge_rating": 0,
+    "proficiency_bonus": 2,
+    "xp": 10,
+    "dexterity": 15,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +0 to hit, reach 5 ft., one target. Hit: 1 slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "centaur",
+    "name": "Centaur",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "neutral good",
+    "armor_class": 12,
+    "hit_points": 45,
+    "hit_dice": "6d10",
+    "speed": "50 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 14,
+    "passive_perception": 13,
+    "languages": "Elvish, Sylvan",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The centaur makes two attacks: one with its pike and one with its hooves or two with its longbow."
+      },
+      {
+        "name": "Pike",
+        "description": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 9 (1d10 + 4) piercing damage."
+      },
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Longbow",
+        "description": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
       }
     ]
   },
@@ -3657,6 +4037,900 @@ export const MONSTERS: Monster[] = [
       {
         "name": "Claws",
         "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage. If the target is a creature other than an undead, it must succeed on a DC 10 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ]
+  },
+  {
+    "index": "ghost",
+    "name": "Ghost",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "any alignment",
+    "armor_class": 11,
+    "hit_points": 45,
+    "hit_dice": "10d8",
+    "speed": "0 ft.",
+    "challenge_rating": 4,
+    "proficiency_bonus": 2,
+    "xp": 1100,
+    "dexterity": 13,
+    "passive_perception": 11,
+    "languages": "any languages it knew in life",
+    "damage_resistances": [
+      "acid",
+      "fire",
+      "lightning",
+      "thunder",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [
+      "cold",
+      "necrotic",
+      "poison"
+    ],
+    "condition_immunities": [
+      "Charmed",
+      "Exhaustion",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned",
+      "Prone",
+      "Restrained"
+    ],
+    "actions": [
+      {
+        "name": "Withering Touch",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 17 (4d6 + 3) necrotic damage."
+      },
+      {
+        "name": "Etherealness",
+        "description": "The ghost enters the Ethereal Plane from the Material Plane, or vice versa. It is visible on the Material Plane while it is in the Border Ethereal, and vice versa, yet it can't affect or be affected by anything on the other plane."
+      },
+      {
+        "name": "Horrifying Visage",
+        "description": "Each non-undead creature within 60 ft. of the ghost that can see it must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 × 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this ghost's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring."
+      },
+      {
+        "name": "Possession",
+        "description": "One humanoid that the ghost can see within 5 ft. of it must succeed on a DC 13 Charisma saving throw or be possessed by the ghost; the ghost then disappears, and the target is incapacitated and loses control of its body. The ghost now controls the body but doesn't deprive the target of awareness. The ghost can't be targeted by any attack, spell, or other effect, except ones that turn undead, and it retains its alignment, Intelligence, Wisdom, Charisma, and immunity to being charmed and frightened. It otherwise uses the possessed target's statistics, but doesn't gain access to the target's knowledge, class features, or proficiencies.\nThe possession lasts until the body drops to 0 hit points, the ghost ends it as a bonus action, or the ghost is turned or forced out by an effect like the dispel evil and good spell. When the possession ends, the ghost reappears in an unoccupied space within 5 ft. of the body. The target is immune to this ghost's Possession for 24 hours after succeeding on the saving throw or after the possession ends."
+      }
+    ]
+  },
+  {
+    "index": "ghoul",
+    "name": "Ghoul",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "chaotic evil",
+    "armor_class": 12,
+    "hit_points": 22,
+    "hit_dice": "5d8",
+    "speed": "30 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 15,
+    "passive_perception": 10,
+    "languages": "Common",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned",
+      "Charmed",
+      "Exhaustion"
+    ],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 9 (2d6 + 2) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) slashing damage. If the target is a creature other than an elf or undead, it must succeed on a DC 10 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ]
+  },
+  {
+    "index": "giant-ape",
+    "name": "Giant Ape",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 157,
+    "hit_dice": "15d12",
+    "speed": "40 ft.",
+    "challenge_rating": 7,
+    "proficiency_bonus": 3,
+    "xp": 2900,
+    "dexterity": 14,
+    "passive_perception": 14,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The ape makes two fist attacks."
+      },
+      {
+        "name": "Fist",
+        "description": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 22 (3d10 + 6) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "description": "Ranged Weapon Attack: +9 to hit, range 50/100 ft., one target. Hit: 30 (7d6 + 6) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-badger",
+    "name": "Giant Badger",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 10,
+    "hit_points": 13,
+    "hit_dice": "2d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 10,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The badger makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-bat",
+    "name": "Giant Bat",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 22,
+    "hit_dice": "4d10",
+    "speed": "10 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 16,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-boar",
+    "name": "Giant Boar",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 42,
+    "hit_dice": "5d10",
+    "speed": "40 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 10,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Tusk",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-centipede",
+    "name": "Giant Centipede",
+    "size": "Small",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 4,
+    "hit_dice": "1d6",
+    "speed": "30 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 14,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage, and the target must succeed on a DC 11 Constitution saving throw or take 10 (3d6) poison damage. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      }
+    ]
+  },
+  {
+    "index": "giant-constrictor-snake",
+    "name": "Giant Constrictor Snake",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 60,
+    "hit_dice": "8d12",
+    "speed": "30 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 14,
+    "passive_perception": 12,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +6 to hit, reach 10 ft., one creature. Hit: 11 (2d6 + 4) piercing damage."
+      },
+      {
+        "name": "Constrict",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 13 (2d8 + 4) bludgeoning damage, and the target is grappled (escape DC 16). Until this grapple ends, the creature is restrained, and the snake can't constrict another target."
+      }
+    ]
+  },
+  {
+    "index": "giant-crab",
+    "name": "Giant Crab",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 15,
+    "hit_points": 13,
+    "hit_dice": "3d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 15,
+    "passive_perception": 9,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage, and the target is grappled (escape DC 11). The crab has two claws, each of which can grapple only one target."
+      }
+    ]
+  },
+  {
+    "index": "giant-crocodile",
+    "name": "Giant Crocodile",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 14,
+    "hit_points": 85,
+    "hit_dice": "9d12",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 9,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The crocodile makes two attacks: one with its bite and one with its tail."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 21 (3d10 + 5) piercing damage, and the target is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the crocodile can't bite another target."
+      },
+      {
+        "name": "Tail",
+        "description": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target not grappled by the crocodile. Hit: 14 (2d8 + 5) bludgeoning damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone."
+      }
+    ]
+  },
+  {
+    "index": "giant-eagle",
+    "name": "Giant Eagle",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "neutral good",
+    "armor_class": 13,
+    "hit_points": 26,
+    "hit_dice": "4d10",
+    "speed": "10 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 17,
+    "passive_perception": 14,
+    "languages": "Giant Eagle, understands Common and Auran but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The eagle makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      },
+      {
+        "name": "Talons",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-elk",
+    "name": "Giant Elk",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 14,
+    "hit_points": 42,
+    "hit_dice": "5d12",
+    "speed": "60 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 16,
+    "passive_perception": 14,
+    "languages": "Giant Elk, understands Common, Elvish, and Sylvan but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Ram",
+        "description": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one prone creature. Hit: 22 (4d8 + 4) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-fire-beetle",
+    "name": "Giant Fire Beetle",
+    "size": "Small",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 4,
+    "hit_dice": "1d6",
+    "speed": "30 ft.",
+    "challenge_rating": 0,
+    "proficiency_bonus": 2,
+    "xp": 10,
+    "dexterity": 10,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6 - 1) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-frog",
+    "name": "Giant Frog",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 18,
+    "hit_dice": "4d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 13,
+    "passive_perception": 12,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage, and the target is grappled (escape DC 11). Until this grapple ends, the target is restrained, and the frog can't bite another target."
+      },
+      {
+        "name": "Swallow",
+        "description": "The frog makes one bite attack against a Small or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the frog, and it takes 5 (2d4) acid damage at the start of each of the frog's turns. The frog can have only one target swallowed at a time. If the frog dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone."
+      }
+    ]
+  },
+  {
+    "index": "giant-goat",
+    "name": "Giant Goat",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 19,
+    "hit_dice": "3d10",
+    "speed": "40 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 11,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Ram",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (2d4 + 3) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-hyena",
+    "name": "Giant Hyena",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 45,
+    "hit_dice": "6d10",
+    "speed": "50 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 14,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-lizard",
+    "name": "Giant Lizard",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 19,
+    "hit_dice": "3d10",
+    "speed": "30 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 12,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-octopus",
+    "name": "Giant Octopus",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 52,
+    "hit_dice": "8d10",
+    "speed": "10 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 13,
+    "passive_perception": 14,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Tentacles",
+        "description": "Melee Weapon Attack: +5 to hit, reach 15 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage. If the target is a creature, it is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target."
+      },
+      {
+        "name": "Ink Cloud",
+        "description": "A 20-foot-radius cloud of ink extends all around the octopus if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the octopus can use the Dash action as a bonus action."
+      }
+    ]
+  },
+  {
+    "index": "giant-owl",
+    "name": "Giant Owl",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "neutral",
+    "armor_class": 12,
+    "hit_points": 19,
+    "hit_dice": "3d10",
+    "speed": "5 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 15,
+    "passive_perception": 15,
+    "languages": "Giant Owl, understands Common, Elvish, and Sylvan but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Talons",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 8 (2d6 + 1) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-poisonous-snake",
+    "name": "Giant Poisonous Snake",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 14,
+    "hit_points": 11,
+    "hit_dice": "2d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 18,
+    "passive_perception": 12,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 6 (1d4 + 4) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 10 (3d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  {
+    "index": "giant-rat",
+    "name": "Giant Rat",
+    "size": "Small",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 7,
+    "hit_dice": "2d6",
+    "speed": "30 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 15,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-rat-diseased",
+    "name": "Giant Rat (Diseased)",
+    "size": "Small",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 7,
+    "hit_dice": "2d6",
+    "speed": "30 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 15,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 2) piercing damage. If the target is a creature, it must succeed on a DC 10 Constitution saving throw or contract a disease. Until the disease is cured, the target can't regain hit points except by magical means, and the target's hit point maximum decreases by 3 (1d6) every 24 hours. If the target's hit point maximum drops to 0 as a result of this disease, the target dies."
+      }
+    ]
+  },
+  {
+    "index": "giant-scorpion",
+    "name": "Giant Scorpion",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 15,
+    "hit_points": 52,
+    "hit_dice": "7d10",
+    "speed": "40 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 13,
+    "passive_perception": 9,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) bludgeoning damage, and the target is grappled (escape DC 12). The scorpion has two claws, each of which can grapple only one target."
+      },
+      {
+        "name": "Multiattack",
+        "description": "The scorpion makes three attacks: two with its claws and one with its sting."
+      },
+      {
+        "name": "Sting",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must make a DC 12 Constitution saving throw, taking 22 (4d10) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  {
+    "index": "giant-sea-horse",
+    "name": "Giant Sea Horse",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 16,
+    "hit_dice": "3d10",
+    "speed": "0 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 15,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Ram",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-shark",
+    "name": "Giant Shark",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 126,
+    "hit_dice": "11d12",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 11,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 22 (3d10 + 6) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-spider",
+    "name": "Giant Spider",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 14,
+    "hit_points": 26,
+    "hit_dice": "4d10",
+    "speed": "30 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 16,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 7 (1d8 + 3) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 9 (2d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      },
+      {
+        "name": "Web",
+        "description": "Ranged Weapon Attack: +5 to hit, range 30/60 ft., one creature. Hit: The target is restrained by webbing. As an action, the restrained target can make a DC 12 Strength check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to fire damage; immunity to bludgeoning, poison, and psychic damage)."
+      }
+    ]
+  },
+  {
+    "index": "giant-toad",
+    "name": "Giant Toad",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 39,
+    "hit_dice": "6d10",
+    "speed": "20 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 13,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage plus 5 (1d10) poison damage, and the target is grappled (escape DC 13). Until this grapple ends, the target is restrained, and the toad can't bite another target."
+      },
+      {
+        "name": "Swallow",
+        "description": "The toad makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the toad, and it takes 10 (3d6) acid damage at the start of each of the toad's turns. The toad can have only one target swallowed at a time.\nIf the toad dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
+      }
+    ]
+  },
+  {
+    "index": "giant-vulture",
+    "name": "Giant Vulture",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "neutral evil",
+    "armor_class": 10,
+    "hit_points": 22,
+    "hit_dice": "3d10",
+    "speed": "10 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 10,
+    "passive_perception": 13,
+    "languages": "understands Common but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The vulture makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) piercing damage."
+      },
+      {
+        "name": "Talons",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 9 (2d6 + 2) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "giant-wasp",
+    "name": "Giant Wasp",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 13,
+    "hit_dice": "3d8",
+    "speed": "10 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 14,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Sting",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 10 (3d6) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      }
+    ]
+  },
+  {
+    "index": "giant-weasel",
+    "name": "Giant Weasel",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 9,
+    "hit_dice": "2d8",
+    "speed": "40 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 16,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage."
       }
     ]
   },
@@ -5383,6 +6657,1042 @@ export const MONSTERS: Monster[] = [
     ]
   },
   {
+    "index": "mammoth",
+    "name": "Mammoth",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 126,
+    "hit_dice": "11d12",
+    "speed": "40 ft.",
+    "challenge_rating": 6,
+    "proficiency_bonus": 3,
+    "xp": 2300,
+    "dexterity": 9,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Gore",
+        "description": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 25 (4d8 + 7) piercing damage."
+      },
+      {
+        "name": "Stomp",
+        "description": "Melee Weapon Attack: +10 to hit, reach 5 ft., one prone creature. Hit: 29 (4d10 + 7) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "manticore",
+    "name": "Manticore",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "lawful evil",
+    "armor_class": 14,
+    "hit_points": 68,
+    "hit_dice": "8d10",
+    "speed": "30 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 16,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The manticore makes three attacks: one with its bite and two with its claws or three with its tail spikes."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage."
+      },
+      {
+        "name": "Tail Spike",
+        "description": "Ranged Weapon Attack: +5 to hit, range 100/200 ft., one target. Hit: 7 (1d8 + 3) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "marilith",
+    "name": "Marilith",
+    "size": "Large",
+    "type": "fiend",
+    "alignment": "chaotic evil",
+    "armor_class": 18,
+    "hit_points": 189,
+    "hit_dice": "18d10",
+    "speed": "40 ft.",
+    "challenge_rating": 16,
+    "proficiency_bonus": 5,
+    "xp": 15000,
+    "dexterity": 20,
+    "passive_perception": 13,
+    "languages": "Abyssal, telepathy 120 ft.",
+    "damage_resistances": [
+      "cold",
+      "fire",
+      "lightning",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The marilith can make seven attacks: six with its longswords and one with its tail."
+      },
+      {
+        "name": "Longsword",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage."
+      },
+      {
+        "name": "Tail",
+        "description": "Melee Weapon Attack: +9 to hit, reach 10 ft., one creature. Hit: 15 (2d10 + 4) bludgeoning damage. If the target is Medium or smaller, it is grappled (escape DC 19). Until this grapple ends, the target is restrained, the marilith can automatically hit the target with its tail, and the marilith can't make tail attacks against other targets."
+      },
+      {
+        "name": "Teleport",
+        "description": "The marilith magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+      }
+    ]
+  },
+  {
+    "index": "mastiff",
+    "name": "Mastiff",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 5,
+    "hit_dice": "1d8",
+    "speed": "40 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 14,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+      }
+    ]
+  },
+  {
+    "index": "medusa",
+    "name": "Medusa",
+    "size": "Medium",
+    "type": "monstrosity",
+    "alignment": "lawful evil",
+    "armor_class": 15,
+    "hit_points": 127,
+    "hit_dice": "17d8",
+    "speed": "30 ft.",
+    "challenge_rating": 6,
+    "proficiency_bonus": 3,
+    "xp": 2300,
+    "dexterity": 15,
+    "passive_perception": 14,
+    "languages": "Common",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The medusa makes either three melee attacks--one with its snake hair and two with its shortsword--or two ranged attacks with its longbow."
+      },
+      {
+        "name": "Snake Hair",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage plus 14 (4d6) poison damage."
+      },
+      {
+        "name": "Shortsword",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Longbow",
+        "description": "Ranged Weapon Attack: +5 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage plus 7 (2d6) poison damage."
+      }
+    ]
+  },
+  {
+    "index": "merfolk",
+    "name": "Merfolk",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "neutral",
+    "armor_class": 11,
+    "hit_points": 11,
+    "hit_dice": "2d8",
+    "speed": "10 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 13,
+    "passive_perception": 12,
+    "languages": "Aquan, Common",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Spear",
+        "description": "Melee or Ranged Weapon Attack: +2 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 3 (1d6) piercing damage, or 4 (1d8) piercing damage if used with two hands to make a melee attack."
+      }
+    ]
+  },
+  {
+    "index": "merrow",
+    "name": "Merrow",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "chaotic evil",
+    "armor_class": 13,
+    "hit_points": 45,
+    "hit_dice": "6d10",
+    "speed": "10 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 10,
+    "passive_perception": 10,
+    "languages": "Abyssal, Aquan",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The merrow makes two attacks: one with its bite and one with its claws or harpoon."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (2d4 + 4) slashing damage."
+      },
+      {
+        "name": "Harpoon",
+        "description": "Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage. If the target is a Huge or smaller creature, it must succeed on a Strength contest against the merrow or be pulled up to 20 feet toward the merrow."
+      }
+    ]
+  },
+  {
+    "index": "mimic",
+    "name": "Mimic",
+    "size": "Medium",
+    "type": "monstrosity",
+    "alignment": "neutral",
+    "armor_class": 12,
+    "hit_points": 58,
+    "hit_dice": "9d8",
+    "speed": "15 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 12,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "acid"
+    ],
+    "condition_immunities": [
+      "Prone"
+    ],
+    "actions": [
+      {
+        "name": "Pseudopod",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage. If the mimic is in object form, the target is subjected to its Adhesive trait."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 4 (1d8) acid damage."
+      }
+    ]
+  },
+  {
+    "index": "minotaur",
+    "name": "Minotaur",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "chaotic evil",
+    "armor_class": 14,
+    "hit_points": 76,
+    "hit_dice": "9d10",
+    "speed": "40 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 11,
+    "passive_perception": 17,
+    "languages": "Abyssal",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Greataxe",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage."
+      },
+      {
+        "name": "Gore",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "minotaur-skeleton",
+    "name": "Minotaur Skeleton",
+    "size": "Large",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 12,
+    "hit_points": 67,
+    "hit_dice": "9d10",
+    "speed": "40 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 11,
+    "passive_perception": 9,
+    "languages": "understands Abyssal but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Exhaustion",
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Greataxe",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage."
+      },
+      {
+        "name": "Gore",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "mule",
+    "name": "Mule",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 10,
+    "hit_points": 11,
+    "hit_dice": "2d8",
+    "speed": "40 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 10,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "mummy",
+    "name": "Mummy",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 11,
+    "hit_points": 58,
+    "hit_dice": "9d8",
+    "speed": "20 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 8,
+    "passive_perception": 10,
+    "languages": "the languages it knew in life",
+    "damage_resistances": [
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [
+      "necrotic",
+      "poison"
+    ],
+    "condition_immunities": [
+      "Charmed",
+      "Exhaustion",
+      "Frightened",
+      "Paralyzed",
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The mummy can use its Dreadful Glare and makes one attack with its rotting fist."
+      },
+      {
+        "name": "Rotting Fist",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC 12 Constitution saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+      },
+      {
+        "name": "Dreadful Glare",
+        "description": "The mummy targets one creature it can see within 60 ft. of it. If the target can see the mummy, it must succeed on a DC 11 Wisdom saving throw against this magic or become frightened until the end of the mummy's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours."
+      }
+    ]
+  },
+  {
+    "index": "mummy-lord",
+    "name": "Mummy Lord",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 17,
+    "hit_points": 97,
+    "hit_dice": "13d8",
+    "speed": "20 ft.",
+    "challenge_rating": 15,
+    "proficiency_bonus": 5,
+    "xp": 13000,
+    "dexterity": 10,
+    "passive_perception": 14,
+    "languages": "the languages it knew in life",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "necrotic",
+      "poison",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "condition_immunities": [
+      "Charmed",
+      "Exhaustion",
+      "Frightened",
+      "Paralyzed",
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The mummy can use its Dreadful Glare and makes one attack with its rotting fist."
+      },
+      {
+        "name": "Rotting Fist",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 14 (3d6 + 4) bludgeoning damage plus 21 (6d6) necrotic damage. If the target is a creature, it must succeed on a DC 16 Constitution saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+      },
+      {
+        "name": "Dreadful Glare",
+        "description": "The mummy lord targets one creature it can see within 60 feet of it. If the target can see the mummy lord, it must succeed on a DC 16 Wisdom saving throw against this magic or become frightened until the end of the mummy's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies and mummy lords for the next 24 hours."
+      }
+    ]
+  },
+  {
+    "index": "nalfeshnee",
+    "name": "Nalfeshnee",
+    "size": "Large",
+    "type": "fiend",
+    "alignment": "chaotic evil",
+    "armor_class": 18,
+    "hit_points": 184,
+    "hit_dice": "16d10",
+    "speed": "20 ft.",
+    "challenge_rating": 13,
+    "proficiency_bonus": 5,
+    "xp": 10000,
+    "dexterity": 10,
+    "passive_perception": 11,
+    "languages": "Abyssal, telepathy 120 ft.",
+    "damage_resistances": [
+      "cold",
+      "fire",
+      "lightning",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The nalfeshnee uses Horror Nimbus if it can. It then makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 32 (5d10 + 5) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 15 (3d6 + 5) slashing damage."
+      },
+      {
+        "name": "Horror Nimbus",
+        "description": "The nalfeshnee magically emits scintillating, multicolored light. Each creature within 15 feet of the nalfeshnee that can see the light must succeed on a DC 15 Wisdom saving throw or be frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the nalfeshnee's Horror Nimbus for the next 24 hours."
+      },
+      {
+        "name": "Teleport",
+        "description": "The nalfeshnee magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+      }
+    ]
+  },
+  {
+    "index": "night-hag",
+    "name": "Night Hag",
+    "size": "Medium",
+    "type": "fiend",
+    "alignment": "neutral evil",
+    "armor_class": 17,
+    "hit_points": 112,
+    "hit_dice": "15d8",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 15,
+    "passive_perception": 16,
+    "languages": "Abyssal, Common, Infernal, Primordial",
+    "damage_resistances": [
+      "cold",
+      "fire",
+      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed"
+    ],
+    "actions": [
+      {
+        "name": "Claws (Hag Form Only)",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage."
+      },
+      {
+        "name": "Change Shape",
+        "description": "The hag magically polymorphs into a Small or Medium female humanoid, or back into her true form. Her statistics are the same in each form. Any equipment she is wearing or carrying isn't transformed. She reverts to her true form if she dies."
+      },
+      {
+        "name": "Etherealness",
+        "description": "The hag magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the hag must have a heartstone in her possession."
+      },
+      {
+        "name": "Nightmare Haunting",
+        "description": "While on the Ethereal Plane, the hag magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the hag's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
+      }
+    ]
+  },
+  {
+    "index": "nightmare",
+    "name": "Nightmare",
+    "size": "Large",
+    "type": "fiend",
+    "alignment": "neutral evil",
+    "armor_class": 13,
+    "hit_points": 68,
+    "hit_dice": "8d10",
+    "speed": "60 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 15,
+    "passive_perception": 11,
+    "languages": "understands Abyssal, Common, and Infernal but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "fire"
+    ],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage plus 7 (2d6) fire damage."
+      },
+      {
+        "name": "Ethereal Stride",
+        "description": "The nightmare and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
+      }
+    ]
+  },
+  {
+    "index": "noble",
+    "name": "Noble",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "any alignment",
+    "armor_class": 15,
+    "hit_points": 9,
+    "hit_dice": "2d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 12,
+    "passive_perception": 12,
+    "languages": "any two languages",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Rapier",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "ochre-jelly",
+    "name": "Ochre Jelly",
+    "size": "Large",
+    "type": "ooze",
+    "alignment": "unaligned",
+    "armor_class": 8,
+    "hit_points": 45,
+    "hit_dice": "6d10",
+    "speed": "10 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 6,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [
+      "acid"
+    ],
+    "damage_immunities": [
+      "lightning",
+      "slashing"
+    ],
+    "condition_immunities": [
+      "Blinded",
+      "Charmed",
+      "Blinded",
+      "Exhaustion",
+      "Frightened",
+      "Prone"
+    ],
+    "actions": [
+      {
+        "name": "Pseudopod",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 9 (2d6 + 2) bludgeoning damage plus 3 (1d6) acid damage."
+      }
+    ]
+  },
+  {
+    "index": "octopus",
+    "name": "Octopus",
+    "size": "Small",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 3,
+    "hit_dice": "1d6",
+    "speed": "5 ft.",
+    "challenge_rating": 0,
+    "proficiency_bonus": 2,
+    "xp": 10,
+    "dexterity": 15,
+    "passive_perception": 12,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Tentacles",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1 bludgeoning damage, and the target is grappled (escape DC 10). Until this grapple ends, the octopus can't use its tentacles on another target."
+      },
+      {
+        "name": "Ink Cloud",
+        "description": "A 5-foot-radius cloud of ink extends all around the octopus if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the octopus can use the Dash action as a bonus action."
+      }
+    ]
+  },
+  {
+    "index": "ogre",
+    "name": "Ogre",
+    "size": "Large",
+    "type": "giant",
+    "alignment": "chaotic evil",
+    "armor_class": 11,
+    "hit_points": 59,
+    "hit_dice": "7d10",
+    "speed": "40 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 8,
+    "passive_perception": 8,
+    "languages": "Common, Giant",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Greatclub",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Javelin",
+        "description": "Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 11 (2d6 + 4) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "ogre-zombie",
+    "name": "Ogre Zombie",
+    "size": "Large",
+    "type": "undead",
+    "alignment": "neutral evil",
+    "armor_class": 8,
+    "hit_points": 85,
+    "hit_dice": "9d10",
+    "speed": "30 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 6,
+    "passive_perception": 8,
+    "languages": "understands Common and Giant but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Morningstar",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "oni",
+    "name": "Oni",
+    "size": "Large",
+    "type": "giant",
+    "alignment": "lawful evil",
+    "armor_class": 16,
+    "hit_points": 110,
+    "hit_dice": "13d10",
+    "speed": "30 ft.",
+    "challenge_rating": 7,
+    "proficiency_bonus": 3,
+    "xp": 2900,
+    "dexterity": 11,
+    "passive_perception": 14,
+    "languages": "Common, Giant",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The oni makes two attacks, either with its claws or its glaive."
+      },
+      {
+        "name": "Claw (Oni Form Only)",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage."
+      },
+      {
+        "name": "Glaive",
+        "description": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) slashing damage, or 9 (1d10 + 4) slashing damage in Small or Medium form."
+      },
+      {
+        "name": "Change Shape",
+        "description": "The oni magically polymorphs into a Small or Medium humanoid, into a Large giant, or back into its true form. Other than its size, its statistics are the same in each form. The only equipment that is transformed is its glaive, which shrinks so that it can be wielded in humanoid form. If the oni dies, it reverts to its true form, and its glaive reverts to its normal size."
+      }
+    ]
+  },
+  {
+    "index": "orc",
+    "name": "Orc",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "chaotic evil",
+    "armor_class": 13,
+    "hit_points": 15,
+    "hit_dice": "2d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 12,
+    "passive_perception": 10,
+    "languages": "Common, Orc",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Greataxe",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage."
+      },
+      {
+        "name": "Javelin",
+        "description": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "otyugh",
+    "name": "Otyugh",
+    "size": "Large",
+    "type": "aberration",
+    "alignment": "neutral",
+    "armor_class": 14,
+    "hit_points": 114,
+    "hit_dice": "12d10",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 11,
+    "passive_perception": 11,
+    "languages": "Otyugh",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The otyugh makes three attacks: one with its bite and two with its tentacles."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 12 (2d8 + 3) piercing damage. If the target is a creature, it must succeed on a DC 15 Constitution saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the target must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. The disease is cured on a success. The target dies if the disease reduces its hit point maximum to 0. This reduction to the target's hit point maximum lasts until the disease is cured."
+      },
+      {
+        "name": "Tentacle",
+        "description": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage plus 4 (1d8) piercing damage. If the target is Medium or smaller, it is grappled (escape DC 13) and restrained until the grapple ends. The otyugh has two tentacles, each of which can grapple one target."
+      },
+      {
+        "name": "Tentacle Slam",
+        "description": "The otyugh slams creatures grappled by it into each other or a solid surface. Each creature must succeed on a DC 14 Constitution saving throw or take 10 (2d6 + 3) bludgeoning damage and be stunned until the end of the otyugh's next turn. On a successful save, the target takes half the bludgeoning damage and isn't stunned."
+      }
+    ]
+  },
+  {
+    "index": "owl",
+    "name": "Owl",
+    "size": "Tiny",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 1,
+    "hit_dice": "1d4",
+    "speed": "5 ft.",
+    "challenge_rating": 0,
+    "proficiency_bonus": 2,
+    "xp": 10,
+    "dexterity": 13,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Talons",
+        "description": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1 slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "owlbear",
+    "name": "Owlbear",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 59,
+    "hit_dice": "7d10",
+    "speed": "40 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 12,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The owlbear makes two attacks: one with its beak and one with its claws."
+      },
+      {
+        "name": "Beak",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 10 (1d10 + 5) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "panther",
+    "name": "Panther",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 13,
+    "hit_dice": "3d8",
+    "speed": "50 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 15,
+    "passive_perception": 14,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "pegasus",
+    "name": "Pegasus",
+    "size": "Large",
+    "type": "celestial",
+    "alignment": "chaotic good",
+    "armor_class": 12,
+    "hit_points": 59,
+    "hit_dice": "7d10",
+    "speed": "60 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 15,
+    "passive_perception": 16,
+    "languages": "understands Celestial, Common, Elvish, and Sylvan but can't speak",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "phase-spider",
+    "name": "Phase Spider",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 32,
+    "hit_dice": "5d10",
+    "speed": "30 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 15,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      }
+    ]
+  },
+  {
+    "index": "pit-fiend",
+    "name": "Pit Fiend",
+    "size": "Large",
+    "type": "fiend",
+    "alignment": "lawful evil",
+    "armor_class": 19,
+    "hit_points": 300,
+    "hit_dice": "24d10",
+    "speed": "30 ft.",
+    "challenge_rating": 20,
+    "proficiency_bonus": 6,
+    "xp": 25000,
+    "dexterity": 14,
+    "passive_perception": 14,
+    "languages": "Infernal, telepathy 120 ft.",
+    "damage_resistances": [
+      "cold",
+      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered"
+    ],
+    "damage_immunities": [
+      "fire",
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The pit fiend makes four attacks: one with its bite, one with its claw, one with its mace, and one with its tail."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +14 to hit, reach 5 ft., one target. Hit: 22 (4d6 + 8) piercing damage. The target must succeed on a DC 21 Constitution saving throw or become poisoned. While poisoned in this way, the target can't regain hit points, and it takes 21 (6d6) poison damage at the start of each of its turns. The poisoned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 17 (2d8 + 8) slashing damage."
+      },
+      {
+        "name": "Mace",
+        "description": "Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 15 (2d6 + 8) bludgeoning damage plus 21 (6d6) fire damage."
+      },
+      {
+        "name": "Tail",
+        "description": "Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 24 (3d10 + 8) bludgeoning damage."
+      }
+    ]
+  },
+  {
     "index": "planetar",
     "name": "Planetar",
     "size": "Large",
@@ -7063,6 +9373,1112 @@ export const MONSTERS: Monster[] = [
       {
         "name": "Bites",
         "description": "Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-centipedes",
+    "name": "Swarm of Centipedes",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 22,
+    "hit_dice": "5d8",
+    "speed": "20 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 13,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.\nA creature reduced to 0 hit points by a swarm of centipedes is stable but poisoned for 1 hour, even after regaining hit points, and paralyzed while poisoned in this way."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-insects",
+    "name": "Swarm of Insects",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 22,
+    "hit_dice": "5d8",
+    "speed": "20 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 13,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-poisonous-snakes",
+    "name": "Swarm of Poisonous Snakes",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 14,
+    "hit_points": 36,
+    "hit_dice": "8d8",
+    "speed": "30 ft.",
+    "challenge_rating": 2,
+    "proficiency_bonus": 2,
+    "xp": 450,
+    "dexterity": 18,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +6 to hit, reach 0 ft., one creature in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer. The target must make a DC 10 Constitution saving throw, taking 14 (4d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-quippers",
+    "name": "Swarm of Quippers",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 28,
+    "hit_dice": "8d8",
+    "speed": "0 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 16,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +5 to hit, reach 0 ft., one creature in the swarm's space. Hit: 14 (4d6) piercing damage, or 7 (2d6) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-rats",
+    "name": "Swarm of Rats",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 10,
+    "hit_points": 24,
+    "hit_dice": "7d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 11,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +2 to hit, reach 0 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-ravens",
+    "name": "Swarm of Ravens",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 24,
+    "hit_dice": "7d8",
+    "speed": "10 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 14,
+    "passive_perception": 15,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Beaks",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-spiders",
+    "name": "Swarm of Spiders",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 22,
+    "hit_dice": "5d8",
+    "speed": "20 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 13,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "swarm-of-wasps",
+    "name": "Swarm of Wasps",
+    "size": "Medium",
+    "type": "swarm of Tiny beasts",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 22,
+    "hit_dice": "5d8",
+    "speed": "5 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 13,
+    "passive_perception": 8,
+    "languages": "",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "actions": [
+      {
+        "name": "Bites",
+        "description": "Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ]
+  },
+  {
+    "index": "tarrasque",
+    "name": "Tarrasque",
+    "size": "Gargantuan",
+    "type": "monstrosity",
+    "alignment": "unaligned",
+    "armor_class": 25,
+    "hit_points": 676,
+    "hit_dice": "33d20",
+    "speed": "40 ft.",
+    "challenge_rating": 30,
+    "proficiency_bonus": 9,
+    "xp": 155000,
+    "dexterity": 11,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "fire",
+      "poison",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "condition_immunities": [
+      "Charmed",
+      "Frightened",
+      "Paralyzed",
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The tarrasque can use its Frightful Presence. It then makes five attacks: one with its bite, two with its claws, one with its horns, and one with its tail. It can use its Swallow instead of its bite."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +19 to hit, reach 10 ft., one target. Hit: 36 (4d12 + 10) piercing damage. If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and the tarrasque can't bite another target."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +19 to hit, reach 15 ft., one target. Hit: 28 (4d8 + 10) slashing damage."
+      },
+      {
+        "name": "Horns",
+        "description": "Melee Weapon Attack: +19 to hit, reach 10 ft., one target. Hit: 32 (4d10 + 10) piercing damage."
+      },
+      {
+        "name": "Tail",
+        "description": "Melee Weapon Attack: +19 to hit, reach 20 ft., one target. Hit: 24 (4d6 + 10) bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Frightful Presence",
+        "description": "Each creature of the tarrasque's choice within 120 feet of it and aware of it must succeed on a DC 17 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if the tarrasque is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the tarrasque's Frightful Presence for the next 24 hours."
+      },
+      {
+        "name": "Swallow",
+        "description": "The tarrasque makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the tarrasque, and it takes 56 (16d6) acid damage at the start of each of the tarrasque's turns.\nIf the tarrasque takes 60 damage or more on a single turn from a creature inside it, the tarrasque must succeed on a DC 20 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the tarrasque. If the tarrasque dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone."
+      }
+    ]
+  },
+  {
+    "index": "thug",
+    "name": "Thug",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "any non-good alignment",
+    "armor_class": 11,
+    "hit_points": 32,
+    "hit_dice": "5d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 11,
+    "passive_perception": 10,
+    "languages": "any one language (usually Common)",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The thug makes two melee attacks."
+      },
+      {
+        "name": "Mace",
+        "description": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) bludgeoning damage."
+      },
+      {
+        "name": "Heavy Crossbow",
+        "description": "Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: 5 (1d10) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "tiger",
+    "name": "Tiger",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 12,
+    "hit_points": 37,
+    "hit_dice": "5d10",
+    "speed": "40 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 15,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "treant",
+    "name": "Treant",
+    "size": "Huge",
+    "type": "plant",
+    "alignment": "chaotic good",
+    "armor_class": 16,
+    "hit_points": 138,
+    "hit_dice": "12d12",
+    "speed": "30 ft.",
+    "challenge_rating": 9,
+    "proficiency_bonus": 4,
+    "xp": 5000,
+    "dexterity": 8,
+    "passive_perception": 13,
+    "languages": "Common, Druidic, Elvish, Sylvan",
+    "damage_resistances": [
+      "bludgeoning",
+      "piercing"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The treant makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "description": "Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 16 (3d6 + 6) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "description": "Ranged Weapon Attack: +10 to hit, range 60/180 ft., one target. Hit: 28 (4d10 + 6) bludgeoning damage."
+      },
+      {
+        "name": "Animate Trees",
+        "description": "The treant magically animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have Intelligence and Charisma scores of 1, they can't speak, and they have only the Slam action option. An animated tree acts as an ally of the treant. The tree remains animate for 1 day or until it dies; until the treant dies or is more than 120 feet from the tree; or until the treant takes a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
+      }
+    ]
+  },
+  {
+    "index": "tribal-warrior",
+    "name": "Tribal Warrior",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "any alignment",
+    "armor_class": 12,
+    "hit_points": 11,
+    "hit_dice": "2d8",
+    "speed": "30 ft.",
+    "challenge_rating": 0.125,
+    "proficiency_bonus": 2,
+    "xp": 25,
+    "dexterity": 11,
+    "passive_perception": 10,
+    "languages": "any one language",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Spear",
+        "description": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack."
+      }
+    ]
+  },
+  {
+    "index": "triceratops",
+    "name": "Triceratops",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 95,
+    "hit_dice": "10d12",
+    "speed": "50 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 9,
+    "passive_perception": 10,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Gore",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 24 (4d8 + 6) piercing damage."
+      },
+      {
+        "name": "Stomp",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one prone creature. Hit: 22 (3d10 + 6) bludgeoning damage"
+      }
+    ]
+  },
+  {
+    "index": "troll",
+    "name": "Troll",
+    "size": "Large",
+    "type": "giant",
+    "alignment": "chaotic evil",
+    "armor_class": 15,
+    "hit_points": 84,
+    "hit_dice": "8d10",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 13,
+    "passive_perception": 12,
+    "languages": "Giant",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The troll makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      }
+    ]
+  },
+  {
+    "index": "tyrannosaurus-rex",
+    "name": "Tyrannosaurus Rex",
+    "size": "Huge",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 136,
+    "hit_dice": "13d12",
+    "speed": "50 ft.",
+    "challenge_rating": 8,
+    "proficiency_bonus": 3,
+    "xp": 3900,
+    "dexterity": 10,
+    "passive_perception": 14,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The tyrannosaurus makes two attacks: one with its bite and one with its tail. It can't make both attacks against the same target."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 33 (4d12 + 7) piercing damage. If the target is a Medium or smaller creature, it is grappled (escape DC 17). Until this grapple ends, the target is restrained, and the tyrannosaurus can't bite another target."
+      },
+      {
+        "name": "Tail",
+        "description": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 20 (3d8 + 7) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "unicorn",
+    "name": "Unicorn",
+    "size": "Large",
+    "type": "celestial",
+    "alignment": "lawful good",
+    "armor_class": 12,
+    "hit_points": 67,
+    "hit_dice": "9d10",
+    "speed": "50 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 14,
+    "passive_perception": 13,
+    "languages": "Celestial, Elvish, Sylvan, telepathy 60 ft.",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Charmed",
+      "Paralyzed",
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The unicorn makes two attacks: one with its hooves and one with its horn."
+      },
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Horn",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+      },
+      {
+        "name": "Healing Touch",
+        "description": "The unicorn touches another creature with its horn. The target magically regains 11 (2d8 + 2) hit points. In addition, the touch removes all diseases and neutralizes all poisons afflicting the target."
+      },
+      {
+        "name": "Teleport",
+        "description": "The unicorn magically teleports itself and up to three willing creatures it can see within 5 ft. of it, along with any equipment they are wearing or carrying, to a location the unicorn is familiar with, up to 1 mile away."
+      }
+    ]
+  },
+  {
+    "index": "vampire-spawn",
+    "name": "Vampire Spawn",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "neutral evil",
+    "armor_class": 15,
+    "hit_points": 82,
+    "hit_dice": "11d8",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 16,
+    "passive_perception": 13,
+    "languages": "the languages it knew in life",
+    "damage_resistances": [
+      "necrotic",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The vampire makes two attacks, only one of which can be a bite attack."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: 6 (1d6 + 3) piercing damage plus 7 (2d6) necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 8 (2d4 + 3) slashing damage. Instead of dealing damage, the vampire can grapple the target (escape DC 13)."
+      }
+    ]
+  },
+  {
+    "index": "vampire-bat",
+    "name": "Vampire, Bat Form",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 16,
+    "hit_points": 144,
+    "hit_dice": "17d8",
+    "speed": "5 ft.",
+    "challenge_rating": 13,
+    "proficiency_bonus": 5,
+    "xp": 10000,
+    "dexterity": 18,
+    "passive_perception": 17,
+    "languages": "the languages it knew in life",
+    "damage_resistances": [
+      "necrotic",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: 7 (1d6 + 4) piercing damage plus 10 (3d6) necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under the vampire's control."
+      },
+      {
+        "name": "Charm",
+        "description": "The vampire targets one humanoid it can see within 30 ft. of it. If the target can see the vampire, the target must succeed on a DC 17 Wisdom saving throw against this magic or be charmed by the vampire. The charmed target regards the vampire as a trusted friend to be heeded and protected. Although the target isn't under the vampire's control, it takes the vampire's requests or actions in the most favorable way it can, and it is a willing target for the vampire's bit attack.\nEach time the vampire or the vampire's companions do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the vampire is destroyed, is on a different plane of existence than the target, or takes a bonus action to end the effect."
+      },
+      {
+        "name": "Children of the Night",
+        "description": "The vampire magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, the vampire can call 3d6 wolves instead. The called creatures arrive in 1d4 rounds, acting as allies of the vampire and obeying its spoken commands. The beasts remain for 1 hour, until the vampire dies, or until the vampire dismisses them as a bonus action."
+      }
+    ]
+  },
+  {
+    "index": "vampire-mist",
+    "name": "Vampire, Mist Form",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 16,
+    "hit_points": 144,
+    "hit_dice": "17d8",
+    "speed": "30 ft.",
+    "challenge_rating": 13,
+    "proficiency_bonus": 5,
+    "xp": 10000,
+    "dexterity": 18,
+    "passive_perception": 17,
+    "languages": "the languages it knew in life",
+    "damage_resistances": [
+      "necrotic",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": []
+  },
+  {
+    "index": "vampire-vampire",
+    "name": "Vampire, Vampire Form",
+    "size": "Medium",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 16,
+    "hit_points": 144,
+    "hit_dice": "17d8",
+    "speed": "30 ft.",
+    "challenge_rating": 13,
+    "proficiency_bonus": 5,
+    "xp": 10000,
+    "dexterity": 18,
+    "passive_perception": 17,
+    "languages": "the languages it knew in life",
+    "damage_resistances": [
+      "necrotic",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The vampire makes two attacks, only one of which can be a bite attack."
+      },
+      {
+        "name": "Unarmed Strike",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one creature. Hit: 8 (1d8 + 4) bludgeoning damage. Instead of dealing damage, the vampire can grapple the target (escape DC 18)."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +9 to hit, reach 5 ft., one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: 7 (1d6 + 4) piercing damage plus 10 (3d6) necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under the vampire's control."
+      },
+      {
+        "name": "Charm",
+        "description": "The vampire targets one humanoid it can see within 30 ft. of it. If the target can see the vampire, the target must succeed on a DC 17 Wisdom saving throw against this magic or be charmed by the vampire. The charmed target regards the vampire as a trusted friend to be heeded and protected. Although the target isn't under the vampire's control, it takes the vampire's requests or actions in the most favorable way it can, and it is a willing target for the vampire's bit attack.\nEach time the vampire or the vampire's companions do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the vampire is destroyed, is on a different plane of existence than the target, or takes a bonus action to end the effect."
+      },
+      {
+        "name": "Children of the Night",
+        "description": "The vampire magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, the vampire can call 3d6 wolves instead. The called creatures arrive in 1d4 rounds, acting as allies of the vampire and obeying its spoken commands. The beasts remain for 1 hour, until the vampire dies, or until the vampire dismisses them as a bonus action."
+      }
+    ]
+  },
+  {
+    "index": "veteran",
+    "name": "Veteran",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "any alignment",
+    "armor_class": 17,
+    "hit_points": 58,
+    "hit_dice": "9d8",
+    "speed": "30 ft.",
+    "challenge_rating": 3,
+    "proficiency_bonus": 2,
+    "xp": 700,
+    "dexterity": 13,
+    "passive_perception": 12,
+    "languages": "any one language (usually Common)",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack."
+      },
+      {
+        "name": "Longsword",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands."
+      },
+      {
+        "name": "Shortsword",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      },
+      {
+        "name": "Heavy Crossbow",
+        "description": "Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: 6 (1d10 + 1) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "violet-fungus",
+    "name": "Violet Fungus",
+    "size": "Medium",
+    "type": "plant",
+    "alignment": "unaligned",
+    "armor_class": 5,
+    "hit_points": 18,
+    "hit_dice": "4d8",
+    "speed": "5 ft.",
+    "challenge_rating": 0.25,
+    "proficiency_bonus": 2,
+    "xp": 50,
+    "dexterity": 1,
+    "passive_perception": 6,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [
+      "Blinded",
+      "Blinded",
+      "Frightened"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The fungus makes 1d4 Rotting Touch attacks."
+      },
+      {
+        "name": "Rotting Touch",
+        "description": "Melee Weapon Attack: +2 to hit, reach 10 ft., one creature. Hit: 4 (1d8) necrotic damage."
+      }
+    ]
+  },
+  {
+    "index": "vrock",
+    "name": "Vrock",
+    "size": "Large",
+    "type": "fiend",
+    "alignment": "chaotic evil",
+    "armor_class": 15,
+    "hit_points": 104,
+    "hit_dice": "11d10",
+    "speed": "40 ft.",
+    "challenge_rating": 6,
+    "proficiency_bonus": 3,
+    "xp": 2300,
+    "dexterity": 15,
+    "passive_perception": 11,
+    "languages": "Abyssal, telepathy 120 ft.",
+    "damage_resistances": [
+      "cold",
+      "fire",
+      "lightning",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The vrock makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage."
+      },
+      {
+        "name": "Talons",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 14 (2d10 + 3) slashing damage."
+      },
+      {
+        "name": "Spores",
+        "description": "A 15-foot-radius cloud of toxic spores extends out from the vrock. The spores spread around corners. Each creature in that area must succeed on a DC 14 Constitution saving throw or become poisoned. While poisoned in this way, a target takes 5 (1d10) poison damage at the start of each of its turns. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Emptying a vial of holy water on the target also ends the effect on it."
+      },
+      {
+        "name": "Stunning Screech",
+        "description": "The vrock emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a demon must succeed on a DC 14 Constitution saving throw or be stunned until the end of the vrock's next turn ."
+      }
+    ]
+  },
+  {
+    "index": "vulture",
+    "name": "Vulture",
+    "size": "Medium",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 10,
+    "hit_points": 5,
+    "hit_dice": "1d8",
+    "speed": "10 ft.",
+    "challenge_rating": 0,
+    "proficiency_bonus": 2,
+    "xp": 10,
+    "dexterity": 10,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Beak",
+        "description": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "warhorse",
+    "name": "Warhorse",
+    "size": "Large",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 19,
+    "hit_dice": "3d10",
+    "speed": "60 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 12,
+    "passive_perception": 11,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "warhorse-skeleton",
+    "name": "Warhorse Skeleton",
+    "size": "Large",
+    "type": "undead",
+    "alignment": "lawful evil",
+    "armor_class": 13,
+    "hit_points": 22,
+    "hit_dice": "3d10",
+    "speed": "60 ft.",
+    "challenge_rating": 0.5,
+    "proficiency_bonus": 2,
+    "xp": 100,
+    "dexterity": 12,
+    "passive_perception": 9,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Exhaustion",
+      "Poisoned"
+    ],
+    "actions": [
+      {
+        "name": "Hooves",
+        "description": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "water-elemental",
+    "name": "Water Elemental",
+    "size": "Large",
+    "type": "elemental",
+    "alignment": "neutral",
+    "armor_class": 14,
+    "hit_points": 114,
+    "hit_dice": "12d10",
+    "speed": "30 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 14,
+    "passive_perception": 10,
+    "languages": "Aquan",
+    "damage_resistances": [
+      "acid",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ],
+    "damage_immunities": [
+      "poison"
+    ],
+    "condition_immunities": [
+      "Exhaustion",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned",
+      "Prone",
+      "Restrained",
+      "Unconscious"
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The elemental makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Whelm",
+        "description": "Each creature in the elemental's space must make a DC 15 Strength saving throw. On a failure, a target takes 13 (2d8 + 4) bludgeoning damage. If it is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe water. If the saving throw is successful, the target is pushed out of the elemental's space.\nThe elemental can grapple one Large creature or up to two Medium or smaller creatures at one time. At the start of each of the elemental's turns, each target grappled by it takes 13 (2d8 + 4) bludgeoning damage. A creature within 5 feet of the elemental can pull a creature or object out of it by taking an action to make a DC 14 Strength and succeeding."
+      }
+    ]
+  },
+  {
+    "index": "weasel",
+    "name": "Weasel",
+    "size": "Tiny",
+    "type": "beast",
+    "alignment": "unaligned",
+    "armor_class": 13,
+    "hit_points": 1,
+    "hit_dice": "1d4",
+    "speed": "30 ft.",
+    "challenge_rating": 0,
+    "proficiency_bonus": 2,
+    "xp": 10,
+    "dexterity": 16,
+    "passive_perception": 13,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 1 piercing damage."
+      }
+    ]
+  },
+  {
+    "index": "werebear-bear",
+    "name": "Werebear, Bear Form",
+    "size": "Medium",
+    "type": "humanoid",
+    "alignment": "neutral good",
+    "armor_class": 11,
+    "hit_points": 135,
+    "hit_dice": "18d8",
+    "speed": "40 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 10,
+    "passive_perception": 17,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [
+      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered"
+    ],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "In bear form, the werebear makes two claw attacks. In humanoid form, it makes two greataxe attacks. In hybrid form, it can attack like a bear or a humanoid."
+      },
+      {
+        "name": "Bite",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 15 (2d10 + 4) piercing damage. If the target is a humanoid, it must succeed on a DC 14 Constitution saving throw or be cursed with werebear lycanthropy."
+      },
+      {
+        "name": "Claw",
+        "description": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage."
       }
     ]
   },
