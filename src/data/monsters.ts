@@ -5716,6 +5716,74 @@ export const MONSTERS: Monster[] = [
     ]
   },
   {
+    "index": "hill-giant",
+    "name": "Hill Giant",
+    "size": "Huge",
+    "type": "giant",
+    "alignment": "chaotic evil",
+    "armor_class": 13,
+    "hit_points": 105,
+    "hit_dice": "10d12",
+    "speed": "40 ft.",
+    "challenge_rating": 5,
+    "proficiency_bonus": 3,
+    "xp": 1800,
+    "dexterity": 8,
+    "passive_perception": 12,
+    "languages": "Giant",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The giant makes two greatclub attacks."
+      },
+      {
+        "name": "Greatclub",
+        "description": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 18 (3d8 + 5) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "description": "Ranged Weapon Attack: +8 to hit, range 60/240 ft., one target. Hit: 21 (3d10 + 5) bludgeoning damage."
+      }
+    ]
+  },
+  {
+    "index": "hippogriff",
+    "name": "Hippogriff",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "unaligned",
+    "armor_class": 11,
+    "hit_points": 19,
+    "hit_dice": "3d10",
+    "speed": "40 ft.",
+    "challenge_rating": 1,
+    "proficiency_bonus": 2,
+    "xp": 200,
+    "dexterity": 13,
+    "passive_perception": 15,
+    "languages": "",
+    "damage_resistances": [],
+    "damage_immunities": [],
+    "condition_immunities": [],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "description": "The hippogriff makes two attacks: one with its beak and one with its claws."
+      },
+      {
+        "name": "Beak",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "description": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      }
+    ]
+  },
+  {
     "index": "hobgoblin",
     "name": "Hobgoblin",
     "size": "Medium",

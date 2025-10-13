@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://initiative-tracker.com/sitemap-index.xml
-Sitemap: https://initiative-tracker.com/sitemap-0.xml
+Sitemap: https://aiinitiativetracker.com/sitemap-index.xml
+Sitemap: https://aiinitiativetracker.com/sitemap-0.xml
 
 
