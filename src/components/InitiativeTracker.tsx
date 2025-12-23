@@ -282,9 +282,24 @@ const NotesCell = ({ getValue, row, column }: any) => {
               <div className="space-y-1">
                 <label className="text-xs text-gray-500">HP</label>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={hp}
-                  onChange={(e) => setHp(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "" || /^-?\d*\.?\d*$/.test(val)) {
+                      setHp(val);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (
+                      !["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key) &&
+                      !(e.ctrlKey || e.metaKey) &&
+                      !/[0-9\-.]/.test(e.key)
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   placeholder="HP"
                   className="h-8 text-center"
                 />
@@ -292,9 +307,24 @@ const NotesCell = ({ getValue, row, column }: any) => {
               <div className="space-y-1">
                 <label className="text-xs text-gray-500">Max HP</label>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={maxHp}
-                  onChange={(e) => setMaxHp(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "" || /^-?\d*\.?\d*$/.test(val)) {
+                      setMaxHp(val);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (
+                      !["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key) &&
+                      !(e.ctrlKey || e.metaKey) &&
+                      !/[0-9\-.]/.test(e.key)
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   placeholder="Max"
                   className="h-8 text-center"
                 />
@@ -302,9 +332,24 @@ const NotesCell = ({ getValue, row, column }: any) => {
               <div className="space-y-1">
                 <label className="text-xs text-gray-500">AC</label>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={ac}
-                  onChange={(e) => setAc(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "" || /^-?\d*\.?\d*$/.test(val)) {
+                      setAc(val);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (
+                      !["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key) &&
+                      !(e.ctrlKey || e.metaKey) &&
+                      !/[0-9\-.]/.test(e.key)
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   placeholder="AC"
                   className="h-8 text-center"
                 />

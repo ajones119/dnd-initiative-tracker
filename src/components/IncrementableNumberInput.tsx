@@ -20,17 +20,21 @@ export const IncrementableNumberInput: React.FC<IncrementableNumberInputProps> =
   placeholder,
 }) => {
   const [incrementValue, setIncrementValue] = useState<number>(1);
+  const [incrementInputValue, setIncrementInputValue] = useState<string>("1");
   const [popoverOpen, setPopoverOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const incrementInputRef = useRef<HTMLInputElement>(null);
 
   const handleIncrement = () => {
     const currentValue = typeof value === "number" ? value : 0;
-    onChange(currentValue + incrementValue);
+    const incValue = incrementInputValue === "" ? 1 : Number(incrementInputValue) || 1;
+    onChange(currentValue + incValue);
   };
 
   const handleDecrement = () => {
     const currentValue = typeof value === "number" ? value : 0;
-    onChange(currentValue - incrementValue);
+    const incValue = incrementInputValue === "" ? 1 : Number(incrementInputValue) || 1;
+    onChange(currentValue - incValue);
   };
 
   const handleDirectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +57,9 @@ export const IncrementableNumberInput: React.FC<IncrementableNumberInputProps> =
     // Only close if focus is leaving the entire component
     const relatedTarget = e.relatedTarget as HTMLElement;
     const popoverElement = document.querySelector('[role="dialog"]');
+
+    //run on change rounding down to the nearest integer
+    onChange(Math.floor(Number(value)) || 0);
     
     if (!popoverElement?.contains(relatedTarget)) {
       setPopoverOpen(false);
@@ -99,16 +106,32 @@ export const IncrementableNumberInput: React.FC<IncrementableNumberInputProps> =
               Increment Value
             </label>
             <Input
-              type="number"
-              value={incrementValue}
+              ref={incrementInputRef}
+              type="text"
+              inputMode="numeric"
+              value={incrementInputValue}
               onChange={(e) => {
-                const val = Number(e.target.value);
-                if (!isNaN(val) && val > 0) {
-                  setIncrementValue(val);
+                const val = e.target.value;
+                // Only allow empty string or valid positive integers
+                if (val === "" || /^\d+$/.test(val)) {
+                  setIncrementInputValue(val);
+                  // Update increment value immediately if valid
+                  if (val !== "") {
+                    const num = parseInt(val, 10);
+                    if (!isNaN(num) && num > 0) {
+                      setIncrementValue(num);
+                    }
+                  }
+                }
+              }}
+              onBlur={() => {
+                // On blur, treat empty as 1
+                if (incrementInputValue === "") {
+                  setIncrementInputValue("1");
+                  setIncrementValue(1);
                 }
               }}
               className="h-8 text-center"
-              min="1"
             />
           </div>
           

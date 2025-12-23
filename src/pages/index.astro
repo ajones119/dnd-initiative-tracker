@@ -29,30 +29,6 @@ const breadcrumbSchema = {
 			"position": 1,
 			"name": "Home",
 			"item": Astro.site
-		},
-		{
-			"@type": "ListItem",
-			"position": 2,
-			"name": "Features",
-			"item": `${Astro.site}features`
-		},
-		{
-			"@type": "ListItem",
-			"position": 3,
-			"name": "Guide",
-			"item": `${Astro.site}guide`
-		},
-		{
-			"@type": "ListItem",
-			"position": 4,
-			"name": "FAQ",
-			"item": `${Astro.site}faq`
-		},
-		{
-			"@type": "ListItem",
-			"position": 5,
-			"name": "About",
-			"item": `${Astro.site}about`
 		}
 	]
 };
@@ -64,45 +40,13 @@ const breadcrumbSchema = {
 >
 	<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-	<div class="w-full h-full p-4 md:p-8">
+	<div class="w-full h-full p-4 md:p-8 min-h-screen">
 		<header class="mb-8 text-left max-w-7xl mx-auto">
 			<h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">
 				Initiative Tracker for D&D 5e
 			</h1>
-			<p class="text-lg text-muted-foreground max-w-3xl mb-4">
-				Free online initiative tracker for Dungeons & Dragons 5th Edition. Manage combat encounters with AI-powered encounter generation, drag-and-drop turn management, and a database of 300+ monsters. The perfect tool for Dungeon Masters.
-			</p>
 		</header>
 
 		<InitiativeTracker client:load />
-
-		<article class="mt-16 max-w-4xl mx-auto">
-			<h2 class="text-3xl font-bold text-foreground mb-4">What is an Initiative Tracker?</h2>
-			<p class="text-base text-muted-foreground mb-6">
-				An initiative tracker is an essential tool for Dungeon Masters running combat encounters in Dungeons & Dragons 5e. It helps you track turn order, monster stats, hit points, and status conditions during battle. Our free online initiative tracker makes combat management effortless with modern features like drag-and-drop reordering, AI encounter generation, and automatic initiative sorting.
-			</p>
-
-			<h2 class="text-3xl font-bold text-foreground mb-4 mt-12">Key Features for D&D Combat</h2>
-			<ul class="list-disc list-inside text-base text-muted-foreground space-y-3 mb-6">
-				<li><strong>Initiative Tracking:</strong> Automatically sort and track turn order for all combatants</li>
-				<li><strong>AI Encounter Generator:</strong> Generate balanced encounters with AI assistance (20 uses per day)</li>
-				<li><strong>300+ Monster Database:</strong> Quick access to official D&D 5e SRD monsters</li>
-				<li><strong>Drag & Drop:</strong> Easily reorder initiative with intuitive drag-and-drop</li>
-				<li><strong>Save Encounters:</strong> Save and load your favorite combat encounters</li>
-				<li><strong>Death Saves:</strong> Track death saving throws for dying characters</li>
-				<li><strong>Status Effects:</strong> Manage conditions like prone, stunned, and paralyzed</li>
-				<li><strong>Mobile Friendly:</strong> Use on any device at your gaming table</li>
-			</ul>
-
-			<h2 class="text-3xl font-bold text-foreground mb-4 mt-12">Perfect for Dungeon Masters</h2>
-			<p class="text-base text-muted-foreground mb-6">
-				Whether you're running a quick random encounter or a climactic boss battle, our initiative tracker streamlines combat so you can focus on storytelling. No more fumbling with paper notes or complicated spreadsheets. Track initiative, hit points, armor class, and conditions all in one beautiful interface.
-			</p>
-
-			<h2 class="text-3xl font-bold text-foreground mb-4 mt-12">Free & No Sign-Up Required</h2>
-			<p class="text-base text-muted-foreground mb-6">
-				Start tracking initiative immediately - no account creation, no downloads, no hassle. Everything runs in your browser with automatic local saving. Perfect for both experienced DMs and newcomers to D&D 5e.
-			</p>
-		</article>
 	</div>
 </Layout>

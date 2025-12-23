@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import Footer from '../components/Footer.astro';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const title = Astro.props.title || "Initiative Tracker - Free D&D 5e Combat Management Tool";
@@ -90,7 +89,6 @@ const description = Astro.props.description || "Free online initiative tracker f
 		<main class="flex-1">
 			<slot />
 		</main>
-		<Footer />
 	</body>
 </html>
 
