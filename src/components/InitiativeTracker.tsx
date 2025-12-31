@@ -617,7 +617,7 @@ const SortableRow = ({
         "transition-colors duration-200",
         isDragging && "bg-gray-50",
         isCurrentTurn &&
-          "!bg-yellow-100 border-l-4 border-l-yellow-500 hover:!bg-yellow-100",
+          "!bg-yellow-100/30 border-l-4 border-l-yellow-500 hover:!bg-yellow-100/30",
       )}
     >
       {childrenWithProps}

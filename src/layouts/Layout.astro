@@ -10,7 +10,7 @@ const description = Astro.props.description || "Free online initiative tracker f
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
@@ -85,7 +85,7 @@ const description = Astro.props.description || "Free online initiative tracker f
 		"permissions": "Storage"
 	})} />
 	</head>
-	<body class="flex flex-col min-h-screen">
+	<body class="flex flex-col min-h-screen" style="background-color: rgb(4 8 20);">
 		<main class="flex-1">
 			<slot />
 		</main>
@@ -105,6 +105,7 @@ const description = Astro.props.description || "Free online initiative tracker f
 		padding: 0;
 		width: 100%;
 		min-height: 100vh;
-		/* Remove the gray background - let global.css handle it */
+		min-height: -webkit-fill-available; /* Fix iOS viewport height */
+		background-color: rgb(4 8 20); /* Fix iPhone white fade */
 	}
 </style>

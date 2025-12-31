@@ -38,6 +38,9 @@
 
 html {
   min-height: 100%;
+  height: 100%;
+  /* Fix iPhone white fade - set explicit background color */
+  background-color: rgb(4 8 20);
   background: radial-gradient(
     ellipse at top,
     rgb(15 23 42) 0%,
@@ -47,9 +50,13 @@ html {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  /* Ensure background extends to edges on mobile */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
+  /* Fix iPhone white fade - ensure body has background */
+  background-color: rgb(4 8 20);
   background: transparent;
   color: rgb(var(--foreground));
   font-family:
@@ -61,9 +68,15 @@ body {
     Arial,
     sans-serif;
   min-height: 100vh;
+  min-height: -webkit-fill-available; /* Fix iOS viewport height */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
+  /* Support safe area insets for iPhone notches */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 /* Subtle background glow */
@@ -254,11 +267,11 @@ body::before {
     @apply bg-background text-foreground;
   }
   
-  /* Button scale states */
+  /* Button scale states with fantasy glow */
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]) {
     transform: scale(1);
-    transition: transform 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
   }
   
   button:disabled,
