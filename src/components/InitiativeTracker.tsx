@@ -150,7 +150,7 @@ const InitiativeTracker = () => {
   };
 
   return (
-    <div className="mx-auto max-w-2xl w-full flex flex-col h-full relative">
+    <div className="relative mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col">
       <section className="flex flex-wrap items-center justify-between gap-3 shrink-0">
         <h2 className="text-lg font-semibold truncate">
           {encounterName || "Encounter"}
@@ -178,7 +178,7 @@ const InitiativeTracker = () => {
       </section>
       <motion.section
         id="initiative-tracker-container"
-        className="flex-1 overflow-y-auto"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain"
         layoutScroll
       >
         <MonsterAutocomplete onSelect={handleSelect} />
