@@ -22,6 +22,14 @@ async function fetchMonsterDetails(monsterIndex) {
   return await response.json();
 }
 
+function getUniqueCreatureTypes(monsters) {
+  const types = new Set();
+  for (const m of monsters) {
+    if (m?.type && typeof m.type === "string") types.add(m.type);
+  }
+  return [...types].sort((a, b) => a.localeCompare(b));
+}
+
 function processMonsterData(monster) {
   // Extract only the fields we need for initiative tracking
   return {
@@ -94,6 +102,8 @@ async function buildMonsterDatabase() {
     // Sort monsters by name for better UX
     monsters.sort((a, b) => a.name.localeCompare(b.name));
 
+    const creatureTypes = getUniqueCreatureTypes(monsters);
+
     // Create output directory if it doesn't exist
     const outputDir = path.join(process.cwd(), "src", "data");
     if (!fs.existsSync(outputDir)) {
@@ -104,23 +114,30 @@ async function buildMonsterDatabase() {
     const outputPath = path.join(outputDir, "monsters.json");
     fs.writeFileSync(outputPath, JSON.stringify(monsters, null, 2));
 
+    const typesPath = path.join(outputDir, "creature-types.json");
+    fs.writeFileSync(typesPath, JSON.stringify(creatureTypes, null, 2));
+
     console.log(`✅ Successfully built monster database!`);
     console.log(`📊 Total monsters: ${monsters.length}`);
+    console.log(`🏷️ Unique creature types: ${creatureTypes.length}`);
     console.log(`📁 Output: ${outputPath}`);
+    console.log(`📁 Creature types: ${typesPath}`);
     console.log(
       `📦 File size: ${(fs.statSync(outputPath).size / 1024 / 1024).toFixed(2)} MB`,
     );
 
     // Generate TypeScript types
-    generateTypeScript(monsters, outputDir);
+    generateTypeScript(monsters, creatureTypes, outputDir);
   } catch (error) {
     console.error("❌ Error building monster database:", error);
     process.exit(1);
   }
 }
 
-function generateTypeScript(monsters, outputDir) {
-  const typeDefinition = `// Auto-generated monster types
+function generateTypeScript(monsters, creatureTypes, outputDir) {
+  const typeDefinition = `import { Searcher } from "fast-fuzzy";
+
+// Auto-generated monster types
 export interface Monster {
   index: string;
   name: string;
@@ -153,24 +170,29 @@ export function getInitiativeModifier(dexterity: number): number {
   return Math.floor((dexterity - 10) / 2);
 }
 
-// Helper function for fuzzy search
+const monsterSearcher = new Searcher(MONSTERS, {
+  keySelector: (m: Monster) => [m.name, m.type],
+  threshold: 0.35,
+});
+
+/** Fuzzy search by monster name and creature type (fast-fuzzy). */
 export function searchMonsters(query: string, limit: number = 10): Monster[] {
-  if (!query.trim()) return [];
-  
-  const searchTerm = query.toLowerCase();
-  
-  return MONSTERS
-    .filter(monster => 
-      monster.name.toLowerCase().includes(searchTerm) ||
-      monster.type.toLowerCase().includes(searchTerm)
-    )
-    .slice(0, limit);
+  const q = query.trim();
+  if (!q) return [];
+  return monsterSearcher.search(q).slice(0, limit);
 }
 `;
 
-  const typesPath = path.join(outputDir, "monsters.ts");
-  fs.writeFileSync(typesPath, typeDefinition);
-  console.log(`📝 Generated TypeScript types: ${typesPath}`);
+  const monstersTsPath = path.join(outputDir, "monsters.ts");
+  fs.writeFileSync(monstersTsPath, typeDefinition);
+  console.log(`📝 Generated TypeScript types: ${monstersTsPath}`);
+
+  const creatureTypesTs = `// Auto-generated unique creature types (from monster \`type\` field)
+export const CREATURE_TYPES: string[] = ${JSON.stringify(creatureTypes, null, 2)};
+`;
+  const creatureTypesTsPath = path.join(outputDir, "creature-types.ts");
+  fs.writeFileSync(creatureTypesTsPath, creatureTypesTs);
+  console.log(`📝 Generated creature types: ${creatureTypesTsPath}`);
 }
 
 // Run the script

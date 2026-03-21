@@ -1,15 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { Drawer } from "vaul";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
-  DrawerClose,
-} from "./ui/drawer";
+import { cn } from "@/lib/utils";
 import {
   BookOpen,
   X,
@@ -20,53 +14,27 @@ import {
   Calendar,
   Users,
   Play,
-  RotateCcw,
   Download,
   Upload,
 } from "lucide-react";
-import { useEncounters } from "../hooks/useEncounters";
-import { getEncounterSummary, type Encounter } from "../lib/encounters";
-import type { InitiativeRow } from "./InitiativeTrackerContext";
+import { useEncountersStorage } from "./EncountersStorageContext";
+import { useInitiativeTracker } from "./InitiativeTrackerContext";
+import { getEncounterSummary } from "../lib/encounters";
+import type { Encounter } from "../Types";
 
 interface EncounterDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  currentEncounterName: string;
-  onEncounterNameChange: (name: string) => void;
-  currentEncounterId: string | null;
-  creatures: InitiativeRow[];
-  currentTurn: number;
-  currentRound: number;
-  onLoadEncounter: (encounter: Encounter) => void;
-  onNewEncounter: () => void;
-  onSaveEncounter: (encounterId: string) => void;
-  aiDescription?: string;
-  combatMechanics?: Array<{
-    name: string;
-    description: string;
-    trigger?: string;
-  }>;
-  tactics?: string;
 }
 
 export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
   open,
   onOpenChange,
-  currentEncounterName,
-  onEncounterNameChange,
-  currentEncounterId,
-  creatures,
-  currentTurn,
-  currentRound,
-  onLoadEncounter,
-  onNewEncounter,
-  onSaveEncounter,
-  aiDescription,
-  combatMechanics,
-  tactics,
 }) => {
   const {
     encounters,
+    currentEncounterId,
+    setCurrentEncounterId,
     saveEncounter,
     updateExistingEncounter,
     deleteEncounter,
@@ -75,11 +43,35 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
     exportEncounters,
     exportSingleEncounter,
     importEncounters,
-  } = useEncounters();
+  } = useEncountersStorage();
+
+  const {
+    initiativeRows: creatures,
+    currentTurn,
+    currentRound,
+    encounterName: currentEncounterName,
+    setEncounterName: onEncounterNameChange,
+    aiDescription,
+    combatMechanics,
+    tactics,
+    loadEncounter,
+    newEncounter,
+  } = useInitiativeTracker();
 
   const [saveAsName, setSaveAsName] = useState("");
   const [saveAsDescription, setSaveAsDescription] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [drawerDirection, setDrawerDirection] = useState<
+    "left" | "right" | "top" | "bottom"
+  >("right");
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setDrawerDirection(mq.matches ? "right" : "bottom");
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const handleSaveCurrent = () => {
     const name = currentEncounterName.trim() || "Untitled Encounter";
@@ -96,8 +88,7 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
         tactics,
       });
     } else {
-      // Create new encounter
-      const newEncounter = saveEncounter(
+      const created = saveEncounter(
         name,
         creatures,
         "",
@@ -107,7 +98,7 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
         combatMechanics,
         tactics,
       );
-      onSaveEncounter(newEncounter.id);
+      setCurrentEncounterId(created.id);
     }
 
     onEncounterNameChange(name);
@@ -117,7 +108,7 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
   const handleSaveAs = () => {
     if (!saveAsName.trim()) return;
 
-    const newEncounter = saveEncounter(
+    const created = saveEncounter(
       saveAsName.trim(),
       creatures,
       saveAsDescription.trim(),
@@ -130,18 +121,24 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
 
     setSaveAsName("");
     setSaveAsDescription("");
-    onEncounterNameChange(newEncounter.name);
+    onEncounterNameChange(created.name);
+    setCurrentEncounterId(created.id);
     onOpenChange(false);
   };
 
   const handleLoadEncounter = (encounter: Encounter) => {
-    onLoadEncounter(encounter);
+    loadEncounter(encounter);
+    setCurrentEncounterId(encounter.id);
     onOpenChange(false);
   };
 
   const handleDeleteEncounter = (id: string, name: string) => {
     if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
       deleteEncounter(id);
+      if (id === currentEncounterId) {
+        newEncounter();
+        setCurrentEncounterId(null);
+      }
     }
   };
 
@@ -150,7 +147,8 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
   };
 
   const handleNewEncounter = () => {
-    onNewEncounter();
+    newEncounter();
+    setCurrentEncounterId(null);
     onOpenChange(false);
   };
 
@@ -207,75 +205,93 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
   };
 
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} direction="right">
-      <DrawerContent className="w-96">
-        <DrawerHeader className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-600" />
-            <DrawerTitle>Encounters</DrawerTitle>
-          </div>
-          <DrawerClose
-            asChild
-            className="hover:scale-102 absolute right-0 top-0"
-          >
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-              <X className="h-4 w-4" />
-            </Button>
-          </DrawerClose>
-        </DrawerHeader>
+    <Drawer.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      direction={drawerDirection}
+    >
+      <Drawer.Portal>
+        <Drawer.Overlay
+          className={cn(
+            "fixed inset-0 z-50 bg-black/50",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out",
+            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          )}
+        />
+        <Drawer.Content
+          className={cn(
+            "group/drawer-content bg-background fixed z-50 flex flex-col",
+            drawerDirection === "right" &&
+              "h-full inset-y-0 right-0 w-96 border-l",
+            drawerDirection === "bottom" &&
+              "inset-x-0 bottom-0 max-h-[85vh] rounded-t-xl border-t",
+          )}
+        >
+          <header className="flex shrink-0 items-center justify-between gap-2 border-b p-4">
+            <div className="flex min-w-0 items-center gap-2">
+              <BookOpen className="h-5 w-5 shrink-0 text-primary" />
+              <Drawer.Title className="truncate text-lg font-semibold">
+                Encounters
+              </Drawer.Title>
+            </div>
+            <Drawer.Close asChild>
+              <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
+                <X className="h-4 w-4" aria-hidden />
+              </Button>
+            </Drawer.Close>
+          </header>
 
         <div className="flex-1 p-6 space-y-6 overflow-y-auto">
-          {/* Current Encounter Actions */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="font-medium text-sm text-gray-700">
-                Current Encounter
+          {/* Current encounter */}
+          <section className="space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-sm font-medium text-muted-foreground">
+                Current encounter
               </h3>
               {currentEncounterId && (
-                <Badge variant="secondary" className="text-xs">
-                  Loaded
+                <Badge variant="secondary" className="text-xs shrink-0">
+                  Saved
                 </Badge>
               )}
             </div>
-
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Button
                 onClick={handleSaveCurrent}
                 className="w-full justify-start"
                 variant="outline"
+                size="sm"
               >
-                <Save className="h-4 w-4 mr-2" />
-                {currentEncounterId
-                  ? "Update Encounter"
-                  : "Save Current Encounter"}
+                <Save className="h-4 w-4 shrink-0 mr-2" />
+                {currentEncounterId ? "Update" : "Save"}
               </Button>
-
               <Button
                 onClick={handleNewEncounter}
                 className="w-full justify-start"
                 variant="outline"
+                size="sm"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Start New Encounter
+                <Plus className="h-4 w-4 shrink-0 mr-2" />
+                New encounter
               </Button>
             </div>
-          </div>
+          </section>
 
-          {/* Save As Section */}
-          <div className="space-y-3 border-t pt-4">
-            <h3 className="font-medium text-sm text-gray-700">Save As New</h3>
-
+          {/* Save as new */}
+          <section className="space-y-3 border-t pt-4">
+            <h3 className="text-sm font-medium text-muted-foreground">
+              Save as new
+            </h3>
             <div className="space-y-2">
               <Input
                 value={saveAsName}
                 onChange={(e) => setSaveAsName(e.target.value)}
-                placeholder="Encounter name..."
+                placeholder="Name"
                 className="text-sm"
               />
               <Input
                 value={saveAsDescription}
                 onChange={(e) => setSaveAsDescription(e.target.value)}
-                placeholder="Description (optional)..."
+                placeholder="Description (optional)"
                 className="text-sm"
               />
               <Button
@@ -284,16 +300,16 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                 className="w-full"
                 size="sm"
               >
-                <Save className="h-4 w-4 mr-2" />
-                Save As New
+                <Save className="h-4 w-4 shrink-0 mr-2" />
+                Save as new
               </Button>
             </div>
-          </div>
+          </section>
 
-          {/* Import/Export Section */}
-          <div className="space-y-3 border-t pt-4">
-            <h3 className="font-medium text-sm text-gray-700">
-              Import / Export
+          {/* Import / export */}
+          <section className="space-y-3 border-t pt-4">
+            <h3 className="text-sm font-medium text-muted-foreground">
+              Import / export
             </h3>
             <div className="grid grid-cols-2 gap-2">
               <Button
@@ -302,7 +318,7 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                 size="sm"
                 className="w-full"
               >
-                <Upload className="h-4 w-4 mr-2" />
+                <Upload className="h-4 w-4 shrink-0 mr-2" />
                 Import
               </Button>
               <Button
@@ -312,8 +328,8 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                 className="w-full"
                 disabled={encounters.length === 0}
               >
-                <Download className="h-4 w-4 mr-2" />
-                Export All
+                <Download className="h-4 w-4 shrink-0 mr-2" />
+                Export all
               </Button>
             </div>
             <input
@@ -322,14 +338,15 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
               accept=".json"
               onChange={handleFileChange}
               className="hidden"
+              aria-hidden
             />
-          </div>
+          </section>
 
-          {/* Saved Encounters */}
-          <div className="space-y-3 border-t pt-4">
-            <div className="flex items-center justify-between">
-              <h3 className="font-medium text-sm text-gray-700">
-                Saved Encounters ({encounters.length})
+          {/* Saved list */}
+          <section className="space-y-3 border-t pt-4">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-sm font-medium text-muted-foreground">
+                Saved ({encounters.length})
               </h3>
               {encounters.length > 0 && (
                 <Button
@@ -338,98 +355,95 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                   onClick={() => {
                     if (window.confirm("Delete all saved encounters?")) {
                       clearAllEncounters();
+                      newEncounter();
+                      setCurrentEncounterId(null);
                     }
                   }}
-                  className="text-red-600 hover:text-red-700 h-6 px-2"
+                  className="h-7 px-2 text-destructive hover:text-destructive"
                 >
-                  Clear All
+                  Clear all
                 </Button>
               )}
             </div>
 
             {encounters.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <BookOpen className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                <p className="text-sm">No saved encounters yet</p>
-              </div>
+              <p className="py-6 text-center text-sm text-muted-foreground">
+                No saved encounters yet
+              </p>
             ) : (
               <div className="space-y-2">
                 {encounters.map((encounter) => (
-                  <div
+                    <div
                     key={encounter.id}
-                    className={`p-3 border rounded-lg ${
-                      encounter.id === currentEncounterId
-                        ? "border-blue-500 bg-blue-50"
-                        : ""
-                    }`}
+                    className={cn(
+                      "rounded-lg border p-3",
+                      encounter.id === currentEncounterId &&
+                        "border-primary bg-primary/5",
+                    )}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-sm truncate">
+                    <div className="mb-2 flex items-start justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="truncate text-sm font-medium">
                           {encounter.name}
                         </h4>
-                        <p className="text-xs text-gray-500 truncate">
+                        <p className="truncate text-xs text-muted-foreground">
                           {getEncounterSummary(encounter)}
                         </p>
                       </div>
-                      <div className="flex items-center gap-1 ml-2">
-                        <Badge variant="secondary" className="text-xs">
-                          R{encounter.currentRound}
-                        </Badge>
-                      </div>
+                      <Badge variant="secondary" className="shrink-0 text-xs">
+                        R{encounter.currentRound}
+                      </Badge>
                     </div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1 text-xs text-gray-500">
-                        <Calendar className="h-3 w-3" />
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Calendar className="h-3 w-3 shrink-0" />
                         {formatDate(encounter.updatedAt)}
-                        <Users className="h-3 w-3 ml-2" />
+                        <Users className="h-3 w-3 shrink-0" />
                         {encounter.creatures.length}
-                      </div>
-
-                      <div className="flex items-center gap-1">
+                      </span>
+                      <div className="flex shrink-0 items-center gap-0.5">
                         <Button
                           variant="ghost"
-                          size="sm"
+                          size="icon"
+                          className="h-7 w-7"
                           onClick={() => handleLoadEncounter(encounter)}
-                          className="h-6 w-6 p-0"
-                          title="Load encounter"
+                          title="Load"
                         >
-                          <Play className="h-3 w-3" />
+                          <Play className="h-3.5 w-3.5" />
                         </Button>
                         <Button
                           variant="ghost"
-                          size="sm"
+                          size="icon"
+                          className="h-7 w-7"
                           onClick={() => handleExportSingle(encounter.id)}
-                          className="h-6 w-6 p-0"
-                          title="Export encounter"
+                          title="Export"
                         >
-                          <Download className="h-3 w-3" />
+                          <Download className="h-3.5 w-3.5" />
                         </Button>
                         <Button
                           variant="ghost"
-                          size="sm"
+                          size="icon"
+                          className="h-7 w-7"
                           onClick={() =>
                             handleDuplicateEncounter(
                               encounter.id,
                               encounter.name,
                             )
                           }
-                          className="h-6 w-6 p-0"
-                          title="Duplicate encounter"
+                          title="Duplicate"
                         >
-                          <Copy className="h-3 w-3" />
+                          <Copy className="h-3.5 w-3.5" />
                         </Button>
                         <Button
                           variant="ghost"
-                          size="sm"
+                          size="icon"
+                          className="h-7 w-7 text-destructive hover:text-destructive"
                           onClick={() =>
                             handleDeleteEncounter(encounter.id, encounter.name)
                           }
-                          className="h-6 w-6 p-0 text-red-600 hover:text-red-700"
-                          title="Delete encounter"
+                          title="Delete"
                         >
-                          <Trash2 className="h-3 w-3" />
+                          <Trash2 className="h-3.5 w-3.5" />
                         </Button>
                       </div>
                     </div>
@@ -437,10 +451,10 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
                 ))}
               </div>
             )}
-          </div>
+          </section>
         </div>
 
-        <DrawerFooter className="border-t pb-safe">
+        <footer className="mt-auto shrink-0 border-t p-4 pb-safe">
           <Button
             variant="outline"
             onClick={() => onOpenChange(false)}
@@ -448,8 +462,9 @@ export const EncounterDrawer: React.FC<EncounterDrawerProps> = ({
           >
             Close
           </Button>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+        </footer>
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer.Root>
   );
 };

@@ -1,3 +1,5 @@
+import { Searcher } from "fast-fuzzy";
+
 // Auto-generated monster types
 export interface Monster {
   index: string;
@@ -11734,16 +11736,14 @@ export function getInitiativeModifier(dexterity: number): number {
   return Math.floor((dexterity - 10) / 2);
 }
 
-// Helper function for fuzzy search
+const monsterSearcher = new Searcher(MONSTERS, {
+  keySelector: (m: Monster) => [m.name, m.type],
+  threshold: 0.35,
+});
+
+/** Fuzzy search by monster name and creature type (fast-fuzzy). */
 export function searchMonsters(query: string, limit: number = 10): Monster[] {
-  if (!query.trim()) return [];
-  
-  const searchTerm = query.toLowerCase();
-  
-  return MONSTERS
-    .filter(monster => 
-      monster.name.toLowerCase().includes(searchTerm) ||
-      monster.type.toLowerCase().includes(searchTerm)
-    )
-    .slice(0, limit);
+  const q = query.trim();
+  if (!q) return [];
+  return monsterSearcher.search(q).slice(0, limit);
 }

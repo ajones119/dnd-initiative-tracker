@@ -1,70 +1,77 @@
-import React, { useState, useEffect } from "react";
-import { Input } from "./ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import React, { useState } from "react";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxContent,
+  ComboboxList,
+  ComboboxItem,
+  ComboboxGroup,
+  ComboboxLabel,
+  ComboboxSeparator,
+} from "./ui/combobox";
 import {
   searchMonsters,
   getInitiativeModifier,
   type Monster,
 } from "../data/monsters";
-import { useInitiativeTracker } from "./InitiativeTrackerContext";
 import { Badge } from "./ui/badge";
+import type { InitiativeRow } from "../Types";
 
 interface MonsterAutocompleteProps {
-  getValue: () => string;
-  row: any;
-  column: any;
-  placeholder?: string;
+  onSelect: (row: Omit<InitiativeRow, "id">) => void;
 }
 
 export const MonsterAutocomplete: React.FC<MonsterAutocompleteProps> = ({
-  getValue,
-  row,
-  column,
-  placeholder = "Name or search monsters...",
+  onSelect,
 }) => {
-  const { updateInitiativeRow } = useInitiativeTracker();
-  const initialValue = getValue() as string;
-  const [value, setValue] = useState(initialValue);
-  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<Monster[]>([]);
 
-  React.useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
-
-  const handleBlur = () => {
-    // Delay to allow dropdown clicks to register
-    setTimeout(() => {
-      setOpen(false);
-      updateInitiativeRow(row.index, column.id, value);
-    }, 200);
-  };
-
-  const handleFocus = () => {
-    if (value.trim().length >= 2) {
-      const results = searchMonsters(value, 10);
-      setSearchResults(results);
-      //setOpen(results.length > 0);
+  const handleInputChange = (val: string) => {
+    if (val === "__custom__") {
+      setSearch("");
+      setSearchResults([]);
+      return;
+    }
+    setSearch(val);
+    if (val.trim().length >= 1) {
+      setSearchResults(searchMonsters(val, 10));
+    } else {
+      setSearchResults([]);
     }
   };
 
-  const handleMonsterSelect = (monster: Monster) => {
-    // Fill in all the monster data
+  const commit = (row: Omit<InitiativeRow, "id">) => {
+    onSelect(row);
+    setSearch("");
+    setSearchResults([]);
+  };
+
+  const handleValueChange = (value: string | null) => {
+    if (!value) return;
+
+    if (value === "__custom__") {
+      const name = search.trim();
+      if (!name) return;
+      commit({ name, initiative: 0, statusConditions: [] });
+      return;
+    }
+
+    const monster = searchResults.find((m) => m.index === value);
+    if (!monster) return;
+
     const initiativeModifier = getInitiativeModifier(monster.dexterity);
     const speedValue = parseInt(monster.speed.replace(/\D/g, "")) || 30;
-
-    // Update each field individually to ensure they all get set
-    updateInitiativeRow(row.index, "name", monster.name);
-    updateInitiativeRow(row.index, "hp", monster.hit_points);
-    updateInitiativeRow(row.index, "maxHp", monster.hit_points);
-    updateInitiativeRow(row.index, "ac", monster.armor_class);
-    updateInitiativeRow(row.index, "initiativeModifier", initiativeModifier);
-    updateInitiativeRow(row.index, "speed", speedValue);
-    updateInitiativeRow(row.index, "actions", monster.actions);
-
-    setValue(monster.name);
-    setOpen(false);
-    setSearchResults([]);
+    commit({
+      name: monster.name,
+      initiative: 32,
+      speed: speedValue,
+      actions: monster.actions,
+      hp: monster.hit_points,
+      maxHp: monster.hit_points,
+      ac: monster.armor_class,
+      statusConditions: [],
+    });
   };
 
   const getChallengeRatingColor = (cr: number) => {
@@ -74,74 +81,77 @@ export const MonsterAutocomplete: React.FC<MonsterAutocompleteProps> = ({
     return "bg-red-100 text-red-800";
   };
 
+  const hasContent = search.trim().length >= 1;
+
   return (
-    <Popover
-      open={open && searchResults.length > 0}
-      onOpenChange={setOpen}
-      modal={false}
+    <Combobox
+      inputValue={search}
+      onInputValueChange={handleInputChange}
+      onValueChange={handleValueChange}
+      value={null}
     >
-      <PopoverTrigger className="w-full">
-        <Input
-          value={value}
-          onChange={(e) => {
-            const inputValue = e.target.value;
-            setValue(inputValue);
+      <ComboboxInput
+        placeholder="Search monsters or type a custom name..."
+        showTrigger={false}
+        showClear={search.length > 0}
+        className="w-full"
+      />
 
-            // Search monsters as user types
-            if (inputValue.trim().length >= 2) {
-              const results = searchMonsters(inputValue, 10);
-              setSearchResults(results);
-              setOpen(results.length > 0);
-            } else {
-              setSearchResults([]);
-              setOpen(false);
-            }
-          }}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholder={placeholder}
-          className="h-8 w-full"
-          autoComplete="off"
-        />
-      </PopoverTrigger>
-
-      <PopoverContent
-        className="w-80 p-0 max-h-60 overflow-y-auto"
-        align="start"
-        onOpenAutoFocus={(e) => e.preventDefault()}
-        onCloseAutoFocus={(e) => e.preventDefault()}
-      >
-        {searchResults.map((monster) => (
-          <div
-            key={monster.index}
-            role="option"
-            onMouseDown={(e) => {
-              e.preventDefault(); // Prevent blur
-              handleMonsterSelect(monster);
-            }}
-            className="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 border-b border-gray-100 last:border-b-0"
-          >
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-sm">{monster.name}</span>
-                <Badge
-                  variant="secondary"
-                  className={`text-xs ${getChallengeRatingColor(monster.challenge_rating)}`}
-                >
-                  CR {monster.challenge_rating}
+      {hasContent && (
+        <ComboboxContent>
+          <ComboboxList>
+            {/* Custom — always first */}
+            <ComboboxGroup>
+              <ComboboxItem
+                value="__custom__"
+                className="flex items-center justify-between gap-2"
+              >
+                <span className="truncate">{search.trim()}</span>
+                <Badge variant="outline" className="text-xs shrink-0 ml-auto">
+                  Custom
                 </Badge>
-              </div>
-              <div className="text-xs text-gray-500">
-                {monster.size} {monster.type} • AC {monster.armor_class} • HP{" "}
-                {monster.hit_points}
-              </div>
-            </div>
-            <div className="text-xs text-gray-500">
-              +{getInitiativeModifier(monster.dexterity)} init
-            </div>
-          </div>
-        ))}
-      </PopoverContent>
-    </Popover>
+              </ComboboxItem>
+            </ComboboxGroup>
+
+            {searchResults.length > 0 && (
+              <>
+                <ComboboxSeparator />
+                <ComboboxGroup>
+                  <ComboboxLabel>Monsters</ComboboxLabel>
+                  {searchResults.map((monster) => (
+                    <ComboboxItem
+                      key={monster.index}
+                      value={monster.index}
+                      className="flex items-center justify-between gap-2"
+                    >
+                      <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium truncate">
+                            {monster.name}
+                          </span>
+                          <Badge
+                            variant="secondary"
+                            className={`text-xs shrink-0 ${getChallengeRatingColor(monster.challenge_rating)}`}
+                          >
+                            CR {monster.challenge_rating}
+                          </Badge>
+                        </div>
+                        <span className="text-xs text-muted-foreground">
+                          {monster.size} {monster.type} · AC{" "}
+                          {monster.armor_class} · HP {monster.hit_points}
+                        </span>
+                      </div>
+                      <span className="text-xs text-muted-foreground shrink-0">
+                        +{getInitiativeModifier(monster.dexterity)} init
+                      </span>
+                    </ComboboxItem>
+                  ))}
+                </ComboboxGroup>
+              </>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      )}
+    </Combobox>
   );
 };

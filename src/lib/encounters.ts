@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { InitiativeRow } from "../components/InitiativeTrackerContext";
+import type { InitiativeRow } from "../Types";
 
 // Encounter schema for validation
 export const EncounterSchema = z.object({

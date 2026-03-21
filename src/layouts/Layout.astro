@@ -1,13 +1,12 @@
 ---
 import '../styles/global.css';
-
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const title = Astro.props.title || "Initiative Tracker - Free D&D 5e Combat Management Tool";
 const description = Astro.props.description || "Free online initiative tracker for D&D 5e with AI-powered encounter generation, drag-and-drop combat management, and 300+ monsters. Perfect for Dungeon Masters running combat encounters.";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="font-geist-sans">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -85,8 +84,8 @@ const description = Astro.props.description || "Free online initiative tracker f
 		"permissions": "Storage"
 	})} />
 	</head>
-	<body class="flex flex-col min-h-screen" style="background-color: rgb(4 8 20);">
-		<main class="flex-1">
+	<body class="flex flex-col h-screen">
+		<main class="flex-1 flex flex-col min-h-0 overflow-hidden">
 			<slot />
 		</main>
 	</body>
@@ -95,17 +94,17 @@ const description = Astro.props.description || "Free online initiative tracker f
 <style>
 	html {
 		height: 100%;
+		height: -webkit-fill-available;
 		width: 100%;
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	body {
 		margin: 0;
 		padding: 0;
 		width: 100%;
-		min-height: 100vh;
-		min-height: -webkit-fill-available; /* Fix iOS viewport height */
-		background-color: rgb(4 8 20); /* Fix iPhone white fade */
+		height: 100%;
+		height: -webkit-fill-available;
 	}
 </style>

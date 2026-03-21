@@ -6,7 +6,7 @@ import {
   updateEncounter,
   type Encounter,
 } from "../lib/encounters";
-import type { InitiativeRow } from "../components/InitiativeTrackerContext";
+import type { InitiativeRow } from "../Types";
 
 const ENCOUNTERS_KEY = "initiative-tracker-encounters";
 
