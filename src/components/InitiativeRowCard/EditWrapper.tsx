@@ -38,7 +38,7 @@ export const EditWrapper = ({
       onPointerUpCapture={onEndHold}
       onPointerCancelCapture={onEndHold}
       onContextMenu={(e) => e.preventDefault()}
-      className="rounded-lg my-0.5 list-none"
+      className=" my-0.5 list-none"
     >
       <InitiativeRowCardContent
         row={row}

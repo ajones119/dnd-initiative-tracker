@@ -49,7 +49,7 @@ export const BottomController = ({ onOpenDiceDrawer }: BottomControllerProps) =>
         </div>
         <div className="flex flex-col items-center">
           <span className="text-xs text-muted-foreground">Up next</span>
-          <span className="text-sm font-semibold truncate max-w-[140px]">
+          <span className="line-clamp-1 max-w-[86px] min-w-0 text-sm font-semibold">
             {activeCombatant?.name ?? "—"}
           </span>
         </div>

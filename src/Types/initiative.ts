@@ -44,6 +44,8 @@ export type InitiativeRow = {
   initiativeModifier?: number;
   /** Condition labels matching `CONDITIONS` names (see `normalizeStatusConditions`). */
   statusConditions: string[];
+  /** Canonical slug from `CREATURE_TYPES` in `@/data/creature-types` (e.g. `"beast"`). */
+  creatureType?: string;
   concentration?: boolean;
   actions?: Array<{
     name: string;

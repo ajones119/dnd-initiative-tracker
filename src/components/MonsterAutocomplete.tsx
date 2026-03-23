@@ -16,6 +16,7 @@ import {
 } from "../data/monsters";
 import { Badge } from "./ui/badge";
 import type { InitiativeRow } from "../Types";
+import { normalizeCreatureType } from "../data/creature-types";
 
 interface MonsterAutocompleteProps {
   onSelect: (row: Omit<InitiativeRow, "id">) => void;
@@ -71,6 +72,7 @@ export const MonsterAutocomplete: React.FC<MonsterAutocompleteProps> = ({
       maxHp: monster.hit_points,
       ac: monster.armor_class,
       statusConditions: [],
+      creatureType: normalizeCreatureType(monster.type),
     });
   };
 

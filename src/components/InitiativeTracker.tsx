@@ -155,7 +155,7 @@ const InitiativeTracker = () => {
         <h2 className="text-lg font-semibold truncate">
           {encounterName || "Encounter"}
         </h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mb-2">
           <Button
             variant="outline"
             size="sm"

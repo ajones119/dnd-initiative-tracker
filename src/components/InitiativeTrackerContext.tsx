@@ -171,7 +171,7 @@ export const InitiativeTrackerProvider = ({
       id: crypto.randomUUID(),
       ...initiativeRow,
     };
-    setInitiativeRows((list: InitiativeRow[]) => [...list, newRow]);
+    setInitiativeRows((list: InitiativeRow[]) => [...list, newRow].sort((a, b) => b.initiative - a.initiative));
   };
 
   const updateInitiativeRow = (
@@ -180,7 +180,7 @@ export const InitiativeTrackerProvider = ({
     value: unknown,
   ) => {
     setInitiativeRows((list: InitiativeRow[]) =>
-      list.map((row) => (row.id === id ? { ...row, [field]: value as any } : row)),
+      list.map((row) => (row.id === id ? { ...row, [field]: value as any } : row)).sort((a, b) => b.initiative - a.initiative),
     );
   };
 
@@ -205,6 +205,8 @@ export const InitiativeTrackerProvider = ({
         .getElementById(`initiative-row-card-${row.id}`)
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
+
+    console.log("current array", initiativeRows);
   };
 
   const previousTurn = () => {

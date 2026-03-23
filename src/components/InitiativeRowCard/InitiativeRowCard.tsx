@@ -70,6 +70,7 @@ export const InitiativeRowCard = ({
       speed: row.speed,
       notes: row.notes,
       statusConditions: row.statusConditions,
+      creatureType: row.creatureType,
     });
   }, [initiativeRowId, initiativeRows, addInitiativeRow]);
 

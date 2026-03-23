@@ -1,80 +1,84 @@
+/* Tailwind v4 entry: pulls in the framework and wires content scanning for class generation */
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Tell Tailwind which file types to scan for utility class usage */
 @source "../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
 
+/* Utility variant: `.dark` only matches when a `.dark` ancestor exists (for dark mode) */
 @custom-variant dark (&:is(.dark *));
 
+/* Design tokens exposed to Tailwind (colors, fonts, radii) — referenced by utilities like `font-body` */
 @theme {
-  /* Fonts */
-  --font-title: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Fonts (loaded via Google Fonts in Layout.astro) */
+  --font-title: "Cinzel", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  --font-body: "EB Garamond", Garamond, "Palatino Linotype", Palatino, serif;
   --font-mono: "Fira Code", ui-monospace, monospace;
 
-  /* Neutral */
-  --color-neutral-50: #f6f9f9;
-  --color-neutral-100: #eaf0f0;
-  --color-neutral-200: #d4dedd;
-  --color-neutral-300: #b5c4c3;
-  --color-neutral-400: #92a5a3;
-  --color-neutral-500: #687e7b;
-  --color-neutral-600: #536967;
-  --color-neutral-700: #405452;
-  --color-neutral-800: #2e3d3b;
-  --color-neutral-900: #1e2928;
-  --color-neutral-950: #0f1514;
+/* Neutral — gray-green ramp for backgrounds and text */
+--color-neutral-50: #f6f9f8;
+--color-neutral-100: #eaf0ee;
+--color-neutral-200: #d3deda;
+--color-neutral-300: #b5c5be;
+--color-neutral-400: #95a8a0;
+--color-neutral-500: #677e75;
+--color-neutral-600: #536a60;
+--color-neutral-700: #40544b;
+--color-neutral-800: #37433e;
+--color-neutral-900: #1e2924;
+--color-neutral-950: #0f1512;
 
-  /* Primary */
-  --color-primary-50: #f4fbfb;
-  --color-primary-100: #e5f5f4;
-  --color-primary-200: #c8eae7;
-  --color-primary-300: #a0d9d3;
-  --color-primary-400: #73c4ba;
-  --color-primary-500: #44a196;
-  --color-primary-600: #36877d;
-  --color-primary-700: #296b62;
-  --color-primary-800: #1d4e46;
-  --color-primary-900: #13342f;
-  --color-primary-950: #091b17;
+/* Primary — brand / success-adjacent green */
+--color-primary-50: #f3fcf8;
+--color-primary-100: #e4f7ef;
+--color-primary-200: #c5eddb;
+--color-primary-300: #9cdebf;
+--color-primary-400: #70cda0;
+--color-primary-500: #3caa76;
+--color-primary-600: #2f8d61;
+--color-primary-700: #24704b;
+--color-primary-800: #205b3f;
+--color-primary-900: #103723;
+--color-primary-950: #081c11;
 
-  /* Secondary */
-  --color-secondary-50: #f7f4fb;
-  --color-secondary-100: #ece5f5;
-  --color-secondary-200: #d6c8ea;
-  --color-secondary-300: #b7a0d9;
-  --color-secondary-400: #9273c4;
-  --color-secondary-500: #6844a1;
-  --color-secondary-600: #553687;
-  --color-secondary-700: #41296b;
-  --color-secondary-800: #2e1d4e;
-  --color-secondary-900: #1e1334;
-  --color-secondary-950: #0f091b;
+/* Secondary — accent purple-blue */
+--color-secondary-50: #f3f3fc;
+--color-secondary-100: #e4e4f7;
+--color-secondary-200: #c5c6ed;
+--color-secondary-300: #9c9ede;
+--color-secondary-400: #7074cd;
+--color-secondary-500: #3c41aa;
+--color-secondary-600: #2f348d;
+--color-secondary-700: #242970;
+--color-secondary-800: #20235b;
+--color-secondary-900: #101437;
+--color-secondary-950: #080a1c;
 
-  /* Tertiary */
-  --color-tertiary-50: #f8fbf4;
-  --color-tertiary-100: #eef5e5;
-  --color-tertiary-200: #dceac8;
-  --color-tertiary-300: #c2d9a0;
-  --color-tertiary-400: #a5c473;
-  --color-tertiary-500: #7ea144;
-  --color-tertiary-600: #688736;
-  --color-tertiary-700: #536b29;
-  --color-tertiary-800: #3d4e1d;
-  --color-tertiary-900: #293413;
-  --color-tertiary-950: #151b09;
+/* Tertiary — gold / warm highlight */
+--color-tertiary-50: #fbfcf3;
+--color-tertiary-100: #f6f7e4;
+--color-tertiary-200: #ebedc5;
+--color-tertiary-300: #ddde9c;
+--color-tertiary-400: #cdcd70;
+--color-tertiary-500: #aaaa3c;
+--color-tertiary-600: #8d8d2f;
+--color-tertiary-700: #706f24;
+--color-tertiary-800: #5b5b20;
+--color-tertiary-900: #373510;
+--color-tertiary-950: #1c1b08;
 
 
 }
 
+/* App-wide semantic tokens (background, surfaces, focus ring) — consumed by Tailwind theme and raw CSS */
 :root {
-  /* Dark Blue Fantasy Theme */
   --background: var(--color-neutral-950);
   --foreground: var(--color-neutral-100);
   --muted: var(--color-neutral-800);
   --accent: var(--color-primary-500);
   --border: var(--color-neutral-700);
 
-  /* Color palette */
+  /* Maps semantic roles to palette ramps (buttons, alerts, etc.) */
   --primary: var(--color-primary-500);
   --primary-foreground: var(--color-neutral-950);
   --secondary: var(--color-secondary-500);
@@ -85,9 +89,9 @@
   --destructive-foreground: var(--color-neutral-950);
 
   --radius: 0.5rem;
-  --card: var(--color-neutral-800);
+  --card: var(--color-neutral-950);
   --card-foreground: var(--color-neutral-50);
-  --drawer: var(--color-primary-800);
+  --drawer: var(--color-primary-950);
   --drawer-foreground: var(--color-neutral-50);
   --popover: var(--color-neutral-800);
   --popover-foreground: var(--color-neutral-50);
@@ -95,8 +99,28 @@
   --accent-foreground: var(--color-neutral-950);
   --input: var(--color-neutral-800);
   --ring: var(--color-primary-500);
+
+  /* CRT overlay: single place to tune strength; z-index 40 sits above main UI, below z-50 modals/drawers */
+  --crt-z-index: 40;
+  /* Master dimmer for the whole CRT layer */
+  --crt-overlay-opacity: 1;
+  /* Scanline darkness (multiplied in gradients; keep low for readability) */
+  --crt-scanline-opacity: 0.1;
+  /* Vertical repeat height: dark line + gap */
+  --crt-scanline-period: 5px;
+  /* Vignette: outer edge color (dims corners like a tube) */
+  --crt-vignette-edge: rgb(0 0 0 / 0.55);
+  /* Vignette: center stays clear */
+  --crt-vignette-mid: transparent;
+  /* Phosphor tint: green wash mid-screen */
+  --crt-phosphor: rgb(60 170 118 / 0.045);
+  /* Phosphor highlight: faint blue at center */
+  --crt-phosphor-center: rgb(96 165 250 / 0.02);
+  /* How the CRT layer blends with the page (soft-light = subtle glow) */
+  --crt-blend-mode: soft-light;
 }
 
+/* Root element: paints the page backdrop and establishes containing context for the CRT pseudo-element */
 html {
   min-height: 100%;
   min-height: 100dvh;
@@ -107,11 +131,54 @@ html {
   background-size: cover;
   /* Ensure background extends to edges on mobile */
   -webkit-tap-highlight-color: transparent;
+  position: relative;
 }
 
+/*
+  Full-screen CRT effect: decorative only (clicks pass through).
+  Stacked backgrounds — first listed layer draws on top:
+  1) horizontal scanlines, 2) edge vignette, 3) phosphor tint, 4) tiled film grain (SVG noise).
+*/
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--crt-z-index);
+  opacity: var(--crt-overlay-opacity);
+  mix-blend-mode: var(--crt-blend-mode);
+  background-image:
+    /* Scanlines: thin repeating horizontal dark lines */
+    repeating-linear-gradient(
+      to bottom,
+      rgb(0 0 0 / calc(var(--crt-scanline-opacity) * 1.2)) 0,
+      rgb(0 0 0 / calc(var(--crt-scanline-opacity) * 1.2)) 1px,
+      transparent 1px,
+      transparent var(--crt-scanline-period)
+    ),
+    /* Vignette: darkens corners for a curved-screen feel */
+    radial-gradient(
+      ellipse 130% 120% at 50% 50%,
+      var(--crt-vignette-mid) 35%,
+      var(--crt-vignette-edge) 100%
+    ),
+    /* Phosphor glow: soft blue center fading to green */
+    radial-gradient(
+      ellipse 80% 55% at 50% 42%,
+      var(--crt-phosphor-center),
+      var(--crt-phosphor) 55%,
+      transparent 72%
+    ),
+    /* Static grain: SVG fractal noise, tiled */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  /* Grain tile size; other layers use default sizing */
+  background-size: auto, auto, auto, 220px 220px;
+  background-repeat: repeat, no-repeat, no-repeat, repeat;
+}
+
+/* Main layout: transparent so html background shows; min-heights match real mobile viewport */
 body {
   /* Fix iPhone white fade - ensure body has background */
-  font-family: 'Geist Sans', sans-serif;
   background: transparent;
   color: var(--foreground);
 
@@ -128,7 +195,10 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-/* Subtle background glow */
+/*
+  Ambient underlay behind all content (z-index -1): green glow from below, cool tint from above.
+  Sits under the CRT `html::after` layer for depth; does not receive pointer events.
+*/
 body::before {
   content: "";
   position: fixed;
@@ -138,15 +208,36 @@ body::before {
   height: 100%;
   pointer-events: none;
   z-index: -1;
+  background:
+    radial-gradient(
+      ellipse 120% 80% at 50% 100%,
+      rgb(60 170 118 / 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 90% 60% at 50% 0%,
+      rgb(60 100 200 / 0.06),
+      transparent 50%
+    );
 }
 
-/* Custom utilities not covered by @theme */
+/* Ease the CRT effect for users who prefer reduced motion: less opacity, no blend mode tricks */
+@media (prefers-reduced-motion: reduce) {
+  html::after {
+    --crt-overlay-opacity: 0.52;
+    mix-blend-mode: normal;
+  }
+}
+
+/* One-off utilities not generated from @theme tokens */
 @layer utilities {
+  /* Extra bottom padding on notched phones so content clears the home indicator */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
+/* Re-export semantic tokens as Tailwind color keys (e.g. `bg-background`, `text-muted-foreground`) */
 @theme inline {
   /* Border radius */
   --radius-sm: calc(var(--radius) - 4px);
@@ -154,7 +245,7 @@ body::before {
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Colors - rgb() wrapper needed for space-separated RGB vars */
+  /* Bridge :root vars to Tailwind — rgb() form where plugins expect numeric components */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-border: var(--border);
@@ -177,26 +268,27 @@ body::before {
   --color-drawer: var(--drawer);
   --color-drawer-foreground: var(--drawer-foreground);
 
-  /* Semantic colors */
+  /* Status colors — must follow the rgb(var(--*)) shape expected by Tailwind */
   --color-success: rgb(var(--success));
   --color-warning: rgb(var(--warning));
 
-  /* Mystical blue theme colors */
+  /* Extra decorative blues for fantasy UI accents */
   --color-mystical-blue: rgb(59 130 246);
   --color-mystical-purple: rgb(168 85 247);
   --color-mystical-ocean: rgb(96 165 250);
   --color-mystical-sky: rgb(191 219 254);
 }
 
+/* Tailwind preflight overrides: border color default, body typography and background */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-body text-foreground;
   }
   
-  /* Button scale states with fantasy glow */
+  /* Interactive affordance: slight scale on press-ready controls */
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]) {
     transform: scale(1);
@@ -227,7 +319,7 @@ body::before {
   }
 }
 
-/* Custom scrollbars — theme colors (desktop: readable width) */
+/* WebKit scrollbars (Chrome, Edge, Safari): width, track, thumb, corner */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -252,13 +344,13 @@ body::before {
   background: var(--muted);
 }
 
-/* Firefox — desktop */
+/* Firefox: thumb and track colors (applies globally; mobile media below thins it) */
 * {
   scrollbar-width: auto;
   scrollbar-color: var(--primary) var(--muted);
 }
 
-/* Mobile / narrow viewports — same palette, thinner bar */
+/* Narrow screens: thinner scrollbars so they steal less horizontal space */
 @media (max-width: 768px) {
   ::-webkit-scrollbar {
     width: 5px;
@@ -276,12 +368,13 @@ body::before {
   }
 }
 
-/* Text selection */
+/* Highlight color when user selects text (WebKit / standard) */
 ::selection {
   background-color: rgb(96 165 250 / 0.3);
   color: rgb(226 232 240);
 }
 
+/* Firefox selection highlight (legacy pseudo-element) */
 ::-moz-selection {
   background-color: var(--color-primary-500);
   color: var(--color-neutral-950);

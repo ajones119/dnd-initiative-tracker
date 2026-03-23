@@ -1,6 +1,7 @@
 import { Drawer } from "vaul";
 import { useInitiativeTracker } from "./InitiativeTrackerContext";
 import { ConditionMultiPicker } from "./ConditionMultiPicker";
+import { CreatureTypePicker } from "./CreatureTypePicker";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 
@@ -63,6 +64,20 @@ export const EditRowDrawer = () => {
                 />
               </div>
 
+              {/* Creature type */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-base font-medium text-muted-foreground">
+                  Creature type
+                </label>
+                <CreatureTypePicker
+                  value={row.creatureType}
+                  onChange={(next) =>
+                    updateInitiativeRow(currentEditRowId!, "creatureType", next)
+                  }
+                />
+              </div>
+
+            <div className="grid grid-cols-2 gap-4">
               {/* Initiative */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-sm font-medium text-muted-foreground">Initiative</label>
@@ -79,6 +94,26 @@ export const EditRowDrawer = () => {
                   placeholder=""
                   className="text-drawer-foreground border-b border-border focus-visible:border-drawer-foreground bg-primary-900 rounded-md w-14"
                 />
+
+              </div>
+              
+                 {/* AC */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm font-medium text-muted-foreground">AC</label>
+                <Input
+                  className="text-drawer-foreground border-b border-border focus-visible:border-drawer-foreground bg-primary-900 rounded-md w-14"
+                  type="number"
+                  value={row.ac ?? ""}
+                  onChange={(e) =>
+                    updateInitiativeRow(
+                      currentEditRowId!,
+                      "ac",
+                      e.target.value === "" ? undefined : Number(e.target.value),
+                    )
+                  }
+                  placeholder=""
+                />
+              </div>
               </div>
 
               {/* HP / Max HP */}
@@ -113,24 +148,6 @@ export const EditRowDrawer = () => {
                     placeholder="Max"
                   />
                 </div>
-              </div>
-
-              {/* AC */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-muted-foreground">AC</label>
-                <Input
-                  className="text-drawer-foreground border-b border-border focus-visible:border-drawer-foreground bg-primary-900 rounded-md w-14"
-                  type="number"
-                  value={row.ac ?? ""}
-                  onChange={(e) =>
-                    updateInitiativeRow(
-                      currentEditRowId!,
-                      "ac",
-                      e.target.value === "" ? undefined : Number(e.target.value),
-                    )
-                  }
-                  placeholder=""
-                />
               </div>
 
               {/* Status conditions */}
