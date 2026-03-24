@@ -11297,3 +11297,11 @@ export function searchMonsters(query: string, limit: number = 10): Monster[] {
   if (!q) return [];
   return monsterSearcher.search(q).slice(0, limit);
 }
+
+const nameCompare = (a: Monster, b: Monster) =>
+  a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+
+/** First `limit` monsters sorted A–Z for empty-query browse in the combobox. */
+export function getBrowseMonsters(limit: number = 10): Monster[] {
+  return [...MONSTERS].sort(nameCompare).slice(0, limit);
+}

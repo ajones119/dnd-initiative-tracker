@@ -7,7 +7,8 @@
     "build": "npm run fetch-monsters && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fetch-monsters": "node scripts/fetch-monsters.js"
+    "fetch-monsters": "node scripts/fetch-monsters.js",
+    "normalize-condition-svgs": "node scripts/normalize-condition-svgs.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.0",
@@ -45,6 +46,7 @@
     "radix-ui": "^1.4.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-use-measure": "^2.1.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
     "usehooks-ts": "^3.1.1",

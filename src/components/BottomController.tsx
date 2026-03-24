@@ -40,7 +40,8 @@ export const BottomController = ({ onOpenDiceDrawer }: BottomControllerProps) =>
   const activeCombatant = initiativeRows[currentTurn];
 
   return (
-    <div className="relative w-full border-t border-border bg-background">
+    <AnimatePresence>
+   { initiativeRows.length > 0 && <motion.div initial={{ y: "100%", scale: 0.98 }} animate={{ y: 0, scale: 1 }} exit={{ y: "100%", scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="relative w-full border-t border-border bg-background">
       {/* Default bar — always rendered */}
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex flex-col">
@@ -87,8 +88,9 @@ export const BottomController = ({ onOpenDiceDrawer }: BottomControllerProps) =>
           >
             {overlay[1]}
           </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          )}
+        </AnimatePresence>
+      </motion.div>}
+    </AnimatePresence>
   );
 };

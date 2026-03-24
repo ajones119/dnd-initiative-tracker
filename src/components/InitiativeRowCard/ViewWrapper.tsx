@@ -49,7 +49,7 @@ export const ViewWrapper = ({
       {/* Delete background — revealed as card slides right */}
       <motion.div
         style={{ opacity: deleteOpacity }}
-        className="absolute inset-0 bg-red-500 flex items-center pl-5 rounded-md"
+        className="absolute inset-0 bg-red-500 flex items-center pl-5"
       >
         <Trash2 className="text-white size-5" />
       </motion.div>

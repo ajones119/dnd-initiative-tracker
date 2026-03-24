@@ -1,6 +1,14 @@
 import type { ComponentType, SVGProps } from "react";
 import { Searcher } from "fast-fuzzy";
-import { Blinded, Charmed, Wildcard, Deafened, Exhausted, Fatigued, Frightened, Grappled, Incapacitated, Invisible, Paralyzed, Petrified, Poisoned, Prone, Restrained, Stunned, Unconscious } from "../assets/conditions";
+import {
+  Blinded, Charmed, Wildcard, Deafened, Exhausted, Fatigued, Frightened,
+  Grappled, Incapacitated, Invisible, Paralyzed, Petrified, Poisoned, Prone,
+  Restrained, Stunned, Unconscious, AbsorbElements, Acid, Bane,
+  Banished, Blessed, Burning, Cursed, DifficultTerrain, FaerieFire, Flying,
+  Guided, Hasted, Heroism, Hexed, HuntersMark, Inspired, Moonbeam, Polymorphed,
+  ProtectionFromEvilAndGood, Raging, Shielded, Silenced, SpellRestrained,
+  Stoneskinned, TrueStrike,
+} from "../assets/conditions";
 
 /**
  * SVG imported with `?react` (see `vite-plugin-svgr`). Paths use `fill="currentColor"`, so Tailwind
@@ -99,39 +107,39 @@ const CONDITIONS_UNSORTED: {
     name: "Absorb Elements",
     description:
       "Absorb Elements: resistance to the triggering damage type and extra melee damage on your next hit.",
-    image: Wildcard,
+    image: AbsorbElements,
   },
   {
     name: "Acided",
     description: "Taking ongoing acid damage from an effect (track source and duration).",
-    image: Wildcard,
+    image: Acid,
   },
   {
     name: "Bane",
     description: "-1d4 to attack rolls and saving throws (Bane, concentration).",
-    image: Wildcard,
+    image: Bane,
   },
   {
     name: "Banished",
     description:
       "Banishment (or similar): on another plane or otherwise removed until the effect ends or conditions are met.",
-    image: Wildcard,
+    image: Banished,
   },
   {
     name: "Blessed",
     description: "+1d4 to attack rolls and saving throws (Bless, concentration).",
-    image: Wildcard,
+    image: Blessed,
   },
   {
     name: "Burning",
     description: "Ongoing fire damage or alight from an effect (track source and duration).",
-    image: Wildcard,
+    image: Burning,
   },
   {
     name: "Cursed",
     description:
       "Magical curse (e.g. Bestow Curse): penalties depend on the chosen curse—track specifics in notes.",
-    image: Wildcard,
+    image: Cursed,
   },
   {
     name: "Dominated",
@@ -143,41 +151,41 @@ const CONDITIONS_UNSORTED: {
     name: "Faerie Fire",
     description:
       "Outlined in light: attack rolls against the creature have advantage if the attacker can see it, and it can't benefit from being invisible.",
-    image: Wildcard,
-      },
+    image: FaerieFire,
+  },
   {
     name: "Flying",
     description: "Magical or granted flight (e.g. Fly)—track fly speed and duration.",
-    image: Wildcard,
+    image: Flying,
   },
   {
     name: "Guided",
     description: "Guidance: +1d4 to one ability check before the spell ends (concentration).",
-    image: Wildcard,
+    image: Guided,
   },
   {
     name: "Hasted",
     description:
       "Haste: +2 AC, advantage on Dexterity saving throws, doubled movement, and an extra action each turn (concentration).",
-    image: Wildcard,
+    image: Hasted,
   },
   {
     name: "Heroism",
     description:
       "Heroism: immune to being frightened and gains temporary hit points at the start of each of your turns (concentration).",
-    image: Wildcard,
+    image: Heroism,
   },
   {
     name: "Hexed",
     description:
       "Hex: disadvantage on ability checks with one ability you choose, and extra damage when you hit with attacks (concentration).",
-    image: Wildcard,
+    image: Hexed,
   },
   {
     name: "Hunter's Mark",
     description:
       "Hunter's Mark: extra damage when you hit the marked creature, and advantage on Wisdom (Survival) checks to track it (concentration).",
-    image: Wildcard,
+    image: HuntersMark,
   },
   {
     name: "In Darkness",
@@ -188,55 +196,55 @@ const CONDITIONS_UNSORTED: {
   {
     name: "In Difficult Terrain",
     description: "Each foot of movement costs extra—track when positioning matters.",
-    image: Wildcard,
+    image: DifficultTerrain,
   },
   {
     name: "Inspired",
     description:
       "Bardic Inspiration: spend the die to add to an attack roll, ability check, or saving throw (exact use can vary by subclass).",
-    image: Wildcard,
+    image: Inspired,
   },
   {
     name: "Moonbeam",
     description:
       "Moonbeam: damage when entering/light, shapechanger complications—track placement and concentration.",
-    image: Wildcard,
+    image: Moonbeam,
   },
   {
     name: "Polymorphed",
     description:
       "Polymorph or similar: stats replaced by the beast form; mental stats often retained—track the form and duration.",
-    image: Wildcard,
+    image: Polymorphed,
   },
   {
     name: "Protected (Evil and Good)",
     description:
       "Protection from evil and good: warded against aberrations, celestials, elementals, fey, fiends, and undead; they have disadvantage on attacks against the warded creature (concentration).",
-    image: Wildcard,
+    image: ProtectionFromEvilAndGood,
   },
   {
     name: "Raging",
     description:
       "Rage: damage resistances, bonus damage on Strength-based melee attacks, and advantage on Strength checks and saves (as per your class feature).",
-    image: Wildcard,
+    image: Raging,
   },
   {
     name: "Shielded",
     description:
       "Temporary AC boost (e.g. Shield: +5 AC until the start of your next turn)—track duration.",
-    image: Wildcard,
+    image: Shielded,
   },
   {
     name: "Silenced",
     description:
       "Inside Silence or similar: can't use verbal spell components in the area—distinct from the Deafened condition.",
-    image: Wildcard,
+    image: Silenced,
   },
   {
     name: "Spell Restrained",
     description:
       "Restrained specifically by a spell or magical effect (e.g. Entangle, Web)—note the source alongside generic Restrained if useful.",
-    image: Wildcard,
+    image: SpellRestrained,
   },
   {
     name: "Spirit Guardians",
@@ -248,13 +256,13 @@ const CONDITIONS_UNSORTED: {
     name: "Stoneskinned",
     description:
       "Stoneskin: resistance to nonmagical bludgeoning, piercing, and slashing (concentration).",
-    image: Wildcard,
+    image: Stoneskinned,
   },
   {
     name: "True Striked",
     description:
       "True Strike (legacy): advantage on your next turn's first attack against the target (concentration).",
-    image: Wildcard,
+    image: TrueStrike,
   },
 ];
 

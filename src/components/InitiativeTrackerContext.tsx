@@ -53,10 +53,16 @@ export type InitiativeTrackerContextType = {
   sortByInitiative: () => void;
   editMode: boolean;
   setEditMode: (editMode: boolean) => void;
-  currentEditRowId: string | null;
-  setCurrentEditRowId: (id: string | null) => void;
+  currentEditRow: {id: string, mode: EditRowMode} | null;
+  setCurrentEditRow: (row: {id: string, mode: EditRowMode} | null) => void;
   startCombat: () => void;
   };
+
+export const EditRowMode = {
+  FULL: "full",
+  HP: "hp",
+} as const;
+export type EditRowMode = (typeof EditRowMode)[keyof typeof EditRowMode];
 
 export const InitiativeTrackerContext =
   createContext<InitiativeTrackerContextType>({
@@ -91,8 +97,8 @@ export const InitiativeTrackerContext =
   sortByInitiative: () => {},
   editMode: false,
   setEditMode: () => {},
-  currentEditRowId: null,
-  setCurrentEditRowId: () => {},
+  currentEditRow: null,
+  setCurrentEditRow: () => {},
   startCombat: () => {},
 });
 
@@ -126,7 +132,7 @@ export const InitiativeTrackerProvider = ({
   const [combatMechanics, setCombatMechanics] = useState<CombatMechanic[]>([]);
   const [tactics, setTactics] = useState("");
   const [editMode, setEditMode] = useState(false);
-  const [currentEditRowId, setCurrentEditRowId] = useState<string | null>(null);
+  const [currentEditRow, setCurrentEditRow] = useState<{id: string, mode: EditRowMode} | null>(null);
   const autoSaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -398,8 +404,8 @@ export const InitiativeTrackerProvider = ({
         sortByInitiative,
         editMode,
         setEditMode,
-        currentEditRowId,
-        setCurrentEditRowId,
+        currentEditRow,
+        setCurrentEditRow,
         startCombat,
       }}
     >

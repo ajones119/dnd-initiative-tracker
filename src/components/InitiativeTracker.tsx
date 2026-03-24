@@ -13,12 +13,13 @@ import { EncounterDrawer } from "./EncounterDrawer";
 import type { InitiativeRow } from "../Types";
 import { MonsterAutocomplete } from "./MonsterAutocomplete";
 import { InitiativeRowCard } from "./InitiativeRowCard/InitiativeRowCard";
-import { EditRowDrawer } from "./EditRowDrawer";
+import { EditRowDrawer } from "./InitiativeRowCard/EditRowDrawer/EditRowDrawer";
 import { DragDropProvider, DragOverlay, useDroppable } from "@dnd-kit/react";
 import { move } from "@dnd-kit/helpers";
 import { InitiativeRowCardOverlay } from "./InitiativeRowCard/InitiativeRowCardOverlay";
 import { CollisionPriority } from "@dnd-kit/abstract";
 import { BottomController } from "./BottomController";
+import { InitiativeEmptyState } from "./InitiativeEmptyState";
 import { DiceDrawer } from "./DiceDrawer";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -108,6 +109,7 @@ const InitiativeTracker = () => {
     setInitiativeRows,
     updateInitiativeRow,
     startCombat,
+    editMode,
   } = useInitiativeTracker();
 
   const bucketItems = useMemo(() => bucketItemsFromRows(rows), [rows]);
@@ -150,7 +152,7 @@ const InitiativeTracker = () => {
   };
 
   return (
-    <div className="relative mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col">
+    <div className="relative mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col crt-hot-image-light crt-hot-image crt-hot-text">
       <section className="flex flex-wrap items-center justify-between gap-3 shrink-0">
         <h2 className="text-lg font-semibold truncate">
           {encounterName || "Encounter"}
@@ -182,6 +184,7 @@ const InitiativeTracker = () => {
         layoutScroll
       >
         <MonsterAutocomplete onSelect={handleSelect} />
+        {rows.length === 0 && !editMode ? <InitiativeEmptyState /> : null}
         <DragDropProvider
           onDragStart={() => {
             previousItemsRef.current = bucketItems;
@@ -238,13 +241,15 @@ const InitiativeTracker = () => {
           }}
         >
           <ul className="space-y-6 mb-20 list-none">
-            {INITIATIVE_BUCKETS.map((bucket) => (
-              <BucketSection
-                key={bucket}
-                bucket={bucket}
-                bucketRows={bucketItems[`bucket-${bucket}`] ?? []}
-              />
-            ))}
+            {INITIATIVE_BUCKETS.map((bucket) =>{
+              return (bucketItems[`bucket-${bucket}`] ?? []).length > 0 || editMode ? (
+                <BucketSection
+                  key={bucket}
+                    bucket={bucket}
+                    bucketRows={bucketItems[`bucket-${bucket}`] ?? []}
+                  />
+                ) : null;
+              })}
           </ul>
           <DragOverlay>
             {(source) => {

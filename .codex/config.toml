@@ -1,1 +1,4 @@
+[agents.svg-fix]
+config_file = "agents/svg-fix.toml"
+
 protected_paths = ["node_modules/**", "dist/**", ".env", ".env.*"]

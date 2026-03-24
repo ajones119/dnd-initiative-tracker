@@ -36,12 +36,12 @@ export const InitiativeRowCardContent = ({
       }}
       transition={{ ease: EASE, duration: 0.2 }}
       className={cn(
-        "flex gap-2 rounded-xs border bg-card px-3 py-2 relative",
-        isCurrentTurn && "border-primary-500",
+        "flex gap-2 rounded-xs border-2 bg-card px-3 py-2 my-1  relative",
+        isCurrentTurn ? "border-neutral-500" : "border-neutral-700",
       )}
     >
       <motion.div
-        className="absolute inset-0 rounded-xs"
+        className="absolute inset-0"
         animate={{
           background: `linear-gradient(to right, var(--color-primary-500) 0%, transparent ${isCurrentTurn ? "30%" : "5%"})`,
         }}
@@ -54,16 +54,16 @@ export const InitiativeRowCardContent = ({
         </h3>
         <div className="flex gap-2 justify-between px-4">
           <div>
-            <p className="text-xs font-bold text-primary-500">Init.</p>
-            <p className="text-sm">{row.initiative}</p>
+            <p className="text-xs font-bold text-primary-400">Init.</p>
+            <p className="text-base">{row.initiative}</p>
           </div>
           <div>
-            <p className="text-xs font-bold text-primary-500">AC</p>
-            <p className="text-sm">{row.ac}</p>
+            <p className="text-xs font-bold text-primary-400">AC</p>
+            <p className="text-base">{row.ac}</p>
           </div>
           <div>
-            <p className="text-xs font-bold text-primary-500">HP</p>
-            <p className="text-sm">{row.hp}</p>
+            <p className="text-xs font-bold text-primary-400">HP</p>
+            <p className="text-base">{row.hp}</p>
           </div>
         </div>
         <TooltipProvider delayDuration={200}>

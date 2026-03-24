@@ -20,12 +20,12 @@ export const InitiativeRowAvatar = ({
   return (
     <div
       className={cn(
-        "flex size-16 shrink-0 items-center justify-center rounded-full bg-muted my-2 z-10",
+        "flex size-16 shrink-0 items-center justify-center crt-hot-image rounded-full bg-transparent my-2 z-10",
         className,
       )}
     >
       {Icon ? (
-        <Icon className="size-10 text-primary-400" aria-hidden />
+        <Icon className="size-10 text-secondary-400" aria-hidden />
       ) : (
         <Circle
           className="size-7 text-muted-foreground/50"

@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 import type { InitiativeRow } from "../../Types";
-import { useInitiativeTracker } from "../InitiativeTrackerContext";
+import { EditRowMode, useInitiativeTracker } from "../InitiativeTrackerContext";
 import { ViewWrapper } from "./ViewWrapper";
 import { EditWrapper } from "./EditWrapper";
 
@@ -21,7 +21,7 @@ export const InitiativeRowCard = ({
     addInitiativeRow,
     editMode,
     setEditMode,
-    setCurrentEditRowId,
+    setCurrentEditRow,
     currentTurn,
   } = useInitiativeTracker();
 
@@ -98,7 +98,7 @@ export const InitiativeRowCard = ({
       onStartHold={startHoldTimers}
       onEndHold={clearHoldTimers}
       onRemove={handleRemove}
-      onOpenDrawer={() => setCurrentEditRowId(initiativeRowId)}
+      onOpenDrawer={() => setCurrentEditRow({id: initiativeRowId, mode: EditRowMode.HP})}
     />
   );
 };

@@ -13,6 +13,7 @@ import Plant from "./plant.svg?react";
 import SwarmOfTinyBeasts from "./swarm of tiny beasts.svg?react";
 import Undead from "./undead.svg?react";
 import Wildcard from "./wildcard.svg?react";
+import Celestial from "./celestial.svg?react";
 
 /** Used when a slug has no asset yet or an unknown future type is stored. */
 export const CREATURE_TYPE_ICON_FALLBACK = Wildcard;
@@ -24,7 +25,7 @@ export const CREATURE_TYPE_ICON_FALLBACK = Wildcard;
 export const CREATURE_TYPE_ICONS: Record<string, ConditionIcon> = {
   aberration: Wildcard,
   beast: Beast,
-  celestial: Wildcard,
+  celestial: Celestial,
   construct: Construct,
   dragon: Dragon,
   elemental: Elemental,
