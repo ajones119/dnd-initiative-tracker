@@ -170,6 +170,11 @@ export function getInitiativeModifier(dexterity: number): number {
   return Math.floor((dexterity - 10) / 2);
 }
 
+/** First \`limit\` monsters in alphabetical order (A–Z) for empty-query browse. MONSTERS is sorted by name at generation time. */
+export function getBrowseMonsters(limit: number = 10): Monster[] {
+  return MONSTERS.slice(0, Math.max(0, limit));
+}
+
 const monsterSearcher = new Searcher(MONSTERS, {
   keySelector: (m: Monster) => [m.name, m.type],
   threshold: 0.35,
