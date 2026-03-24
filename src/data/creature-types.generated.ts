@@ -14,5 +14,5 @@ export const CREATURE_TYPES: string[] = [
   "ooze",
   "plant",
   "swarm of Tiny beasts",
-  "undead",
+  "undead"
 ];
