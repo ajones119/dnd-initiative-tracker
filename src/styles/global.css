@@ -65,7 +65,7 @@
 --color-secondary-700: #706f24;
 --color-secondary-800: #5b5b20;
 --color-secondary-900: #373510;
---color-secondary-950: #1c1b08;
+--color-secondary-950: hsl(53 50% 3%);
 
 
 
@@ -73,7 +73,7 @@
 
 /* App-wide semantic tokens (background, surfaces, focus ring) — consumed by Tailwind theme and raw CSS */
 :root {
-  --background: var(--color-neutral-950);
+  --background: var(--color-secondary-950);
   --foreground: var(--color-neutral-100);
   --muted: var(--color-neutral-800);
   --accent: var(--color-primary-500);
@@ -106,9 +106,9 @@
   /* Master dimmer for the whole CRT layer */
   --crt-overlay-opacity: 1;
   /* Scanline darkness (multiplied in gradients; keep low for readability) */
-  --crt-scanline-opacity: 0.1;
+  --crt-scanline-opacity: 0.3;
   /* Scanline thickness */
-  --crt-scanline-thickness: 2px;
+  --crt-scanline-thickness: 4px;
   /* Vertical repeat height: dark line + gap */
   --crt-scanline-period: 10px;
   /* Vignette: outer edge color (dims corners like a tube) */
@@ -354,6 +354,41 @@ body.crt-ambient::before {
       drop-shadow(0 0 6px rgb(60 170 118 / 0.22))
       saturate(114%)
       brightness(1.04);
+  }
+
+  /*
+    Edit Row drawer: Hero Patterns “bamboo” (import src/assets/backgrounds/bamboo.svg?raw into <pattern>).
+    Custom properties MUST live on an ancestor of the <path> (e.g. .edit-drawer-bamboo-host) so var() inherits;
+    putting them only on the background div broke fill/stroke (invisible pattern).
+  */
+  .edit-drawer-bamboo-host {
+    --edit-drawer-bamboo-fill: color-mix(in srgb, var(--color-tertiary-400) 55%, transparent);
+    --edit-drawer-bamboo-stroke: color-mix(in srgb, var(--color-tertiary-700) 50%, transparent);
+  }
+
+  .edit-drawer-bamboo-host .edit-drawer-bamboo-layer {
+    background-repeat: repeat;
+    /* ~1.22× tile vs 16×32 viewBox = slightly zoomed-in motif */
+    background-size: 19.5px 39px;
+    opacity: 0.88;
+  }
+
+  .edit-drawer-bamboo-host--bold {
+    --edit-drawer-bamboo-fill: color-mix(in srgb, var(--color-tertiary-500) 68%, transparent);
+    --edit-drawer-bamboo-stroke: color-mix(in srgb, var(--color-tertiary-900) 58%, transparent);
+  }
+
+  .edit-drawer-bamboo-host--bold .edit-drawer-bamboo-layer {
+    opacity: 0.94;
+  }
+
+  .edit-drawer-bamboo-host--muted {
+    --edit-drawer-bamboo-fill: color-mix(in srgb, var(--color-tertiary-400) 32%, transparent);
+    --edit-drawer-bamboo-stroke: color-mix(in srgb, var(--color-tertiary-700) 26%, transparent);
+  }
+
+  .edit-drawer-bamboo-host--muted .edit-drawer-bamboo-layer {
+    opacity: 0.5;
   }
 }
 

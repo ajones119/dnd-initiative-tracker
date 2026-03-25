@@ -3,12 +3,14 @@ import { EditRowMode, useInitiativeTracker } from "../../InitiativeTrackerContex
 import { cn } from "@/lib/utils";
 import { FullEditRowContent } from "./FullEditRowContent";
 import { HpQuickEditContent } from "./HpQuickEditContent";
-import { useMemo, useRef, useState } from "react";
+import { useId, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "motion/react";
 import useMeasure from "react-use-measure";
+import { bambooPatternInnerHtml } from "./bambooPatternInnerHtml";
 
 export const EditRowDrawer = () => {
+  const bambooPatternId = `edit-drawer-bamboo-${useId().replace(/:/g, "")}`;
   const [elementRef, bounds] = useMeasure();
   const previousHeightRef = useRef<number>(0);
 
@@ -62,7 +64,41 @@ export const EditRowDrawer = () => {
               transition: { duration: animDuration, ease: [0.25, 1, 0.5, 1] },
             }}
           >
-            <div ref={elementRef}>
+            <div
+              className={cn(
+                "edit-drawer-bamboo-host pointer-events-none absolute inset-0 rounded-t-xl",
+              )}
+              aria-hidden
+            >
+              {/*
+                Vars live on this host so they inherit into <pattern><path> (imported from bamboo.svg).
+                Avoid 0×0 defs <svg> — some engines skip patterns; 1×1 + opacity-0 is enough.
+              */}
+              <svg
+                width={1}
+                height={1}
+                className="pointer-events-none absolute left-0 top-0 opacity-0"
+                aria-hidden
+              >
+                <defs>
+                  <pattern
+                    id={bambooPatternId}
+                    width={16}
+                    height={32}
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <g
+                      dangerouslySetInnerHTML={{ __html: bambooPatternInnerHtml }}
+                    />
+                  </pattern>
+                </defs>
+              </svg>
+              <div
+                className="edit-drawer-bamboo-layer absolute inset-0 rounded-t-xl"
+                style={{ backgroundImage: `url(#${bambooPatternId})` }}
+              />
+            </div>
+            <div ref={elementRef} className="relative z-[1]">
               {/* Drag handle */}
               <div className="mx-auto mt-3 h-1.5 w-10 shrink-0 bg-muted-foreground/30" />
               <Drawer.Title className="sr-only">Edit Row</Drawer.Title>
